@@ -1,568 +1,568 @@
-route_id,trip_headsign,direction_id,route_short_name,stop_id,stop_sequence
-100223,University District Montlake,0,43,41902,1
-100223,University District Montlake,0,43,41904,18
-100223,University District Montlake,0,43,41908,31
-100223,University District Montlake,0,43,41965,37
-100223,University District Montlake,0,43,41970,40
-100223,University District Montlake,0,43,29270,49
-100223,University District Montlake,0,43,29277,54
-100223,University District Montlake,0,43,29273,60
-100223,University District Montlake,0,43,29274,65
-100223,University District Montlake,0,43,29275,71
-100223,University District Montlake,0,43,29276,79
-100223,University District Montlake,0,43,35825,81
-100223,University District Montlake,0,43,29278,85
-100223,University District Montlake,0,43,29280,94
-100223,University District Montlake,0,43,29300,104
-100223,University District Montlake,0,43,29320,109
-100223,University District Montlake,0,43,29340,113
-100223,University District Montlake,0,43,29350,117
-100223,University District Montlake,0,43,29361,122
-100223,University District Montlake,0,43,29380,132
-100223,University District Montlake,0,43,25751,142
-100223,University District Montlake,0,43,29405,163
-100223,Capitol Hill University Of Washington Medical Center,1,43,10911,1
-100223,Capitol Hill University Of Washington Medical Center,1,43,10912,8
-100223,Capitol Hill University Of Washington Medical Center,1,43,10914,11
-100223,Capitol Hill University Of Washington Medical Center,1,43,10917,15
-100223,Capitol Hill University Of Washington Medical Center,1,43,29240,28
-100223,Capitol Hill University Of Washington Medical Center,1,43,29247,37
-100223,Capitol Hill University Of Washington Medical Center,1,43,29238,63
-100223,Capitol Hill University Of Washington Medical Center,1,43,29244,74
-100223,Capitol Hill University Of Washington Medical Center,1,43,29248,81
-100223,Capitol Hill University Of Washington Medical Center,1,43,29249,84
-100223,Capitol Hill University Of Washington Medical Center,1,43,29251,89
-100223,Capitol Hill University Of Washington Medical Center,1,43,29253,94
-100223,Capitol Hill University Of Washington Medical Center,1,43,29254,106
-100223,Capitol Hill University Of Washington Medical Center,1,43,29256,113
-100223,Capitol Hill University Of Washington Medical Center,1,43,29257,116
-100223,Capitol Hill University Of Washington Medical Center,1,43,29258,119
-100223,Capitol Hill University Of Washington Medical Center,1,43,29259,125
-100223,Capitol Hill University Of Washington Medical Center,1,43,29260,133
-100223,Capitol Hill University Of Washington Medical Center,1,43,29261,137
-100223,Capitol Hill University Of Washington Medical Center,1,43,29301,144
-100223,Capitol Hill University Of Washington Medical Center,1,43,29262,148
-100223,Capitol Hill University Of Washington Medical Center,1,43,11060,151
-100223,Capitol Hill University Of Washington Medical Center,1,43,11070,157
-100223,Capitol Hill University Of Washington Medical Center,1,43,41980,159
-100223,Capitol Hill University Of Washington Medical Center,1,43,41982,162
-100223,Capitol Hill University Of Washington Medical Center,1,43,41986,168
-100223,Capitol Hill University Of Washington Medical Center,1,43,41987,181
-100223,Capitol Hill University Of Washington Medical Center,1,43,41989,197
-100224,Ballard Wallingford,0,44,25240,1
-100224,Ballard Wallingford,0,44,29405,11
-100224,Ballard Wallingford,0,44,29420,20
-100224,Ballard Wallingford,0,44,29440,33
-100224,Ballard Wallingford,0,44,11352,38
-100224,Ballard Wallingford,0,44,9587,46
-100224,Ballard Wallingford,0,44,29455,56
-100224,Ballard Wallingford,0,44,29480,73
-100224,Ballard Wallingford,0,44,29500,79
-100224,Ballard Wallingford,0,44,17310,86
-100224,Ballard Wallingford,0,44,29530,95
-100224,Ballard Wallingford,0,44,29540,99
-100224,Ballard Wallingford,0,44,29557,110
-100224,Ballard Wallingford,0,44,29581,127
-100224,Ballard Wallingford,0,44,29600,135
-100224,Ballard Wallingford,0,44,29620,155
-100224,Ballard Wallingford,0,44,29630,162
-100224,Ballard Wallingford,0,44,29640,172
-100224,Ballard Wallingford,0,44,29650,186
-100224,Ballard Wallingford,0,44,29660,191
-100224,Ballard Wallingford,0,44,29680,194
-100224,Ballard Wallingford,0,44,29700,201
-100224,Ballard Wallingford,0,44,29720,208
-100224,Ballard Wallingford,0,44,18740,213
-100224,Ballard Wallingford,0,44,18760,218
-100224,Ballard Wallingford,0,44,18785,226
-100224,Ballard Wallingford,0,44,18085,228
-100224,Ballard Wallingford,0,44,29405,1
-100224,Ballard Wallingford,0,44,29420,10
-100224,Ballard Wallingford,0,44,29440,23
-100224,Ballard Wallingford,0,44,11352,28
-100224,Ballard Wallingford,0,44,9587,36
-100224,Ballard Wallingford,0,44,29455,46
-100224,Ballard Wallingford,0,44,29480,63
-100224,Ballard Wallingford,0,44,29500,69
-100224,Ballard Wallingford,0,44,17310,76
-100224,Ballard Wallingford,0,44,29530,85
-100224,Ballard Wallingford,0,44,29540,89
-100224,Ballard Wallingford,0,44,29557,100
-100224,Ballard Wallingford,0,44,29581,117
-100224,Ballard Wallingford,0,44,29600,125
-100224,Ballard Wallingford,0,44,29620,145
-100224,Ballard Wallingford,0,44,29630,152
-100224,Ballard Wallingford,0,44,29640,162
-100224,Ballard Wallingford,0,44,29650,176
-100224,Ballard Wallingford,0,44,29660,181
-100224,Ballard Wallingford,0,44,29680,184
-100224,Ballard Wallingford,0,44,29700,191
-100224,Ballard Wallingford,0,44,29720,198
-100224,Ballard Wallingford,0,44,18740,203
-100224,Ballard Wallingford,0,44,18760,208
-100224,Ballard Wallingford,0,44,18785,216
-100224,Ballard Wallingford,0,44,18085,218
-100224,University Of Washington Medical Center Wallingford,1,44,18085,1
-100224,University Of Washington Medical Center Wallingford,1,44,18090,3
-100224,University Of Washington Medical Center Wallingford,1,44,18100,15
-100224,University Of Washington Medical Center Wallingford,1,44,18120,21
-100224,University Of Washington Medical Center Wallingford,1,44,29213,28
-100224,University Of Washington Medical Center Wallingford,1,44,29215,35
-100224,University Of Washington Medical Center Wallingford,1,44,29217,41
-100224,University Of Washington Medical Center Wallingford,1,44,29219,44
-100224,University Of Washington Medical Center Wallingford,1,44,29220,48
-100224,University Of Washington Medical Center Wallingford,1,44,75407,65
-100224,University Of Washington Medical Center Wallingford,1,44,29222,74
-100224,University Of Washington Medical Center Wallingford,1,44,29223,80
-100224,University Of Washington Medical Center Wallingford,1,44,29225,100
-100224,University Of Washington Medical Center Wallingford,1,44,29582,115
-100224,University Of Washington Medical Center Wallingford,1,44,29231,138
-100224,University Of Washington Medical Center Wallingford,1,44,29232,142
-100224,University Of Washington Medical Center Wallingford,1,44,17410,149
-100224,University Of Washington Medical Center Wallingford,1,44,29234,156
-100224,University Of Washington Medical Center Wallingford,1,44,29236,161
-100224,University Of Washington Medical Center Wallingford,1,44,29865,180
-100224,University Of Washington Medical Center Wallingford,1,44,10911,189
-100224,University Of Washington Medical Center Wallingford,1,44,10912,196
-100224,University Of Washington Medical Center Wallingford,1,44,10914,199
-100224,University Of Washington Medical Center Wallingford,1,44,10917,203
-100224,University Of Washington Medical Center Wallingford,1,44,29240,216
-100224,University Of Washington Medical Center Wallingford,1,44,29242,227
-100224,University Of Washington Medical Center Wallingford,1,44,29243,232
-100224,University District,1,44,18085,1
-100224,University District,1,44,18090,3
-100224,University District,1,44,18100,15
-100224,University District,1,44,18120,21
-100224,University District,1,44,29213,28
-100224,University District,1,44,29215,35
-100224,University District,1,44,29217,41
-100224,University District,1,44,29219,44
-100224,University District,1,44,29220,48
-100224,University District,1,44,75407,65
-100224,University District,1,44,29222,74
-100224,University District,1,44,29223,80
-100224,University District,1,44,29225,100
-100224,University District,1,44,29582,115
-100224,University District,1,44,29231,138
-100224,University District,1,44,29232,142
-100224,University District,1,44,17410,149
-100224,University District,1,44,29234,156
-100224,University District,1,44,29236,161
-100224,University District,1,44,29865,180
-100224,University District,1,44,10911,189
-100225,Loyal Heights Greenwood,0,45,9978,1
-100225,Loyal Heights Greenwood,0,45,29130,16
-100225,Loyal Heights Greenwood,0,45,25202,19
-100225,Loyal Heights Greenwood,0,45,25210,30
-100225,Loyal Heights Greenwood,0,45,75406,64
-100225,Loyal Heights Greenwood,0,45,75403,83
-100225,Loyal Heights Greenwood,0,45,75402,103
-100225,Loyal Heights Greenwood,0,45,75404,114
-100225,Loyal Heights Greenwood,0,45,75405,142
-100225,Loyal Heights Greenwood,0,45,9581,158
-100225,Loyal Heights Greenwood,0,45,9582,160
-100225,Loyal Heights Greenwood,0,45,9584,163
-100225,Loyal Heights Greenwood,0,45,37350,166
-100225,Loyal Heights Greenwood,0,45,37352,170
-100225,Loyal Heights Greenwood,0,45,37353,172
-100225,Loyal Heights Greenwood,0,45,36931,192
-100225,Loyal Heights Greenwood,0,45,36940,197
-100225,Loyal Heights Greenwood,0,45,36960,208
-100225,Loyal Heights Greenwood,0,45,16515,214
-100225,Loyal Heights Greenwood,0,45,16520,215
-100225,Loyal Heights Greenwood,0,45,36961,235
-100225,Loyal Heights Greenwood,0,45,36991,269
-100225,Loyal Heights Greenwood,0,45,37020,284
-100225,Loyal Heights Greenwood,0,45,17640,294
-100225,Loyal Heights Greenwood,0,45,17650,297
-100225,Loyal Heights Greenwood,0,45,5420,301
-100225,Loyal Heights Greenwood,0,45,5440,311
-100225,Loyal Heights Greenwood,0,45,5450,316
-100225,Loyal Heights Greenwood,0,45,5470,322
-100225,Loyal Heights Greenwood,0,45,41450,327
-100225,Loyal Heights Greenwood,0,45,37040,330
-100225,Loyal Heights Greenwood,0,45,37060,334
-100225,Loyal Heights Greenwood,0,45,37074,340
-100225,Loyal Heights Greenwood,0,45,37080,343
-100225,Loyal Heights Greenwood,0,45,37081,346
-100225,Loyal Heights Greenwood,0,45,37083,351
-100225,Loyal Heights Greenwood,0,45,37078,356
-100225,Loyal Heights Greenwood,0,45,37086,360
-100225,Loyal Heights Greenwood,0,45,37087,367
-100225,Loyal Heights Greenwood,0,45,37088,371
-100225,Loyal Heights Greenwood,0,45,37089,378
-100225,Loyal Heights Greenwood,0,45,35530,390
-100225,University District Roosevelt Station,1,45,35530,1
-100225,University District Roosevelt Station,1,45,35540,10
-100225,University District Roosevelt Station,1,45,35550,17
-100225,University District Roosevelt Station,1,45,19210,20
-100225,University District Roosevelt Station,1,45,35551,28
-100225,University District Roosevelt Station,1,45,35570,33
-100225,University District Roosevelt Station,1,45,35580,36
-100225,University District Roosevelt Station,1,45,35600,43
-100225,University District Roosevelt Station,1,45,35630,49
-100225,University District Roosevelt Station,1,45,41430,54
-100225,University District Roosevelt Station,1,45,35660,57
-100225,University District Roosevelt Station,1,45,35670,59
-100225,University District Roosevelt Station,1,45,5330,62
-100225,University District Roosevelt Station,1,45,5350,67
-100225,University District Roosevelt Station,1,45,5370,70
-100225,University District Roosevelt Station,1,45,5380,76
-100225,University District Roosevelt Station,1,45,5400,87
-100225,University District Roosevelt Station,1,45,17070,92
-100225,University District Roosevelt Station,1,45,17080,94
-100225,University District Roosevelt Station,1,45,17081,102
-100225,University District Roosevelt Station,1,45,35691,123
-100225,University District Roosevelt Station,1,45,35721,153
-100225,University District Roosevelt Station,1,45,16390,173
-100225,University District Roosevelt Station,1,45,16400,175
-100225,University District Roosevelt Station,1,45,16416,186
-100225,University District Roosevelt Station,1,45,16430,192
-100225,University District Roosevelt Station,1,45,37359,198
-100225,University District Roosevelt Station,1,45,38022,217
-100225,University District Roosevelt Station,1,45,38024,221
-100225,University District Roosevelt Station,1,45,9132,224
-100228,University District Central District,0,48,8402,1
-100228,University District Central District,0,48,8429,8
-100228,University District Central District,0,48,8440,13
-100228,University District Central District,0,48,36730,17
-100228,University District Central District,0,48,36750,24
-100228,University District Central District,0,48,36774,49
-100228,University District Central District,0,48,12532,69
-100228,University District Central District,0,48,12550,76
-100228,University District Central District,0,48,12560,89
-100228,University District Central District,0,48,36791,113
-100228,University District Central District,0,48,36800,116
-100228,University District Central District,0,48,36830,121
-100228,University District Central District,0,48,36845,125
-100228,University District Central District,0,48,35825,132
-100228,University District Central District,0,48,29278,136
-100228,University District Central District,0,48,29280,145
-100228,University District Central District,0,48,29300,155
-100228,University District Central District,0,48,29320,160
-100228,University District Central District,0,48,29340,164
-100228,University District Central District,0,48,29350,168
-100228,University District Central District,0,48,29361,173
-100228,University District Central District,0,48,29380,183
-100228,University District Central District,0,48,25751,193
-100228,University District Central District,0,48,29405,214
-100228,University District Central District,0,48,29420,223
-100228,University District Central District,0,48,29440,236
-100228,University District Central District,0,48,11352,241
-100228,University District Central District,0,48,36860,246
-100228,University District Central District,0,48,9586,255
-100228,Mount Baker Transit Center Central District,1,48,9135,1
-100228,Mount Baker Transit Center Central District,1,48,35800,7
-100228,Mount Baker Transit Center Central District,1,48,35820,10
-100228,Mount Baker Transit Center Central District,1,48,10912,15
-100228,Mount Baker Transit Center Central District,1,48,10914,18
-100228,Mount Baker Transit Center Central District,1,48,10917,22
-100228,Mount Baker Transit Center Central District,1,48,29240,35
-100228,Mount Baker Transit Center Central District,1,48,29247,44
-100228,Mount Baker Transit Center Central District,1,48,29238,70
-100228,Mount Baker Transit Center Central District,1,48,29244,81
-100228,Mount Baker Transit Center Central District,1,48,29248,88
-100228,Mount Baker Transit Center Central District,1,48,29249,91
-100228,Mount Baker Transit Center Central District,1,48,29251,96
-100228,Mount Baker Transit Center Central District,1,48,29253,101
-100228,Mount Baker Transit Center Central District,1,48,29254,113
-100228,Mount Baker Transit Center Central District,1,48,29256,120
-100228,Mount Baker Transit Center Central District,1,48,29257,123
-100228,Mount Baker Transit Center Central District,1,48,35821,125
-100228,Mount Baker Transit Center Central District,1,48,35850,133
-100228,Mount Baker Transit Center Central District,1,48,35860,136
-100228,Mount Baker Transit Center Central District,1,48,12770,141
-100228,Mount Baker Transit Center Central District,1,48,12600,144
-100228,Mount Baker Transit Center Central District,1,48,12630,174
-100228,Mount Baker Transit Center Central District,1,48,12640,182
-100228,Mount Baker Transit Center Central District,1,48,35890,189
-100228,Mount Baker Transit Center Central District,1,48,35910,207
-100228,Mount Baker Transit Center Central District,1,48,35940,233
-100228,Mount Baker Transit Center Central District,1,48,8641,242
-100228,Mount Baker Transit Center Central District,1,48,8660,248
-100228,Mount Baker Transit Center Central District,1,48,8402,259
-100254,Shoreline South 148th St Station Lake City,0,65,9605,1
-100254,Shoreline South 148th St Station Lake City,0,65,9610,4
-100254,Shoreline South 148th St Station Lake City,0,65,9575,16
-100254,Shoreline South 148th St Station Lake City,0,65,10917,23
-100254,Shoreline South 148th St Station Lake City,0,65,29240,36
-100254,Shoreline South 148th St Station Lake City,0,65,29242,47
-100254,Shoreline South 148th St Station Lake City,0,65,25765,67
-100254,Shoreline South 148th St Station Lake City,0,65,25790,104
-100254,Shoreline South 148th St Station Lake City,0,65,25201,110
-100254,Shoreline South 148th St Station Lake City,0,65,29920,116
-100254,Shoreline South 148th St Station Lake City,0,65,29930,119
-100254,Shoreline South 148th St Station Lake City,0,65,10513,130
-100254,Shoreline South 148th St Station Lake City,0,65,10515,135
-100254,Shoreline South 148th St Station Lake City,0,65,10010,145
-100254,Shoreline South 148th St Station Lake City,0,65,10020,153
-100254,Shoreline South 148th St Station Lake City,0,65,25840,160
-100254,Shoreline South 148th St Station Lake City,0,65,25860,163
-100254,Shoreline South 148th St Station Lake City,0,65,25880,166
-100254,Shoreline South 148th St Station Lake City,0,65,25890,168
-100254,Shoreline South 148th St Station Lake City,0,65,25900,170
-100254,Shoreline South 148th St Station Lake City,0,65,25920,173
-100254,Shoreline South 148th St Station Lake City,0,65,25940,176
-100254,Shoreline South 148th St Station Lake City,0,65,25960,182
-100254,Shoreline South 148th St Station Lake City,0,65,25980,187
-100254,Shoreline South 148th St Station Lake City,0,65,26000,195
-100254,Shoreline South 148th St Station Lake City,0,65,26010,200
-100254,Shoreline South 148th St Station Lake City,0,65,26020,204
-100254,Shoreline South 148th St Station Lake City,0,65,26030,207
-100254,Shoreline South 148th St Station Lake City,0,65,26050,212
-100254,Shoreline South 148th St Station Lake City,0,65,26060,216
-100254,Shoreline South 148th St Station Lake City,0,65,26080,221
-100254,Shoreline South 148th St Station Lake City,0,65,26100,232
-100254,Shoreline South 148th St Station Lake City,0,65,26110,234
-100254,Shoreline South 148th St Station Lake City,0,65,10860,240
-100254,Shoreline South 148th St Station Lake City,0,65,10870,243
-100254,Shoreline South 148th St Station Lake City,0,65,35230,249
-100254,Shoreline South 148th St Station Lake City,0,65,38670,252
-100254,Shoreline South 148th St Station Lake City,0,65,38680,254
-100254,Shoreline South 148th St Station Lake City,0,65,38700,257
-100254,Shoreline South 148th St Station Lake City,0,65,38720,264
-100254,Shoreline South 148th St Station Lake City,0,65,38730,267
-100254,Shoreline South 148th St Station Lake City,0,65,82120,272
-100254,Shoreline South 148th St Station Lake City,0,65,82130,275
-100254,Shoreline South 148th St Station Lake City,0,65,82140,278
-100254,Shoreline South 148th St Station Lake City,0,65,38810,286
-100254,Shoreline South 148th St Station Lake City,0,65,82160,292
-100254,Shoreline South 148th St Station Lake City,0,65,81301,322
-100254,University District Wedgwood,1,65,81301,1
-100254,University District Wedgwood,1,65,82230,35
-100254,University District Wedgwood,1,65,39350,38
-100254,University District Wedgwood,1,65,82250,47
-100254,University District Wedgwood,1,65,82260,50
-100254,University District Wedgwood,1,65,38050,57
-100254,University District Wedgwood,1,65,38060,59
-100254,University District Wedgwood,1,65,38080,66
-100254,University District Wedgwood,1,65,38090,69
-100254,University District Wedgwood,1,65,38100,71
-100254,University District Wedgwood,1,65,38110,73
-100254,University District Wedgwood,1,65,9670,78
-100254,University District Wedgwood,1,65,9680,81
-100254,University District Wedgwood,1,65,9690,84
-100254,University District Wedgwood,1,65,24910,91
-100254,University District Wedgwood,1,65,24920,93
-100254,University District Wedgwood,1,65,24940,104
-100254,University District Wedgwood,1,65,24950,109
-100254,University District Wedgwood,1,65,24960,113
-100254,University District Wedgwood,1,65,24980,118
-100254,University District Wedgwood,1,65,24990,122
-100254,University District Wedgwood,1,65,25000,127
-100254,University District Wedgwood,1,65,25010,131
-100254,University District Wedgwood,1,65,25020,137
-100254,University District Wedgwood,1,65,25040,143
-100254,University District Wedgwood,1,65,25050,148
-100254,University District Wedgwood,1,65,25070,152
-100254,University District Wedgwood,1,65,25090,155
-100254,University District Wedgwood,1,65,25100,157
-100254,University District Wedgwood,1,65,25110,159
-100254,University District Wedgwood,1,65,25130,162
-100254,University District Wedgwood,1,65,25140,164
-100254,University District Wedgwood,1,65,10510,169
-100254,University District Wedgwood,1,65,10525,179
-100254,University District Wedgwood,1,65,10005,189
-100254,University District Wedgwood,1,65,9978,194
-100259,Northgate Station Roosevelt Station,0,67,9978,1
-100259,Northgate Station Roosevelt Station,0,67,29130,16
-100259,Northgate Station Roosevelt Station,0,67,25202,19
-100259,Northgate Station Roosevelt Station,0,67,25210,30
-100259,Northgate Station Roosevelt Station,0,67,75406,64
-100259,Northgate Station Roosevelt Station,0,67,75403,83
-100259,Northgate Station Roosevelt Station,0,67,75402,103
-100259,Northgate Station Roosevelt Station,0,67,75404,114
-100259,Northgate Station Roosevelt Station,0,67,75405,142
-100259,Northgate Station Roosevelt Station,0,67,9147,158
-100259,Northgate Station Roosevelt Station,0,67,9630,166
-100259,Northgate Station Roosevelt Station,0,67,9650,169
-100259,Northgate Station Roosevelt Station,0,67,23500,174
-100259,Northgate Station Roosevelt Station,0,67,23520,176
-100259,Northgate Station Roosevelt Station,0,67,23530,181
-100259,Northgate Station Roosevelt Station,0,67,23540,191
-100259,Northgate Station Roosevelt Station,0,67,23561,199
-100259,Northgate Station Roosevelt Station,0,67,23580,204
-100259,Northgate Station Roosevelt Station,0,67,23600,220
-100259,Northgate Station Roosevelt Station,0,67,23610,231
-100259,Northgate Station Roosevelt Station,0,67,82145,239
-100259,Northgate Station Roosevelt Station,0,67,82155,246
-100259,Northgate Station Roosevelt Station,0,67,82165,252
-100259,Northgate Station Roosevelt Station,0,67,82167,255
-100259,Northgate Station Roosevelt Station,0,67,82175,258
-100259,Northgate Station Roosevelt Station,0,67,82185,267
-100259,Northgate Station Roosevelt Station,0,67,82187,270
-100259,Northgate Station Roosevelt Station,0,67,82195,273
-100259,Northgate Station Roosevelt Station,0,67,82197,276
-100259,Northgate Station Roosevelt Station,0,67,82198,279
-100259,Northgate Station Roosevelt Station,0,67,23230,282
-100259,Northgate Station Roosevelt Station,0,67,23250,287
-100259,Northgate Station Roosevelt Station,0,67,23260,294
-100259,Northgate Station Roosevelt Station,0,67,23273,297
-100259,Northgate Station Roosevelt Station,0,67,35317,306
-100259,University District Roosevelt,1,67,35317,1
-100259,University District Roosevelt,1,67,23750,9
-100259,University District Roosevelt,1,67,23770,14
-100259,University District Roosevelt,1,67,81364,21
-100259,University District Roosevelt,1,67,82205,25
-100259,University District Roosevelt,1,67,82207,29
-100259,University District Roosevelt,1,67,82216,33
-100259,University District Roosevelt,1,67,82227,43
-100259,University District Roosevelt,1,67,82235,46
-100259,University District Roosevelt,1,67,82237,49
-100259,University District Roosevelt,1,67,82247,55
-100259,University District Roosevelt,1,67,23370,62
-100259,University District Roosevelt,1,67,23390,72
-100259,University District Roosevelt,1,67,23420,86
-100259,University District Roosevelt,1,67,23421,89
-100259,University District Roosevelt,1,67,16440,92
-100259,University District Roosevelt,1,67,16460,97
-100259,University District Roosevelt,1,67,16480,109
-100259,University District Roosevelt,1,67,9589,114
-100259,University District Roosevelt,1,67,9605,121
-100264,U-District Station Eastlake,0,70,1610,1
-100264,U-District Station Eastlake,0,70,538,13
-100264,U-District Station Eastlake,0,70,558,18
-100264,U-District Station Eastlake,0,70,575,22
-100264,U-District Station Eastlake,0,70,880,44
-100264,U-District Station Eastlake,0,70,900,53
-100264,U-District Station Eastlake,0,70,10280,61
-100264,U-District Station Eastlake,0,70,10305,65
-100264,U-District Station Eastlake,0,70,10325,80
-100264,U-District Station Eastlake,0,70,10340,85
-100264,U-District Station Eastlake,0,70,10350,86
-100264,U-District Station Eastlake,0,70,9480,98
-100264,U-District Station Eastlake,0,70,9510,108
-100264,U-District Station Eastlake,0,70,9550,116
-100264,U-District Station Eastlake,0,70,9580,153
-100264,U-District Station Eastlake,0,70,11352,163
-100264,U-District Station Eastlake,0,70,9587,171
-100264,U-District Station Eastlake,0,70,1530,1
-100264,U-District Station Eastlake,0,70,1610,11
-100264,U-District Station Eastlake,0,70,538,23
-100264,U-District Station Eastlake,0,70,558,28
-100264,U-District Station Eastlake,0,70,575,32
-100264,U-District Station Eastlake,0,70,880,54
-100264,U-District Station Eastlake,0,70,900,63
-100264,U-District Station Eastlake,0,70,10280,71
-100264,U-District Station Eastlake,0,70,10305,75
-100264,U-District Station Eastlake,0,70,10325,90
-100264,U-District Station Eastlake,0,70,10340,95
-100264,U-District Station Eastlake,0,70,10350,96
-100264,U-District Station Eastlake,0,70,9480,108
-100264,U-District Station Eastlake,0,70,9510,118
-100264,U-District Station Eastlake,0,70,9550,126
-100264,U-District Station Eastlake,0,70,9580,163
-100264,U-District Station Eastlake,0,70,11352,173
-100264,U-District Station Eastlake,0,70,9587,181
-100264,Downtown Seattle Fairview,1,70,10911,1
-100264,Downtown Seattle Fairview,1,70,10912,8
-100264,Downtown Seattle Fairview,1,70,10914,11
-100264,Downtown Seattle Fairview,1,70,9138,17
-100264,Downtown Seattle Fairview,1,70,9140,32
-100264,Downtown Seattle Fairview,1,70,9150,70
-100264,Downtown Seattle Fairview,1,70,9190,78
-100264,Downtown Seattle Fairview,1,70,9220,85
-100264,Downtown Seattle Fairview,1,70,10170,99
-100264,Downtown Seattle Fairview,1,70,10180,102
-100264,Downtown Seattle Fairview,1,70,10190,105
-100264,Downtown Seattle Fairview,1,70,10210,117
-100264,Downtown Seattle Fairview,1,70,10225,123
-100264,Downtown Seattle Fairview,1,70,10240,129
-100264,Downtown Seattle Fairview,1,70,940,135
-100264,Downtown Seattle Fairview,1,70,950,140
-100264,Downtown Seattle Fairview,1,70,430,158
-100264,Downtown Seattle Fairview,1,70,450,163
-100264,Downtown Seattle Fairview,1,70,480,168
-100264,Downtown Seattle Fairview,1,70,500,173
-100264,Downtown Seattle Fairview,1,70,515,185
-100264,Downtown Seattle Fairview,1,70,1471,194
-100264,Downtown Seattle Fairview,1,70,10911,1
-100264,Downtown Seattle Fairview,1,70,10912,8
-100264,Downtown Seattle Fairview,1,70,10914,11
-100264,Downtown Seattle Fairview,1,70,9138,17
-100264,Downtown Seattle Fairview,1,70,9140,32
-100264,Downtown Seattle Fairview,1,70,9150,70
-100264,Downtown Seattle Fairview,1,70,9190,78
-100264,Downtown Seattle Fairview,1,70,9220,85
-100264,Downtown Seattle Fairview,1,70,10170,99
-100264,Downtown Seattle Fairview,1,70,10180,102
-100264,Downtown Seattle Fairview,1,70,10190,105
-100264,Downtown Seattle Fairview,1,70,10210,117
-100264,Downtown Seattle Fairview,1,70,10225,123
-100264,Downtown Seattle Fairview,1,70,10240,129
-100264,Downtown Seattle Fairview,1,70,940,135
-100264,Downtown Seattle Fairview,1,70,950,140
-100264,Downtown Seattle Fairview,1,70,430,158
-100264,Downtown Seattle Fairview,1,70,450,163
-100264,Downtown Seattle Fairview,1,70,480,168
-100264,Downtown Seattle Fairview,1,70,500,173
-100264,Downtown Seattle Fairview,1,70,515,185
-100447,U-District Station Capitol Hill,0,49,1180,1
-100447,U-District Station Capitol Hill,0,49,1190,8
-100447,U-District Station Capitol Hill,0,49,1195,12
-100447,U-District Station Capitol Hill,0,49,11133,21
-100447,U-District Station Capitol Hill,0,49,11140,30
-100447,U-District Station Capitol Hill,0,49,11150,34
-100447,U-District Station Capitol Hill,0,49,11180,44
-100447,U-District Station Capitol Hill,0,49,11190,48
-100447,U-District Station Capitol Hill,0,49,11200,51
-100447,U-District Station Capitol Hill,0,49,11230,61
-100447,U-District Station Capitol Hill,0,49,11250,63
-100447,U-District Station Capitol Hill,0,49,11270,76
-100447,U-District Station Capitol Hill,0,49,11290,80
-100447,U-District Station Capitol Hill,0,49,11300,93
-100447,U-District Station Capitol Hill,0,49,11330,101
-100447,U-District Station Capitol Hill,0,49,10915,106
-100447,U-District Station Capitol Hill,0,49,9580,140
-100447,U-District Station Capitol Hill,0,49,11352,150
-100447,U-District Station Capitol Hill,0,49,9587,158
-100447,Downtown Seattle Broadway,1,49,10911,1
-100447,Downtown Seattle Broadway,1,49,10912,8
-100447,Downtown Seattle Broadway,1,49,10914,11
-100447,Downtown Seattle Broadway,1,49,9138,17
-100447,Downtown Seattle Broadway,1,49,9140,32
-100447,Downtown Seattle Broadway,1,49,10916,66
-100447,Downtown Seattle Broadway,1,49,10920,71
-100447,Downtown Seattle Broadway,1,49,10940,83
-100447,Downtown Seattle Broadway,1,49,10950,92
-100447,Downtown Seattle Broadway,1,49,10970,96
-100447,Downtown Seattle Broadway,1,49,10990,109
-100447,Downtown Seattle Broadway,1,49,11010,111
-100447,Downtown Seattle Broadway,1,49,11030,119
-100447,Downtown Seattle Broadway,1,49,11040,124
-100447,Downtown Seattle Broadway,1,49,11050,127
-100447,Downtown Seattle Broadway,1,49,11060,130
-100447,Downtown Seattle Broadway,1,49,11070,136
-100447,Downtown Seattle Broadway,1,49,11080,140
-100447,Downtown Seattle Broadway,1,49,11090,144
-100447,Downtown Seattle Broadway,1,49,11100,148
-100447,Downtown Seattle Broadway,1,49,1085,163
-100447,Downtown Seattle Broadway,1,49,1110,174
-100447,Downtown Seattle Broadway,1,49,1120,180
-100447,Downtown Seattle Broadway,1,49,10911,1
-100447,Downtown Seattle Broadway,1,49,10912,8
-100447,Downtown Seattle Broadway,1,49,10914,11
-100447,Downtown Seattle Broadway,1,49,9138,17
-100447,Downtown Seattle Broadway,1,49,9140,32
-100447,Downtown Seattle Broadway,1,49,10916,66
-100447,Downtown Seattle Broadway,1,49,10920,71
-100447,Downtown Seattle Broadway,1,49,10940,83
-100447,Downtown Seattle Broadway,1,49,10950,92
-100447,Downtown Seattle Broadway,1,49,10970,96
-100447,Downtown Seattle Broadway,1,49,10990,109
-100447,Downtown Seattle Broadway,1,49,11010,111
-100447,Downtown Seattle Broadway,1,49,11030,119
-100447,Downtown Seattle Broadway,1,49,11040,124
-100447,Downtown Seattle Broadway,1,49,11050,127
-100447,Downtown Seattle Broadway,1,49,11060,130
-100447,Downtown Seattle Broadway,1,49,11070,136
-100447,Downtown Seattle Broadway,1,49,11080,140
-100447,Downtown Seattle Broadway,1,49,11090,144
-100447,Downtown Seattle Broadway,1,49,11100,148
-100447,Downtown Seattle Broadway,1,49,1085,163
-100447,Downtown Seattle Broadway,1,49,1110,174
-100447,Downtown Seattle Broadway,1,49,450,187
-100447,Downtown Seattle Broadway,1,49,480,192
-100447,Downtown Seattle Broadway,1,49,500,197
-100447,Downtown Seattle Broadway,1,49,515,209
-100447,Downtown Seattle Broadway,1,49,1471,218
+route_id,trip_headsign,direction_id,route_short_name,stop_id,stop_sequence,stop_lat,stop_lon
+100223,University District Montlake,0,43,41902,1,47.6019592,-122.31797
+100223,University District Montlake,0,43,41904,18,47.6054497,-122.320648
+100223,University District Montlake,0,43,41908,31,47.6099854,-122.320663
+100223,University District Montlake,0,43,41965,37,47.612896,-122.320679
+100223,University District Montlake,0,43,41970,40,47.6151657,-122.320702
+100223,University District Montlake,0,43,29270,49,47.6198463,-122.320473
+100223,University District Montlake,0,43,29277,54,47.619873,-122.316429
+100223,University District Montlake,0,43,29273,60,47.6198921,-122.313042
+100223,University District Montlake,0,43,29274,65,47.6204262,-122.31102
+100223,University District Montlake,0,43,29275,71,47.6204224,-122.307518
+100223,University District Montlake,0,43,29276,79,47.6201439,-122.303177
+100223,University District Montlake,0,43,35825,81,47.6206017,-122.302399
+100223,University District Montlake,0,43,29278,85,47.6233788,-122.302361
+100223,University District Montlake,0,43,29280,94,47.6270142,-122.302292
+100223,University District Montlake,0,43,29300,104,47.629467,-122.301567
+100223,University District Montlake,0,43,29320,109,47.6327782,-122.301514
+100223,University District Montlake,0,43,29340,113,47.635047900000004,-122.301468
+100223,University District Montlake,0,43,29350,117,47.6380997,-122.301483
+100223,University District Montlake,0,43,29361,122,47.640152,-122.301979
+100223,University District Montlake,0,43,29380,132,47.6430969,-122.302849
+100223,University District Montlake,0,43,25751,142,47.6444321,-122.30423
+100223,University District Montlake,0,43,29405,163,47.649765,-122.305893
+100223,Capitol Hill University Of Washington Medical Center,1,43,10911,1,47.6612053,-122.313477
+100223,Capitol Hill University Of Washington Medical Center,1,43,10912,8,47.6593704,-122.312096
+100223,Capitol Hill University Of Washington Medical Center,1,43,10914,11,47.6564217,-122.312164
+100223,Capitol Hill University Of Washington Medical Center,1,43,10917,15,47.6548195,-122.31221
+100223,Capitol Hill University Of Washington Medical Center,1,43,29240,28,47.6520844,-122.310883
+100223,Capitol Hill University Of Washington Medical Center,1,43,29247,37,47.6491432,-122.30497
+100223,Capitol Hill University Of Washington Medical Center,1,43,29238,63,47.6433144,-122.303467
+100223,Capitol Hill University Of Washington Medical Center,1,43,29244,74,47.6405449,-122.30217
+100223,Capitol Hill University Of Washington Medical Center,1,43,29248,81,47.6376915,-122.30162
+100223,Capitol Hill University Of Washington Medical Center,1,43,29249,84,47.6349983,-122.301674
+100223,Capitol Hill University Of Washington Medical Center,1,43,29251,89,47.6321678,-122.301712
+100223,Capitol Hill University Of Washington Medical Center,1,43,29253,94,47.6290436,-122.301773
+100223,Capitol Hill University Of Washington Medical Center,1,43,29254,106,47.6265831,-122.302498
+100223,Capitol Hill University Of Washington Medical Center,1,43,29256,113,47.6229362,-122.302559
+100223,Capitol Hill University Of Washington Medical Center,1,43,29257,116,47.62117,-122.302589
+100223,Capitol Hill University Of Washington Medical Center,1,43,29258,119,47.6202774,-122.303993
+100223,Capitol Hill University Of Washington Medical Center,1,43,29259,125,47.6205559,-122.30719
+100223,Capitol Hill University Of Washington Medical Center,1,43,29260,133,47.6205711,-122.31192
+100223,Capitol Hill University Of Washington Medical Center,1,43,29261,137,47.6200333,-122.313202
+100223,Capitol Hill University Of Washington Medical Center,1,43,29301,144,47.6200027,-122.317535
+100223,Capitol Hill University Of Washington Medical Center,1,43,29262,148,47.6199799,-122.320114
+100223,Capitol Hill University Of Washington Medical Center,1,43,11060,151,47.6185379,-122.320946
+100223,Capitol Hill University Of Washington Medical Center,1,43,11070,157,47.6161919,-122.320923
+100223,Capitol Hill University Of Washington Medical Center,1,43,41980,159,47.6141396,-122.320885
+100223,Capitol Hill University Of Washington Medical Center,1,43,41982,162,47.6127129,-122.320885
+100223,Capitol Hill University Of Washington Medical Center,1,43,41986,168,47.609745,-122.320869
+100223,Capitol Hill University Of Washington Medical Center,1,43,41987,181,47.6055832,-122.320854
+100223,Capitol Hill University Of Washington Medical Center,1,43,41989,197,47.601963,-122.31823
+100224,Ballard Wallingford,0,44,25240,1,47.6502266,-122.30442
+100224,Ballard Wallingford,0,44,29405,11,47.649765,-122.305893
+100224,Ballard Wallingford,0,44,29420,20,47.6522064,-122.310783
+100224,Ballard Wallingford,0,44,29440,33,47.655899,-122.311974
+100224,Ballard Wallingford,0,44,11352,38,47.6586685,-122.311905
+100224,Ballard Wallingford,0,44,9587,46,47.6598778,-122.314117
+100224,Ballard Wallingford,0,44,29455,56,47.6613731,-122.318214
+100224,Ballard Wallingford,0,44,29480,73,47.6614151,-122.325386
+100224,Ballard Wallingford,0,44,29500,79,47.6614418,-122.331238
+100224,Ballard Wallingford,0,44,17310,86,47.6614609,-122.335556
+100224,Ballard Wallingford,0,44,29530,95,47.6614609,-122.339653
+100224,Ballard Wallingford,0,44,29540,99,47.6614609,-122.34256
+100224,Ballard Wallingford,0,44,29557,110,47.6621895,-122.345413
+100224,Ballard Wallingford,0,44,29581,127,47.6622086,-122.349037
+100224,Ballard Wallingford,0,44,29600,135,47.6622124,-122.354324
+100224,Ballard Wallingford,0,44,29620,155,47.6636391,-122.357941
+100224,Ballard Wallingford,0,44,29630,162,47.665184000000004,-122.359619
+100224,Ballard Wallingford,0,44,29640,172,47.6677628,-122.361328
+100224,Ballard Wallingford,0,44,29650,186,47.6687508,-122.363228
+100224,Ballard Wallingford,0,44,29660,191,47.6687355,-122.366493
+100224,Ballard Wallingford,0,44,29680,194,47.6687279,-122.371155
+100224,Ballard Wallingford,0,44,29700,201,47.6687355,-122.377136
+100224,Ballard Wallingford,0,44,29720,208,47.6687393,-122.382423
+100224,Ballard Wallingford,0,44,18740,213,47.6687469,-122.386124
+100224,Ballard Wallingford,0,44,18760,218,47.6687241,-122.392639
+100224,Ballard Wallingford,0,44,18785,226,47.6687088,-122.396057
+100224,Ballard Wallingford,0,44,18085,228,47.6679344,-122.398415
+100224,Ballard Wallingford,0,44,29405,1,47.649765,-122.305893
+100224,Ballard Wallingford,0,44,29420,10,47.6522064,-122.310783
+100224,Ballard Wallingford,0,44,29440,23,47.655899,-122.311974
+100224,Ballard Wallingford,0,44,11352,28,47.6586685,-122.311905
+100224,Ballard Wallingford,0,44,9587,36,47.6598778,-122.314117
+100224,Ballard Wallingford,0,44,29455,46,47.6613731,-122.318214
+100224,Ballard Wallingford,0,44,29480,63,47.6614151,-122.325386
+100224,Ballard Wallingford,0,44,29500,69,47.6614418,-122.331238
+100224,Ballard Wallingford,0,44,17310,76,47.6614609,-122.335556
+100224,Ballard Wallingford,0,44,29530,85,47.6614609,-122.339653
+100224,Ballard Wallingford,0,44,29540,89,47.6614609,-122.34256
+100224,Ballard Wallingford,0,44,29557,100,47.6621895,-122.345413
+100224,Ballard Wallingford,0,44,29581,117,47.6622086,-122.349037
+100224,Ballard Wallingford,0,44,29600,125,47.6622124,-122.354324
+100224,Ballard Wallingford,0,44,29620,145,47.6636391,-122.357941
+100224,Ballard Wallingford,0,44,29630,152,47.665184000000004,-122.359619
+100224,Ballard Wallingford,0,44,29640,162,47.6677628,-122.361328
+100224,Ballard Wallingford,0,44,29650,176,47.6687508,-122.363228
+100224,Ballard Wallingford,0,44,29660,181,47.6687355,-122.366493
+100224,Ballard Wallingford,0,44,29680,184,47.6687279,-122.371155
+100224,Ballard Wallingford,0,44,29700,191,47.6687355,-122.377136
+100224,Ballard Wallingford,0,44,29720,198,47.6687393,-122.382423
+100224,Ballard Wallingford,0,44,18740,203,47.6687469,-122.386124
+100224,Ballard Wallingford,0,44,18760,208,47.6687241,-122.392639
+100224,Ballard Wallingford,0,44,18785,216,47.6687088,-122.396057
+100224,Ballard Wallingford,0,44,18085,218,47.6679344,-122.398415
+100224,University Of Washington Medical Center Wallingford,1,44,18085,1,47.6679344,-122.398415
+100224,University Of Washington Medical Center Wallingford,1,44,18090,3,47.6676369,-122.39653
+100224,University Of Washington Medical Center Wallingford,1,44,18100,15,47.6685905,-122.393089
+100224,University Of Washington Medical Center Wallingford,1,44,18120,21,47.6686058,-122.385345
+100224,University Of Washington Medical Center Wallingford,1,44,29213,28,47.6686058,-122.381287
+100224,University Of Washington Medical Center Wallingford,1,44,29215,35,47.6685944,-122.375603
+100224,University Of Washington Medical Center Wallingford,1,44,29217,41,47.6685944,-122.370453
+100224,University Of Washington Medical Center Wallingford,1,44,29219,44,47.6685982,-122.36554
+100224,University Of Washington Medical Center Wallingford,1,44,29220,48,47.6686134,-122.363037
+100224,University Of Washington Medical Center Wallingford,1,44,75407,65,47.667099,-122.361046
+100224,University Of Washington Medical Center Wallingford,1,44,29222,74,47.664814,-122.359512
+100224,University Of Washington Medical Center Wallingford,1,44,29223,80,47.6633644,-122.357872
+100224,University Of Washington Medical Center Wallingford,1,44,29225,100,47.6620674,-122.353638
+100224,University Of Washington Medical Center Wallingford,1,44,29582,115,47.6619835,-122.34745
+100224,University Of Washington Medical Center Wallingford,1,44,29231,138,47.6613197,-122.34166
+100224,University Of Washington Medical Center Wallingford,1,44,29232,142,47.6613159,-122.338692
+100224,University Of Washington Medical Center Wallingford,1,44,17410,149,47.6613159,-122.335442
+100224,University Of Washington Medical Center Wallingford,1,44,29234,156,47.6613083,-122.331032
+100224,University Of Washington Medical Center Wallingford,1,44,29236,161,47.6612778,-122.326347
+100224,University Of Washington Medical Center Wallingford,1,44,29865,180,47.6612358,-122.317291
+100224,University Of Washington Medical Center Wallingford,1,44,10911,189,47.6612053,-122.313477
+100224,University Of Washington Medical Center Wallingford,1,44,10912,196,47.6593704,-122.312096
+100224,University Of Washington Medical Center Wallingford,1,44,10914,199,47.6564217,-122.312164
+100224,University Of Washington Medical Center Wallingford,1,44,10917,203,47.6548195,-122.31221
+100224,University Of Washington Medical Center Wallingford,1,44,29240,216,47.6520844,-122.310883
+100224,University Of Washington Medical Center Wallingford,1,44,29242,227,47.6505051,-122.306908
+100224,University Of Washington Medical Center Wallingford,1,44,29243,232,47.6504898,-122.306198
+100224,University District,1,44,18085,1,47.6679344,-122.398415
+100224,University District,1,44,18090,3,47.6676369,-122.39653
+100224,University District,1,44,18100,15,47.6685905,-122.393089
+100224,University District,1,44,18120,21,47.6686058,-122.385345
+100224,University District,1,44,29213,28,47.6686058,-122.381287
+100224,University District,1,44,29215,35,47.6685944,-122.375603
+100224,University District,1,44,29217,41,47.6685944,-122.370453
+100224,University District,1,44,29219,44,47.6685982,-122.36554
+100224,University District,1,44,29220,48,47.6686134,-122.363037
+100224,University District,1,44,75407,65,47.667099,-122.361046
+100224,University District,1,44,29222,74,47.664814,-122.359512
+100224,University District,1,44,29223,80,47.6633644,-122.357872
+100224,University District,1,44,29225,100,47.6620674,-122.353638
+100224,University District,1,44,29582,115,47.6619835,-122.34745
+100224,University District,1,44,29231,138,47.6613197,-122.34166
+100224,University District,1,44,29232,142,47.6613159,-122.338692
+100224,University District,1,44,17410,149,47.6613159,-122.335442
+100224,University District,1,44,29234,156,47.6613083,-122.331032
+100224,University District,1,44,29236,161,47.6612778,-122.326347
+100224,University District,1,44,29865,180,47.6612358,-122.317291
+100224,University District,1,44,10911,189,47.6612053,-122.313477
+100225,Loyal Heights Greenwood,0,45,9978,1,47.6627426,-122.285202
+100225,Loyal Heights Greenwood,0,45,29130,16,47.6612053,-122.289627
+100225,Loyal Heights Greenwood,0,45,25202,19,47.6612778,-122.295418
+100225,Loyal Heights Greenwood,0,45,25210,30,47.6610489,-122.298904
+100225,Loyal Heights Greenwood,0,45,75406,64,47.6567421,-122.304886
+100225,Loyal Heights Greenwood,0,45,75403,83,47.6545029,-122.30513
+100225,Loyal Heights Greenwood,0,45,75402,103,47.6523895,-122.306305
+100225,Loyal Heights Greenwood,0,45,75404,114,47.6521721,-122.308624
+100225,Loyal Heights Greenwood,0,45,75405,142,47.6551399,-122.310974
+100225,Loyal Heights Greenwood,0,45,9581,158,47.6573868,-122.313133
+100225,Loyal Heights Greenwood,0,45,9582,160,47.6596832,-122.313065
+100225,Loyal Heights Greenwood,0,45,9584,163,47.6620674,-122.313011
+100225,Loyal Heights Greenwood,0,45,37350,166,47.6653786,-122.312973
+100225,Loyal Heights Greenwood,0,45,37352,170,47.668766,-122.31292
+100225,Loyal Heights Greenwood,0,45,37353,172,47.6707764,-122.312927
+100225,Loyal Heights Greenwood,0,45,36931,192,47.6758652,-122.313545
+100225,Loyal Heights Greenwood,0,45,36940,197,47.6758881,-122.315994
+100225,Loyal Heights Greenwood,0,45,36960,208,47.67593,-122.321167
+100225,Loyal Heights Greenwood,0,45,16515,214,47.6778717,-122.323586
+100225,Loyal Heights Greenwood,0,45,16520,215,47.6788406,-122.324486
+100225,Loyal Heights Greenwood,0,45,36961,235,47.6813698,-122.32692
+100225,Loyal Heights Greenwood,0,45,36991,269,47.6831055,-122.333557
+100225,Loyal Heights Greenwood,0,45,37020,284,47.6856461,-122.336632
+100225,Loyal Heights Greenwood,0,45,17640,294,47.6873512,-122.336304
+100225,Loyal Heights Greenwood,0,45,17650,297,47.6889038,-122.336319
+100225,Loyal Heights Greenwood,0,45,5420,301,47.6905785,-122.336769
+100225,Loyal Heights Greenwood,0,45,5440,311,47.690609,-122.341194
+100225,Loyal Heights Greenwood,0,45,5450,316,47.6906242,-122.344162
+100225,Loyal Heights Greenwood,0,45,5470,322,47.6906471,-122.350266
+100225,Loyal Heights Greenwood,0,45,41450,327,47.6906662,-122.355675
+100225,Loyal Heights Greenwood,0,45,37040,330,47.6906891,-122.360275
+100225,Loyal Heights Greenwood,0,45,37060,334,47.6907234,-122.366653
+100225,Loyal Heights Greenwood,0,45,37074,340,47.6906967,-122.371796
+100225,Loyal Heights Greenwood,0,45,37080,343,47.6906853,-122.375343
+100225,Loyal Heights Greenwood,0,45,37081,346,47.6906776,-122.377609
+100225,Loyal Heights Greenwood,0,45,37083,351,47.6906586,-122.381462
+100225,Loyal Heights Greenwood,0,45,37078,356,47.6906509,-122.38472
+100225,Loyal Heights Greenwood,0,45,37086,360,47.6906471,-122.38797
+100225,Loyal Heights Greenwood,0,45,37087,367,47.6906395,-122.390862
+100225,Loyal Heights Greenwood,0,45,37088,371,47.6906395,-122.393379
+100225,Loyal Heights Greenwood,0,45,37089,378,47.6906395,-122.396301
+100225,Loyal Heights Greenwood,0,45,35530,390,47.6902084,-122.397842
+100225,University District Roosevelt Station,1,45,35530,1,47.6902084,-122.397842
+100225,University District Roosevelt Station,1,45,35540,10,47.6904984,-122.39653
+100225,University District Roosevelt Station,1,45,35550,17,47.6905022,-122.394058
+100225,University District Roosevelt Station,1,45,19210,20,47.6905022,-122.391617
+100225,University District Roosevelt Station,1,45,35551,28,47.690506,-122.387764
+100225,University District Roosevelt Station,1,45,35570,33,47.6905174,-122.384018
+100225,University District Roosevelt Station,1,45,35580,36,47.6905251,-122.381874
+100225,University District Roosevelt Station,1,45,35600,43,47.6905403,-122.376434
+100225,University District Roosevelt Station,1,45,35630,49,47.6905708,-122.370033
+100225,University District Roosevelt Station,1,45,41430,54,47.6905861,-122.365471
+100225,University District Roosevelt Station,1,45,35660,57,47.6905556,-122.360275
+100225,University District Roosevelt Station,1,45,35670,59,47.6905479,-122.357658
+100225,University District Roosevelt Station,1,45,5330,62,47.6905289,-122.354935
+100225,University District Roosevelt Station,1,45,5350,67,47.690506,-122.349609
+100225,University District Roosevelt Station,1,45,5370,70,47.6904907,-122.344734
+100225,University District Roosevelt Station,1,45,5380,76,47.6904716,-122.34150699999999
+100225,University District Roosevelt Station,1,45,5400,87,47.6904449,-122.336601
+100225,University District Roosevelt Station,1,45,17070,92,47.68853,-122.33651
+100225,University District Roosevelt Station,1,45,17080,94,47.6870499,-122.336494
+100225,University District Roosevelt Station,1,45,17081,102,47.6857948,-122.336861
+100225,University District Roosevelt Station,1,45,35691,123,47.682682,-122.332932
+100225,University District Roosevelt Station,1,45,35721,153,47.6812057,-122.326973
+100225,University District Roosevelt Station,1,45,16390,173,47.6784592,-122.32486
+100225,University District Roosevelt Station,1,45,16400,175,47.6773109,-122.323807
+100225,University District Roosevelt Station,1,45,16416,186,47.6757851,-122.320129
+100225,University District Roosevelt Station,1,45,16430,192,47.6757507,-122.316673
+100225,University District Roosevelt Station,1,45,37359,198,47.6757202,-122.312683
+100225,University District Roosevelt Station,1,45,38022,217,47.6706772,-122.313133
+100225,University District Roosevelt Station,1,45,38024,221,47.6683159,-122.313126
+100225,University District Roosevelt Station,1,45,9132,224,47.664135,-122.313187
+100228,University District Central District,0,48,8402,1,47.5775909,-122.297127
+100228,University District Central District,0,48,8429,8,47.5811958,-122.300201
+100228,University District Central District,0,48,8440,13,47.583931,-122.302299
+100228,University District Central District,0,48,36730,17,47.5857391,-122.302834
+100228,University District Central District,0,48,36750,24,47.588604,-122.302483
+100228,University District Central District,0,48,36774,49,47.5918427,-122.302383
+100228,University District Central District,0,48,12532,69,47.5967102,-122.302124
+100228,University District Central District,0,48,12550,76,47.5996971,-122.302124
+100228,University District Central District,0,48,12560,89,47.6018944,-122.302299
+100228,University District Central District,0,48,36791,113,47.6063156,-122.302689
+100228,University District Central District,0,48,36800,116,47.6083145,-122.302673
+100228,University District Central District,0,48,36830,121,47.6134415,-122.302605
+100228,University District Central District,0,48,36845,125,47.6167336,-122.302505
+100228,University District Central District,0,48,35825,132,47.6206017,-122.302399
+100228,University District Central District,0,48,29278,136,47.6233788,-122.302361
+100228,University District Central District,0,48,29280,145,47.6270142,-122.302292
+100228,University District Central District,0,48,29300,155,47.629467,-122.301567
+100228,University District Central District,0,48,29320,160,47.6327782,-122.301514
+100228,University District Central District,0,48,29340,164,47.635047900000004,-122.301468
+100228,University District Central District,0,48,29350,168,47.6380997,-122.301483
+100228,University District Central District,0,48,29361,173,47.640152,-122.301979
+100228,University District Central District,0,48,29380,183,47.6430969,-122.302849
+100228,University District Central District,0,48,25751,193,47.6444321,-122.30423
+100228,University District Central District,0,48,29405,214,47.649765,-122.305893
+100228,University District Central District,0,48,29420,223,47.6522064,-122.310783
+100228,University District Central District,0,48,29440,236,47.655899,-122.311974
+100228,University District Central District,0,48,11352,241,47.6586685,-122.311905
+100228,University District Central District,0,48,36860,246,47.661747,-122.311905
+100228,University District Central District,0,48,9586,255,47.6649742,-122.313721
+100228,Mount Baker Transit Center Central District,1,48,9135,1,47.6660233,-122.313164
+100228,Mount Baker Transit Center Central District,1,48,35800,7,47.6644783,-122.312042
+100228,Mount Baker Transit Center Central District,1,48,35820,10,47.6615601,-122.31208
+100228,Mount Baker Transit Center Central District,1,48,10912,15,47.6593704,-122.312096
+100228,Mount Baker Transit Center Central District,1,48,10914,18,47.6564217,-122.312164
+100228,Mount Baker Transit Center Central District,1,48,10917,22,47.6548195,-122.31221
+100228,Mount Baker Transit Center Central District,1,48,29240,35,47.6520844,-122.310883
+100228,Mount Baker Transit Center Central District,1,48,29247,44,47.6491432,-122.30497
+100228,Mount Baker Transit Center Central District,1,48,29238,70,47.6433144,-122.303467
+100228,Mount Baker Transit Center Central District,1,48,29244,81,47.6405449,-122.30217
+100228,Mount Baker Transit Center Central District,1,48,29248,88,47.6376915,-122.30162
+100228,Mount Baker Transit Center Central District,1,48,29249,91,47.6349983,-122.301674
+100228,Mount Baker Transit Center Central District,1,48,29251,96,47.6321678,-122.301712
+100228,Mount Baker Transit Center Central District,1,48,29253,101,47.6290436,-122.301773
+100228,Mount Baker Transit Center Central District,1,48,29254,113,47.6265831,-122.302498
+100228,Mount Baker Transit Center Central District,1,48,29256,120,47.6229362,-122.302559
+100228,Mount Baker Transit Center Central District,1,48,29257,123,47.62117,-122.302589
+100228,Mount Baker Transit Center Central District,1,48,35821,125,47.6199303,-122.30262
+100228,Mount Baker Transit Center Central District,1,48,35850,133,47.6151199,-122.302757
+100228,Mount Baker Transit Center Central District,1,48,35860,136,47.6124611,-122.302826
+100228,Mount Baker Transit Center Central District,1,48,12770,141,47.6077118,-122.302879
+100228,Mount Baker Transit Center Central District,1,48,12600,144,47.6058998,-122.302887
+100228,Mount Baker Transit Center Central District,1,48,12630,174,47.6012573,-122.302361
+100228,Mount Baker Transit Center Central District,1,48,12640,182,47.5989761,-122.302315
+100228,Mount Baker Transit Center Central District,1,48,35890,189,47.5953178,-122.30233
+100228,Mount Baker Transit Center Central District,1,48,35910,207,47.5916214,-122.302505
+100228,Mount Baker Transit Center Central District,1,48,35940,233,47.5880508,-122.302696
+100228,Mount Baker Transit Center Central District,1,48,8641,242,47.5837326,-122.302368
+100228,Mount Baker Transit Center Central District,1,48,8660,248,47.5807915,-122.300133
+100228,Mount Baker Transit Center Central District,1,48,8402,259,47.5775909,-122.297127
+100254,Shoreline South 148th St Station Lake City,0,65,9605,1,47.6609535,-122.317818
+100254,Shoreline South 148th St Station Lake City,0,65,9610,4,47.6584549,-122.317879
+100254,Shoreline South 148th St Station Lake City,0,65,9575,16,47.6559219,-122.313492
+100254,Shoreline South 148th St Station Lake City,0,65,10917,23,47.6548195,-122.31221
+100254,Shoreline South 148th St Station Lake City,0,65,29240,36,47.6520844,-122.310883
+100254,Shoreline South 148th St Station Lake City,0,65,29242,47,47.6505051,-122.306908
+100254,Shoreline South 148th St Station Lake City,0,65,25765,67,47.6515427,-122.30349
+100254,Shoreline South 148th St Station Lake City,0,65,25790,104,47.6608543,-122.298584
+100254,Shoreline South 148th St Station Lake City,0,65,25201,110,47.6611023,-122.296974
+100254,Shoreline South 148th St Station Lake City,0,65,29920,116,47.6611481,-122.29246500000001
+100254,Shoreline South 148th St Station Lake City,0,65,29930,119,47.6610489,-122.289024
+100254,Shoreline South 148th St Station Lake City,0,65,10513,130,47.6619339,-122.284668
+100254,Shoreline South 148th St Station Lake City,0,65,10515,135,47.6650925,-122.284698
+100254,Shoreline South 148th St Station Lake City,0,65,10010,145,47.6685791,-122.285667
+100254,Shoreline South 148th St Station Lake City,0,65,10020,153,47.6685791,-122.2883
+100254,Shoreline South 148th St Station Lake City,0,65,25840,160,47.6687775,-122.290108
+100254,Shoreline South 148th St Station Lake City,0,65,25860,163,47.6723289,-122.290131
+100254,Shoreline South 148th St Station Lake City,0,65,25880,166,47.6760139,-122.290176
+100254,Shoreline South 148th St Station Lake City,0,65,25890,168,47.6777916,-122.29023
+100254,Shoreline South 148th St Station Lake City,0,65,25900,170,47.6796265,-122.290283
+100254,Shoreline South 148th St Station Lake City,0,65,25920,173,47.683403,-122.29039
+100254,Shoreline South 148th St Station Lake City,0,65,25940,176,47.6869316,-122.290497
+100254,Shoreline South 148th St Station Lake City,0,65,25960,182,47.6905174,-122.290611
+100254,Shoreline South 148th St Station Lake City,0,65,25980,187,47.6933403,-122.290543
+100254,Shoreline South 148th St Station Lake City,0,65,26000,195,47.6962128,-122.290474
+100254,Shoreline South 148th St Station Lake City,0,65,26010,200,47.6977005,-122.290474
+100254,Shoreline South 148th St Station Lake City,0,65,26020,204,47.6996078,-122.290527
+100254,Shoreline South 148th St Station Lake City,0,65,26030,207,47.7015343,-122.290627
+100254,Shoreline South 148th St Station Lake City,0,65,26050,212,47.7050743,-122.290764
+100254,Shoreline South 148th St Station Lake City,0,65,26060,216,47.7086182,-122.290649
+100254,Shoreline South 148th St Station Lake City,0,65,26080,221,47.7121582,-122.290558
+100254,Shoreline South 148th St Station Lake City,0,65,26100,232,47.715744,-122.291389
+100254,Shoreline South 148th St Station Lake City,0,65,26110,234,47.7175217,-122.291252
+100254,Shoreline South 148th St Station Lake City,0,65,10860,240,47.7193222,-122.291412
+100254,Shoreline South 148th St Station Lake City,0,65,10870,243,47.7193375,-122.293205
+100254,Shoreline South 148th St Station Lake City,0,65,35230,249,47.7193527,-122.295776
+100254,Shoreline South 148th St Station Lake City,0,65,38670,252,47.7215424,-122.296234
+100254,Shoreline South 148th St Station Lake City,0,65,38680,254,47.7230873,-122.296265
+100254,Shoreline South 148th St Station Lake City,0,65,38700,257,47.7269859,-122.296303
+100254,Shoreline South 148th St Station Lake City,0,65,38720,264,47.7303658,-122.296432
+100254,Shoreline South 148th St Station Lake City,0,65,38730,267,47.7321701,-122.29644
+100254,Shoreline South 148th St Station Lake City,0,65,82120,272,47.7338562,-122.296936
+100254,Shoreline South 148th St Station Lake City,0,65,82130,275,47.7338829,-122.299599
+100254,Shoreline South 148th St Station Lake City,0,65,82140,278,47.7339058,-122.302505
+100254,Shoreline South 148th St Station Lake City,0,65,38810,286,47.7339783,-122.308693
+100254,Shoreline South 148th St Station Lake City,0,65,82160,292,47.7340279,-122.313164
+100254,Shoreline South 148th St Station Lake City,0,65,81301,322,47.7361488,-122.325119
+100254,University District Wedgwood,1,65,81301,1,47.7361488,-122.325119
+100254,University District Wedgwood,1,65,82230,35,47.7338753,-122.311699
+100254,University District Wedgwood,1,65,39350,38,47.7338295,-122.307632
+100254,University District Wedgwood,1,65,82250,47,47.7337494,-122.301186
+100254,University District Wedgwood,1,65,82260,50,47.7337418,-122.298927
+100254,University District Wedgwood,1,65,38050,57,47.73172,-122.296646
+100254,University District Wedgwood,1,65,38060,59,47.7301979,-122.296608
+100254,University District Wedgwood,1,65,38080,66,47.7265778,-122.296509
+100254,University District Wedgwood,1,65,38090,69,47.724472,-122.296486
+100254,University District Wedgwood,1,65,38100,71,47.7226067,-122.296455
+100254,University District Wedgwood,1,65,38110,73,47.7207794,-122.29644
+100254,University District Wedgwood,1,65,9670,78,47.7192078,-122.294708
+100254,University District Wedgwood,1,65,9680,81,47.7191963,-122.292862
+100254,University District Wedgwood,1,65,9690,84,47.7191849,-122.291084
+100254,University District Wedgwood,1,65,24910,91,47.7171211,-122.291481
+100254,University District Wedgwood,1,65,24920,93,47.7152977,-122.291618
+100254,University District Wedgwood,1,65,24940,104,47.7117157,-122.290764
+100254,University District Wedgwood,1,65,24950,109,47.7081223,-122.290871
+100254,University District Wedgwood,1,65,24960,113,47.7045135,-122.290962
+100254,University District Wedgwood,1,65,24980,118,47.7008743,-122.290802
+100254,University District Wedgwood,1,65,24990,122,47.6990242,-122.290703
+100254,University District Wedgwood,1,65,25000,127,47.6966324,-122.290695
+100254,University District Wedgwood,1,65,25010,131,47.6954384,-122.290695
+100254,University District Wedgwood,1,65,25020,137,47.6935959,-122.290733
+100254,University District Wedgwood,1,65,25040,143,47.6899185,-122.290817
+100254,University District Wedgwood,1,65,25050,148,47.6871986,-122.290718
+100254,University District Wedgwood,1,65,25070,152,47.682682,-122.290565
+100254,University District Wedgwood,1,65,25090,155,47.6790237,-122.290474
+100254,University District Wedgwood,1,65,25100,157,47.6772995,-122.290421
+100254,University District Wedgwood,1,65,25110,159,47.6755104,-122.290375
+100254,University District Wedgwood,1,65,25130,162,47.6719856,-122.290337
+100254,University District Wedgwood,1,65,25140,164,47.6687851,-122.290298
+100254,University District Wedgwood,1,65,10510,169,47.6684456,-122.288803
+100254,University District Wedgwood,1,65,10525,179,47.6684418,-122.285049
+100254,University District Wedgwood,1,65,10005,189,47.6658859,-122.284897
+100254,University District Wedgwood,1,65,9978,194,47.6627426,-122.285202
+100259,Northgate Station Roosevelt Station,0,67,9978,1,47.6627426,-122.285202
+100259,Northgate Station Roosevelt Station,0,67,29130,16,47.6612053,-122.289627
+100259,Northgate Station Roosevelt Station,0,67,25202,19,47.6612778,-122.295418
+100259,Northgate Station Roosevelt Station,0,67,25210,30,47.6610489,-122.298904
+100259,Northgate Station Roosevelt Station,0,67,75406,64,47.6567421,-122.304886
+100259,Northgate Station Roosevelt Station,0,67,75403,83,47.6545029,-122.30513
+100259,Northgate Station Roosevelt Station,0,67,75402,103,47.6523895,-122.306305
+100259,Northgate Station Roosevelt Station,0,67,75404,114,47.6521721,-122.308624
+100259,Northgate Station Roosevelt Station,0,67,75405,142,47.6551399,-122.310974
+100259,Northgate Station Roosevelt Station,0,67,9147,158,47.656498,-122.314308
+100259,Northgate Station Roosevelt Station,0,67,9630,166,47.6587448,-122.316551
+100259,Northgate Station Roosevelt Station,0,67,9650,169,47.6619453,-122.316452
+100259,Northgate Station Roosevelt Station,0,67,23500,174,47.6651726,-122.316238
+100259,Northgate Station Roosevelt Station,0,67,23520,176,47.6683769,-122.316193
+100259,Northgate Station Roosevelt Station,0,67,23530,181,47.6713295,-122.316101
+100259,Northgate Station Roosevelt Station,0,67,23540,191,47.6726532,-122.315552
+100259,Northgate Station Roosevelt Station,0,67,23561,199,47.6771355,-122.315582
+100259,Northgate Station Roosevelt Station,0,67,23580,204,47.67976,-122.315536
+100259,Northgate Station Roosevelt Station,0,67,23600,220,47.6831245,-122.315651
+100259,Northgate Station Roosevelt Station,0,67,23610,231,47.6835442,-122.317398
+100259,Northgate Station Roosevelt Station,0,67,82145,239,47.6869354,-122.317451
+100259,Northgate Station Roosevelt Station,0,67,82155,246,47.6908607,-122.31752
+100259,Northgate Station Roosevelt Station,0,67,82165,252,47.6941757,-122.317497
+100259,Northgate Station Roosevelt Station,0,67,82167,255,47.6959686,-122.317497
+100259,Northgate Station Roosevelt Station,0,67,82175,258,47.6978111,-122.317497
+100259,Northgate Station Roosevelt Station,0,67,82185,267,47.7014313,-122.317589
+100259,Northgate Station Roosevelt Station,0,67,82187,270,47.7033806,-122.317657
+100259,Northgate Station Roosevelt Station,0,67,82195,273,47.7051086,-122.317696
+100259,Northgate Station Roosevelt Station,0,67,82197,276,47.7075043,-122.317741
+100259,Northgate Station Roosevelt Station,0,67,82198,279,47.7086334,-122.318367
+100259,Northgate Station Roosevelt Station,0,67,23230,282,47.7081947,-122.323364
+100259,Northgate Station Roosevelt Station,0,67,23250,287,47.7064209,-122.323311
+100259,Northgate Station Roosevelt Station,0,67,23260,294,47.702755,-122.323242
+100259,Northgate Station Roosevelt Station,0,67,23273,297,47.7014008,-122.324051
+100259,Northgate Station Roosevelt Station,0,67,35317,306,47.7028084,-122.328423
+100259,University District Roosevelt,1,67,35317,1,47.7028084,-122.328423
+100259,University District Roosevelt,1,67,23750,9,47.7035408,-122.323051
+100259,University District Roosevelt,1,67,23770,14,47.7062187,-122.323105
+100259,University District Roosevelt,1,67,81364,21,47.708519,-122.322723
+100259,University District Roosevelt,1,67,82205,25,47.7074165,-122.317947
+100259,University District Roosevelt,1,67,82207,29,47.7047005,-122.317886
+100259,University District Roosevelt,1,67,82216,33,47.7019234,-122.31781
+100259,University District Roosevelt,1,67,82227,43,47.6973915,-122.317688
+100259,University District Roosevelt,1,67,82235,46,47.6954765,-122.317696
+100259,University District Roosevelt,1,67,82237,49,47.6938744,-122.317696
+100259,University District Roosevelt,1,67,82247,55,47.6901321,-122.317711
+100259,University District Roosevelt,1,67,23370,62,47.6864853,-122.317657
+100259,University District Roosevelt,1,67,23390,72,47.6828651,-122.317589
+100259,University District Roosevelt,1,67,23420,86,47.6785011,-122.317505
+100259,University District Roosevelt,1,67,23421,89,47.6767235,-122.317482
+100259,University District Roosevelt,1,67,16440,92,47.675457,-122.317467
+100259,University District Roosevelt,1,67,16460,97,47.6723557,-122.317467
+100259,University District Roosevelt,1,67,16480,109,47.668396,-122.317467
+100259,University District Roosevelt,1,67,9589,114,47.6645966,-122.317505
+100259,University District Roosevelt,1,67,9605,121,47.6609535,-122.317818
+100264,U-District Station Eastlake,0,70,1610,1,47.6016579,-122.329941
+100264,U-District Station Eastlake,0,70,538,13,47.6040955,-122.332504
+100264,U-District Station Eastlake,0,70,558,18,47.6070518,-122.335213
+100264,U-District Station Eastlake,0,70,575,22,47.609642,-122.337585
+100264,U-District Station Eastlake,0,70,880,44,47.6142273,-122.338394
+100264,U-District Station Eastlake,0,70,900,53,47.6165466,-122.335388
+100264,U-District Station Eastlake,0,70,10280,61,47.6188736,-122.334198
+100264,U-District Station Eastlake,0,70,10305,65,47.6222763,-122.334229
+100264,U-District Station Eastlake,0,70,10325,80,47.6266136,-122.33345
+100264,U-District Station Eastlake,0,70,10340,85,47.6288757,-122.330597
+100264,U-District Station Eastlake,0,70,10350,86,47.6299744,-122.329185
+100264,U-District Station Eastlake,0,70,9480,98,47.636161800000004,-122.325577
+100264,U-District Station Eastlake,0,70,9510,108,47.6422806,-122.325783
+100264,U-District Station Eastlake,0,70,9550,116,47.6489449,-122.323204
+100264,U-District Station Eastlake,0,70,9580,153,47.6559219,-122.31398
+100264,U-District Station Eastlake,0,70,11352,163,47.6586685,-122.311905
+100264,U-District Station Eastlake,0,70,9587,171,47.6598778,-122.314117
+100264,U-District Station Eastlake,0,70,1530,1,47.5992661,-122.328384
+100264,U-District Station Eastlake,0,70,1610,11,47.6016579,-122.329941
+100264,U-District Station Eastlake,0,70,538,23,47.6040955,-122.332504
+100264,U-District Station Eastlake,0,70,558,28,47.6070518,-122.335213
+100264,U-District Station Eastlake,0,70,575,32,47.609642,-122.337585
+100264,U-District Station Eastlake,0,70,880,54,47.6142273,-122.338394
+100264,U-District Station Eastlake,0,70,900,63,47.6165466,-122.335388
+100264,U-District Station Eastlake,0,70,10280,71,47.6188736,-122.334198
+100264,U-District Station Eastlake,0,70,10305,75,47.6222763,-122.334229
+100264,U-District Station Eastlake,0,70,10325,90,47.6266136,-122.33345
+100264,U-District Station Eastlake,0,70,10340,95,47.6288757,-122.330597
+100264,U-District Station Eastlake,0,70,10350,96,47.6299744,-122.329185
+100264,U-District Station Eastlake,0,70,9480,108,47.636161800000004,-122.325577
+100264,U-District Station Eastlake,0,70,9510,118,47.6422806,-122.325783
+100264,U-District Station Eastlake,0,70,9550,126,47.6489449,-122.323204
+100264,U-District Station Eastlake,0,70,9580,163,47.6559219,-122.31398
+100264,U-District Station Eastlake,0,70,11352,173,47.6586685,-122.311905
+100264,U-District Station Eastlake,0,70,9587,181,47.6598778,-122.314117
+100264,Downtown Seattle Fairview,1,70,10911,1,47.6612053,-122.313477
+100264,Downtown Seattle Fairview,1,70,10912,8,47.6593704,-122.312096
+100264,Downtown Seattle Fairview,1,70,10914,11,47.6564217,-122.312164
+100264,Downtown Seattle Fairview,1,70,9138,17,47.6562996,-122.315338
+100264,Downtown Seattle Fairview,1,70,9140,32,47.6557655,-122.318504
+100264,Downtown Seattle Fairview,1,70,9150,70,47.648613,-122.323685
+100264,Downtown Seattle Fairview,1,70,9190,78,47.6418648,-122.325989
+100264,Downtown Seattle Fairview,1,70,9220,85,47.6365471,-122.32592
+100264,Downtown Seattle Fairview,1,70,10170,99,47.6300545,-122.329338
+100264,Downtown Seattle Fairview,1,70,10180,102,47.628349300000004,-122.33152
+100264,Downtown Seattle Fairview,1,70,10190,105,47.6270752,-122.333122
+100264,Downtown Seattle Fairview,1,70,10210,117,47.6235619,-122.33445
+100264,Downtown Seattle Fairview,1,70,10225,123,47.6205864,-122.334435
+100264,Downtown Seattle Fairview,1,70,10240,129,47.6175003,-122.333817
+100264,Downtown Seattle Fairview,1,70,940,135,47.6157036,-122.334457
+100264,Downtown Seattle Fairview,1,70,950,140,47.61446,-122.336075
+100264,Downtown Seattle Fairview,1,70,430,158,47.6108971,-122.338966
+100264,Downtown Seattle Fairview,1,70,450,163,47.608253499999996,-122.336548
+100264,Downtown Seattle Fairview,1,70,480,168,47.6049957,-122.333572
+100264,Downtown Seattle Fairview,1,70,500,173,47.6028175,-122.331581
+100264,Downtown Seattle Fairview,1,70,515,185,47.6002388,-122.330376
+100264,Downtown Seattle Fairview,1,70,1471,194,47.5991249,-122.328041
+100264,Downtown Seattle Fairview,1,70,10911,1,47.6612053,-122.313477
+100264,Downtown Seattle Fairview,1,70,10912,8,47.6593704,-122.312096
+100264,Downtown Seattle Fairview,1,70,10914,11,47.6564217,-122.312164
+100264,Downtown Seattle Fairview,1,70,9138,17,47.6562996,-122.315338
+100264,Downtown Seattle Fairview,1,70,9140,32,47.6557655,-122.318504
+100264,Downtown Seattle Fairview,1,70,9150,70,47.648613,-122.323685
+100264,Downtown Seattle Fairview,1,70,9190,78,47.6418648,-122.325989
+100264,Downtown Seattle Fairview,1,70,9220,85,47.6365471,-122.32592
+100264,Downtown Seattle Fairview,1,70,10170,99,47.6300545,-122.329338
+100264,Downtown Seattle Fairview,1,70,10180,102,47.628349300000004,-122.33152
+100264,Downtown Seattle Fairview,1,70,10190,105,47.6270752,-122.333122
+100264,Downtown Seattle Fairview,1,70,10210,117,47.6235619,-122.33445
+100264,Downtown Seattle Fairview,1,70,10225,123,47.6205864,-122.334435
+100264,Downtown Seattle Fairview,1,70,10240,129,47.6175003,-122.333817
+100264,Downtown Seattle Fairview,1,70,940,135,47.6157036,-122.334457
+100264,Downtown Seattle Fairview,1,70,950,140,47.61446,-122.336075
+100264,Downtown Seattle Fairview,1,70,430,158,47.6108971,-122.338966
+100264,Downtown Seattle Fairview,1,70,450,163,47.608253499999996,-122.336548
+100264,Downtown Seattle Fairview,1,70,480,168,47.6049957,-122.333572
+100264,Downtown Seattle Fairview,1,70,500,173,47.6028175,-122.331581
+100264,Downtown Seattle Fairview,1,70,515,185,47.6002388,-122.330376
+100447,U-District Station Capitol Hill,0,49,1180,1,47.6100731,-122.336838
+100447,U-District Station Capitol Hill,0,49,1190,8,47.6110344,-122.334526
+100447,U-District Station Capitol Hill,0,49,1195,12,47.6118088,-122.332687
+100447,U-District Station Capitol Hill,0,49,11133,21,47.6137848,-122.327957
+100447,U-District Station Capitol Hill,0,49,11140,30,47.6151581,-122.324638
+100447,U-District Station Capitol Hill,0,49,11150,34,47.6151619,-122.321617
+100447,U-District Station Capitol Hill,0,49,11180,44,47.6197739,-122.32077
+100447,U-District Station Capitol Hill,0,49,11190,48,47.6221962,-122.320816
+100447,U-District Station Capitol Hill,0,49,11200,51,47.6246109,-122.320839
+100447,U-District Station Capitol Hill,0,49,11230,61,47.6288605,-122.320114
+100447,U-District Station Capitol Hill,0,49,11250,63,47.6322136,-122.320099
+100447,U-District Station Capitol Hill,0,49,11270,76,47.6362305,-122.319992
+100447,U-District Station Capitol Hill,0,49,11290,80,47.6410675,-122.319969
+100447,U-District Station Capitol Hill,0,49,11300,93,47.643261,-122.320747
+100447,U-District Station Capitol Hill,0,49,11330,101,47.647171,-122.321999
+100447,U-District Station Capitol Hill,0,49,10915,106,47.6499405,-122.321999
+100447,U-District Station Capitol Hill,0,49,9580,140,47.6559219,-122.31398
+100447,U-District Station Capitol Hill,0,49,11352,150,47.6586685,-122.311905
+100447,U-District Station Capitol Hill,0,49,9587,158,47.6598778,-122.314117
+100447,Downtown Seattle Broadway,1,49,10911,1,47.6612053,-122.313477
+100447,Downtown Seattle Broadway,1,49,10912,8,47.6593704,-122.312096
+100447,Downtown Seattle Broadway,1,49,10914,11,47.6564217,-122.312164
+100447,Downtown Seattle Broadway,1,49,9138,17,47.6562996,-122.315338
+100447,Downtown Seattle Broadway,1,49,9140,32,47.6557655,-122.318504
+100447,Downtown Seattle Broadway,1,49,10916,66,47.6496201,-122.322205
+100447,Downtown Seattle Broadway,1,49,10920,71,47.647007,-122.322205
+100447,Downtown Seattle Broadway,1,49,10940,83,47.6427994,-122.32016
+100447,Downtown Seattle Broadway,1,49,10950,92,47.6411629,-122.32016
+100447,Downtown Seattle Broadway,1,49,10970,96,47.6370277,-122.320183
+100447,Downtown Seattle Broadway,1,49,10990,109,47.6321259,-122.320305
+100447,Downtown Seattle Broadway,1,49,11010,111,47.6288223,-122.32032
+100447,Downtown Seattle Broadway,1,49,11030,119,47.625267,-122.320702
+100447,Downtown Seattle Broadway,1,49,11040,124,47.6228943,-122.321014
+100447,Downtown Seattle Broadway,1,49,11050,127,47.6208153,-122.320992
+100447,Downtown Seattle Broadway,1,49,11060,130,47.6185379,-122.320946
+100447,Downtown Seattle Broadway,1,49,11070,136,47.6161919,-122.320923
+100447,Downtown Seattle Broadway,1,49,11080,140,47.615303,-122.321495
+100447,Downtown Seattle Broadway,1,49,11090,144,47.6152878,-122.325127
+100447,Downtown Seattle Broadway,1,49,11100,148,47.6152992,-122.327271
+100447,Downtown Seattle Broadway,1,49,1085,163,47.6133766,-122.332603
+100447,Downtown Seattle Broadway,1,49,1110,174,47.6117668,-122.336456
+100447,Downtown Seattle Broadway,1,49,1120,180,47.6111031,-122.338028
+100447,Downtown Seattle Broadway,1,49,10911,1,47.6612053,-122.313477
+100447,Downtown Seattle Broadway,1,49,10912,8,47.6593704,-122.312096
+100447,Downtown Seattle Broadway,1,49,10914,11,47.6564217,-122.312164
+100447,Downtown Seattle Broadway,1,49,9138,17,47.6562996,-122.315338
+100447,Downtown Seattle Broadway,1,49,9140,32,47.6557655,-122.318504
+100447,Downtown Seattle Broadway,1,49,10916,66,47.6496201,-122.322205
+100447,Downtown Seattle Broadway,1,49,10920,71,47.647007,-122.322205
+100447,Downtown Seattle Broadway,1,49,10940,83,47.6427994,-122.32016
+100447,Downtown Seattle Broadway,1,49,10950,92,47.6411629,-122.32016
+100447,Downtown Seattle Broadway,1,49,10970,96,47.6370277,-122.320183
+100447,Downtown Seattle Broadway,1,49,10990,109,47.6321259,-122.320305
+100447,Downtown Seattle Broadway,1,49,11010,111,47.6288223,-122.32032
+100447,Downtown Seattle Broadway,1,49,11030,119,47.625267,-122.320702
+100447,Downtown Seattle Broadway,1,49,11040,124,47.6228943,-122.321014
+100447,Downtown Seattle Broadway,1,49,11050,127,47.6208153,-122.320992
+100447,Downtown Seattle Broadway,1,49,11060,130,47.6185379,-122.320946
+100447,Downtown Seattle Broadway,1,49,11070,136,47.6161919,-122.320923
+100447,Downtown Seattle Broadway,1,49,11080,140,47.615303,-122.321495
+100447,Downtown Seattle Broadway,1,49,11090,144,47.6152878,-122.325127
+100447,Downtown Seattle Broadway,1,49,11100,148,47.6152992,-122.327271
+100447,Downtown Seattle Broadway,1,49,1085,163,47.6133766,-122.332603
+100447,Downtown Seattle Broadway,1,49,1110,174,47.6117668,-122.336456
+100447,Downtown Seattle Broadway,1,49,450,187,47.608253499999996,-122.336548
+100447,Downtown Seattle Broadway,1,49,480,192,47.6049957,-122.333572
+100447,Downtown Seattle Broadway,1,49,500,197,47.6028175,-122.331581
+100447,Downtown Seattle Broadway,1,49,515,209,47.6002388,-122.330376
+100447,Downtown Seattle Broadway,1,49,1471,218,47.5991249,-122.328041
