@@ -2,18 +2,53 @@
 
 <html>
     <head>
-        <!-- INSERT HERE - general webpage stuff, links to MapBox style and js -->
-
-         <style>
-            /* INSERT HERE - webpage layout, map sizing */
-         </style>
+        <meta charset="utf-8" />
+        <title>Seattle Bus Map</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css" rel="stylesheet" />
+        <style>
+            body { margin:0; padding:0; }
+            #map { position:absolute; top:0; bottom:0; width:100%; }
+            #menu { position:absolute; background:white; padding:10px; top:10px; left:10px; z-index:1; border-radius:8px; }
+        </style>
     </head>
 
     <body>
-        <!-- INSERT HERE - webpage text, containing map as div -->
-
+        <div id="menu"></div>
+        <div id="map"></div>
+        
         <script>
-            // INSERT HERE - MapBox code
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
+        
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/light-v11', 
+          center: [-122.3035, 47.6553], 
+          zoom: 12,
+        });
+        
+        map.on('load', () => {
+          const layers = map.getStyle().layers;
+          const labelLayerId = layers.find(
+            (layer) => layer.type === 'symbol' && layer.layout['text-field']
+          ).id;
+        
+          map.addLayer({
+            'id': '3d-buildings',
+            'source': 'composite',
+            'source-layer': 'building',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            'paint': {
+              'fill-extrusion-color': '#aaa',
+              'fill-extrusion-height': ['get', 'height'],
+              'fill-extrusion-base': ['get', 'min_height'],
+              'fill-extrusion-opacity': 0.6
+            }
+          }, labelLayerId);
+        });
         </script>
     </body>
 </html>
