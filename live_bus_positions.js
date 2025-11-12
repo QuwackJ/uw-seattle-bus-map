@@ -10,3 +10,36 @@ export class LiveBusData {
         this.coordinates = [lon, lat];
     }
 }
+
+// fetch data from S3 AWS link
+export async function fetchLiveBusPositions() {
+    const response = await fetch(LIVE_BUS_POSITIONS_URL);
+    const busPositions = await response.json();
+    return busPositions;
+}
+
+// convert fetched data into array of LiveBusData objects
+export function convertToLiveBusObjects(busPositions) {
+    if (!busPositions || !busPositions.entity) {
+        return [];
+    }
+
+    return busPositions.entity.map(e => {
+        const trip = e.vehicle.trip;
+        const position = e.vehicle.position;
+
+        return new LiveBusData(
+            e.vehicle.vehicle.label,
+            trip.route_id,
+            trip.direction_id,
+            position.latitude,
+            position.longitude
+        );
+    });
+}
+
+// combining fetching and converting into single function
+export async function getLiveBusData() {
+    const busPositionsJson = await fetchLiveBusPositions();
+    return convertToLiveBusObjects(busPositionsJson);
+}
