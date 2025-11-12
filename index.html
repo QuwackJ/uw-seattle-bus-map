@@ -72,19 +72,52 @@
             //add points
             map.addSource('uw-routes', {
                 type: 'geojson',
-                data: 'routes_uw.geojson'
+                data: 'assets/routes_uw.geojson'
             });
 
             map.addLayer({
-                id: 'uw-route-points',
-                type: 'circle',
+                id: 'uw-route-lines',
+                type: 'line',
                 source: 'uw-routes',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#550AA1',
+                    'line-width': 3
+                }
+            });
+            map.addSource('uw-stops', {
+                type: 'geojson',
+                data: 'assets/stops_uw.geojson'
+            });
+
+            map.addLayer({
+                
+                id: 'uw-stops',
+                type: 'circle',
+                source: 'uw-stops',
                 paint: {
                     'circle-radius': 5,
-                    'circle-color': '#FF5733',
+                    'circle-color': '#30D1FF',
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#fff'
                 }
+            });
+            map.on('click', 'uw-stops', (e) => {
+                const feature = e.features[0];
+                const coordinates = feature.geometry.coordinates.slice();
+                const props = feature.properties;
+
+                const description = Object.entries(props)
+                    .map(([key, val]) => `<b>${key}</b>: ${val}`)
+                    .join('<br>');
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
             });
         });
     </script>
