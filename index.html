@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <title>Seattle Bus Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,125 +8,85 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
     <style>
-      body { 
-        margin:0; 
-        padding:0;
-      }
+        body { 
+            margin:0; 
+            padding:0;
+        }
 
-      #map { 
-        position:absolute; 
-        top:0; 
-        bottom:0; 
-        width:100%;
-      }
+        #map { 
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            width:100%;
+        }
 
-      #menu { 
-        position:absolute; 
-        background:white; 
-        padding:10px; 
-        top:10px; 
-        left:10px; 
-        z-index:1; 
-        border-radius:8px;
-      }
+        #menu { 
+            position:absolute; 
+            background:white; 
+            padding:10px; 
+            top:10px; 
+            left:10px; 
+            z-index:1; 
+            border-radius:8px;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="menu"></div>
     <div id="map"></div>
     
     <script>
-      // map create
-      mapboxgl.accessToken = 'pk.eyJ1IjoiaG1lcnJpdHQxMSIsImEiOiJjbWhqcHRpOWgxMjA1MmxwbjdqY2x2dzdiIn0.Y0OZ2_z34S1hWXsgpOP19A';
-      
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v11', 
-        center: [-122.3035, 47.6553], 
-        zoom: 12,
-      });
-      
-      map.on('load', () => {
-        const layers = map.getStyle().layers;
-        const labelLayerId = layers.find(
-          (layer) => layer.type === 'symbol' && layer.layout['text-field']
-        ).id;
+    
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
         
-        map.addLayer({
-          'id': '3d-buildings',
-          'source': 'composite',
-          'source-layer': 'building',
-          'filter': ['==', 'extrude', 'true'],
-          'type': 'fill-extrusion',
-          'minzoom': 15,
-          'paint': {
-            'fill-extrusion-color': '#aaa',
-            'fill-extrusion-height': ['get', 'height'],
-            'fill-extrusion-base': ['get', 'min_height'],
-            'fill-extrusion-opacity': 0.6
-          }
-        }, labelLayerId);
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v11', 
+            center: [-122.3035, 47.6553], 
+            zoom: 12,
+        });
+        
+        map.on('load', () => {
+            const layers = map.getStyle().layers;
+            const labelLayerId = layers.find(
+                (layer) => layer.type === 'symbol' && layer.layout['text-field']
+            ).id;
+     
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-base': ['get', 'min_height'],
+                    'fill-extrusion-opacity': 0.6
+                }
+            }, labelLayerId);
 
-        // parse CSV bus stops data
-        Papa.parse('assets/stops.csv', {
-          download: true,
-          header: true,
-          complete: function(results) {
-            const geojson = {
-              type: 'FeatureCollection',
-              features: results.data
-                .filter(row => row.stop_lat && row.stop_lon)
-                .map(row => ({
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [parseFloat(row.stop_lon), parseFloat(row.stop_lat)]
-                  },
-                  properties: {
-                    route_id: row.route_id,
-                    route_short_name: row.route_short_name,
-                    trip_headsign: row.trip_headsign,
-                    stop_id: row.stop_id,
-                    stop_sequence: row.stop_sequence
-                  }
-                }))
-            };
-
-            // Add GeoJSON source layer for static stuff
-            map.addSource('stops', { type: 'geojson', data: geojson });
+            //add points
+            map.addSource('uw-routes', {
+                type: 'geojson',
+                data: 'routes_uw.geojson'
+            });
 
             map.addLayer({
-              id: 'stops',
-              type: 'circle',
-              source: 'stops',
-              paint: {
-                'circle-radius': 5,
-                'circle-color': '#ff5500'
-              }
+                id: 'uw-route-points',
+                type: 'circle',
+                source: 'uw-routes',
+                paint: {
+                    'circle-radius': 5,
+                    'circle-color': '#FF5733',
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#fff'
+                }
             });
-
-            // Popup for each stop
-            map.on('click', 'stops', (e) => {
-              const p = e.features[0].properties;
-              new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(
-                  `<strong>${p.route_short_name} – ${p.trip_headsign}</strong><br>
-                   Stop ID: ${p.stop_id}<br>
-                   Seq: ${p.stop_sequence}`
-                )
-                .addTo(map);
-            });
-
-            map.on('mouseenter', 'stops', () => map.getCanvas().style.cursor = 'pointer');
-            map.on('mouseleave', 'stops', () => map.getCanvas().style.cursor = '');
-          }
         });
-      });
     </script>
-  </body>
+</body>
 </html>
