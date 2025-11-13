@@ -38,7 +38,7 @@
     <div id="map"></div>
     
     <script>
-    
+        // setting up map and basemap style
         mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
         
         const map = new mapboxgl.Map({
@@ -48,12 +48,14 @@
             zoom: 12,
         });
         
+        // adding layers
         map.on('load', () => {
             const layers = map.getStyle().layers;
             const labelLayerId = layers.find(
                 (layer) => layer.type === 'symbol' && layer.layout['text-field']
             ).id;
-     
+            
+            // add 3D buildings
             map.addLayer({
                 'id': '3d-buildings',
                 'source': 'composite',
@@ -65,46 +67,50 @@
                     'fill-extrusion-color': '#aaa',
                     'fill-extrusion-height': ['get', 'height'],
                     'fill-extrusion-base': ['get', 'min_height'],
-                    'fill-extrusion-opacity': 0.6
+                    'fill-extrusion-opacity': 0.85
                 }
             }, labelLayerId);
 
-            //add points
+            // add route lines
             map.addSource('uw-routes', {
                 type: 'geojson',
                 data: 'assets/routes_uw.geojson'
             });
 
             map.addLayer({
-                id: 'uw-route-lines',
-                type: 'line',
-                source: 'uw-routes',
-                layout: {
+                'id': 'uw-route-lines',
+                'type': 'line',
+                'source': 'uw-routes',
+                'layout': {
                     'line-join': 'round',
                     'line-cap': 'round'
                 },
-                paint: {
-                    'line-color': '#550AA1',
+                'paint': {
+                    'line-color': '#53585C', // default color when user hasn't selected a route from menu
                     'line-width': 3
                 }
             });
+
+            // add stop points
             map.addSource('uw-stops', {
                 type: 'geojson',
                 data: 'assets/stops_uw.geojson'
             });
 
             map.addLayer({
-                
-                id: 'uw-stops',
-                type: 'circle',
-                source: 'uw-stops',
-                paint: {
+                'id': 'uw-stops',
+                'type': 'circle',
+                'source': 'uw-stops',
+                'minzoom': 14,
+                'paint': {
                     'circle-radius': 5,
-                    'circle-color': '#30D1FF',
+                    'circle-color': '#6C7278', // default color when user hasn't selected a route from menu
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#fff'
                 }
             });
+
+            // add pop-ups for stops
             map.on('click', 'uw-stops', (e) => {
                 const feature = e.features[0];
                 const coordinates = feature.geometry.coordinates.slice();
