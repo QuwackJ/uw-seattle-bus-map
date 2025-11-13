@@ -1,0 +1,102 @@
+---
+title: "bus data prep"
+format: html
+editor: visual
+---
+
+```{r}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+## load data
+
+```{r}
+trips <- read.csv("trips copy.csv")
+routes <- read.csv("routes copy.csv")
+stops <- read.csv("stops copy.csv")
+stop_times <- read.csv("stop_times copy.csv")
+
+glimpse(stops)
+```
+
+## selecting important columns
+
+```{r}
+trips_select <- trips |> select(route_id, service_id, trip_id, trip_headsign, direction_id, shape_id)
+
+routes_select <- routes |> select(route_id, route_short_name, route_desc)
+
+stop_times_select <- stop_times |> select(trip_id, stop_id, stop_sequence)
+
+stops_select <- stops |> select(stop_id, stop_lat, stop_lon)
+
+glimpse(trips_select)
+```
+
+## full_join all data
+
+```{r}
+full_join_data <- trips_select |>
+  full_join(routes_select, by = "route_id") |>
+  full_join(stop_times_select, by = "trip_id") |>
+  full_join(stops_select, by = "stop_id")
+
+glimpse(full_join_data)
+
+write_csv(full_join_data, "all_data_full_join.csv")
+```
+
+## filtering all data
+
+```{r}
+uw_static_bus_data <- full_join_data |>
+  filter(route_short_name %in% c("43", "44", "45", "48", "49", "65", "67", "70")) |>
+  # distinct(service_id)
+  filter(service_id == 121403)
+
+glimpse(uw_static_bus_data)
+```
+
+## getting rid of repeated bus stop sequences
+
+```{r}
+# 0) ensure correct order
+uw_ordered <- uw_static_bus_data %>%
+  arrange(route_id, route_short_name, direction_id, trip_id, stop_sequence)
+
+# 1) build a per-trip "pattern" (ordered stop_id string)
+trip_patterns <- uw_ordered %>%
+  group_by(route_id, route_short_name, direction_id, trip_id) %>%
+  summarise(
+    pattern = paste(stop_id[order(stop_sequence)], collapse = ">"),
+    n_stops = n(),
+    .groups = "drop"
+  )
+
+# 2) within each route+direction, keep the FIRST trip for each unique pattern
+keepers <- trip_patterns %>%
+  group_by(route_id, route_short_name, direction_id) %>%
+  arrange(trip_id, .by_group = TRUE) %>%              # tie-breaker: earliest trip_id
+  distinct(pattern, .keep_all = TRUE) %>%             # keep first occurrence of each pattern
+  ungroup() %>%
+  select(route_id, route_short_name, direction_id, trip_id)
+
+# 3) filter the main table down to just those trips (removes repeated sequences)
+df_dedup <- uw_ordered %>%
+  semi_join(keepers,
+            by = c("route_id", "route_short_name", "direction_id", "trip_id"))
+
+glimpse(df_dedup)
+```
+
+## further filtering non-duplicate data
+
+```{r}
+df_dedup_selected <- df_dedup |>
+  select(route_id, trip_headsign, direction_id, route_short_name, stop_id, stop_sequence, stop_lat, stop_lon)
+
+glimpse(df_dedup_selected)
+
+write_csv(df_dedup_selected, "uw_static_bus_data.csv")
+```
