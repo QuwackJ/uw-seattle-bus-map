@@ -47,7 +47,145 @@
             center: [-122.3035, 47.6553], 
             zoom: 12,
         });
+
+        const ROUTE_GEOJSON = 'assets/routes_uw.geojson';
+        const STOPS_GEOJSON = 'assets/stops_uw.geojson';
+        const ROUTE_FIELD = 'route_short_name';   // in routes_uw.geojson
+        const STOP_ROUTES_FIELD = 'route_short_name';   
+
+        // palette for routes (wraps automatically)
+        const PALETTE = ['#2E86AB','#F18F01','#C73E1D','#6C9A8B','#9B5DE5','#40BFBF','#FF6F59','#3D5A80','#0CA678','#FF9F1C','#B08968','#2A9D8F','#8D5B4C','#E76F51','#577590'];
+
+        const selected = new Set();
+        const colorMap = new Map();
         
+        // returned color from the palette array for each bus route 
+        // makes sure that every route consistently gets same color
+        function colorFor(route) {
+            if (!colorMap.has(route)) {
+                const i = colorMap.size % PALETTE.length;
+                colorMap.set(route, PALETTE[i]);
+            }
+            return colorMap.get(route);
+        }
+
+        // mapbox "match" to assign color to each route and selects routes use colorFor(route), 
+        // others will be light gray 
+        function buildRouteColorExpression() {
+        // color selected routes, light gray others
+            const match = ['match', ['get', ROUTE_FIELD]];
+            for (const r of selected) match.push(r, colorFor(r));
+            match.push('#BFC5CA'); 
+            return match;
+        }
+        
+        // creates filter expression for route
+        //shows all routes and keeps unselected routes visible
+        function buildRouteFilter() {
+            // Show all lines but de-emphasize non-selected
+            return ['!=', ['get', ROUTE_FIELD], '___never___']; // all routes
+        }
+
+        // builds stop filter 
+        // when no routes selected, hides stops
+        // routes selected, shows stops of selected route
+        function buildStopsFilter() {
+            if (selected.size === 0) return ['==', ['get', STOP_ROUTES_FIELD], '___none___']; // hide all until selection
+            const arr = ['literal', Array.from(selected)];
+            const singleEquals = ['in', ['get', STOP_ROUTES_FIELD], arr];
+
+            return ['case',
+                ['has', 'length', ['coalesce', ['get', STOP_ROUTES_FIELD], ['literal', []]]], checks,
+                singleEquals
+            ];
+        }
+
+        //updates map layers when routes are selected
+        // adjusts line color, width, etc
+        function updateStyles() {
+            if (map.getLayer('uw-route-lines')) {
+                map.setPaintProperty('uw-route-lines','line-color', buildRouteColorExpression());
+                map.setPaintProperty('uw-route-lines','line-width', [
+                'case',
+                ['in', ['get', ROUTE_FIELD], ['literal', Array.from(selected)]],
+                3.5, 1.2
+                ]);
+                map.setPaintProperty('uw-route-lines','line-opacity', [
+                'case',
+                ['in', ['get', ROUTE_FIELD], ['literal', Array.from(selected)]],
+                0.95, 0.25
+                ]);
+                map.setFilter('uw-route-lines', buildRouteFilter());
+            }
+            if (map.getLayer('uw-stops')) {
+                map.setFilter('uw-stops', buildStopsFilter());
+                map.setPaintProperty('uw-stops','circle-color', [
+                'case',
+                ['in', ['get', STOP_ROUTES_FIELD], ['literal', Array.from(selected)]],
+                '#111', '#6C7278'
+                ]);
+                map.setPaintProperty('uw-stops','circle-opacity', selected.size ? 0.9 : 0.0);
+            }
+        }
+
+        // initializes map interface and builds menu 
+        // loads route and stop data, gets route name, assigns colors
+        // creates checkbox menu and gives option for "select all" and "clear"
+        //defines layers and popups 
+        async function init() {
+            //Load data (we fetch here to get the unique list; map also uses the same URLs)
+            const [routesResp, stopsResp] = await Promise.all([fetch(ROUTE_GEOJSON), fetch(STOPS_GEOJSON)]);
+            const [routesData, stopsData] = [await routesResp.json(), await stopsResp.json()];
+
+            //Build unique route list
+            const routes = Array.from(new Set(routesData.features.map(f => String(f.properties[ROUTE_FIELD]))))
+                .filter(Boolean)
+                .sort((a,b) => (isNaN(a)||isNaN(b)) ? a.localeCompare(b) : Number(a)-Number(b));
+
+            routes.forEach((r,i) => colorMap.set(r, PALETTE[i % PALETTE.length]));
+
+            //Build menu
+            const menu = document.getElementById('menu');
+            menu.innerHTML = `<h3>Bus Routes</h3><div id="route-list"></div><div class="btns">
+                <button id="selectAll">Select all</button>
+                <button id="clear">Clear</button>
+                </div>`;
+            const list = document.getElementById('route-list');
+
+            routes.forEach(route => {
+                const row = document.createElement('label');
+                const cb = document.createElement('input');
+                cb.type = 'checkbox';
+                cb.value = route;
+                cb.onchange = () => { cb.checked ? selected.add(route) : selected.delete(route); updateStyles(); };
+
+                const dot = document.createElement('span');
+                dot.className = 'color-dot';
+                dot.style.background = colorFor(route);
+
+                const txt = document.createElement('span');
+                txt.textContent = route;
+
+                row.appendChild(cb);
+                row.appendChild(dot);
+                row.appendChild(txt);
+                list.appendChild(row);
+            });
+
+        // select all button -- shows all routes
+        document.getElementById('selectAll').onclick = () => {
+            selected.clear(); routes.forEach(r => selected.add(r));
+            list.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = true);
+            updateStyles();
+        };
+
+        // clear button -- unchecks routes and hides stops 
+        document.getElementById('clear').onclick = () => {
+            selected.clear();
+            list.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+            updateStyles();
+        };
+
         // adding layers
         map.on('load', () => {
             const layers = map.getStyle().layers;
@@ -106,7 +244,8 @@
                     'circle-radius': 5,
                     'circle-color': '#6C7278', // default color when user hasn't selected a route from menu
                     'circle-stroke-width': 1,
-                    'circle-stroke-color': '#fff'
+                    'circle-stroke-color': '#fff',
+                    'circle-opacity': 0.0
                 }
             });
 
@@ -124,8 +263,11 @@
                     .setLngLat(coordinates)
                     .setHTML(description)
                     .addTo(map);
-            });
+                });
+            updateStyles();
         });
+        }
+        init();
     </script>
 </body>
 </html>
