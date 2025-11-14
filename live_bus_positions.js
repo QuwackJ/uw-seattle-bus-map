@@ -38,8 +38,31 @@ export function convertToLiveBusObjects(busPositions) {
     });
 }
 
+// might delete this function later - depends on if the one below works
 // combining fetching and converting into single function
-export async function getLiveBusData() {
+// export async function getLiveBusData() {
+//     const busPositionsJson = await fetchLiveBusPositions();
+//     return convertToLiveBusObjects(busPositionsJson);
+// }
+
+// combining fetching and converting into single function + converting to GeoJSON format
+export async function getLiveBusGeoJSON() {
     const busPositionsJson = await fetchLiveBusPositions();
-    return convertToLiveBusObjects(busPositionsJson);
+    const busObjectArray = convertToLiveBusObjects(busPositionsJson);
+
+    return {
+        type: "FeatureCollection",
+        features: busObjectArray.map(bus => ({
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: bus.coordinates
+            },
+            properties: {
+                label: bus.label,
+                route_id: bus.route_id,
+                direction_id: bus.direction_id
+            }
+        }))
+    }
 }
