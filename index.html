@@ -48,84 +48,89 @@
             zoom: 12,
         });
 
-        // adding layers
-        map.on('load', () => {
-            const layers = map.getStyle().layers;
-            const labelLayerId = layers.find(
-                (layer) => layer.type === 'symbol' && layer.layout['text-field']
-            ).id;
-            
-            // add 3D buildings
-            map.addLayer({
-                'id': '3d-buildings',
-                'source': 'composite',
-                'source-layer': 'building',
-                'filter': ['==', 'extrude', 'true'],
-                'type': 'fill-extrusion',
-                'minzoom': 15,
-                'paint': {
-                    'fill-extrusion-color': '#aaa',
-                    'fill-extrusion-height': ['get', 'height'],
-                    'fill-extrusion-base': ['get', 'min_height'],
-                    'fill-extrusion-opacity': 0.85
-                }
-            }, labelLayerId);
+        // function to add layers to map
+        async function makeMap() {
+            // adding layers
+            map.on('load', () => {
+                const layers = map.getStyle().layers;
+                const labelLayerId = layers.find(
+                    (layer) => layer.type === 'symbol' && layer.layout['text-field']
+                ).id;
+                
+                // add 3D buildings
+                map.addLayer({
+                    'id': '3d-buildings',
+                    'source': 'composite',
+                    'source-layer': 'building',
+                    'filter': ['==', 'extrude', 'true'],
+                    'type': 'fill-extrusion',
+                    'minzoom': 15,
+                    'paint': {
+                        'fill-extrusion-color': '#aaa',
+                        'fill-extrusion-height': ['get', 'height'],
+                        'fill-extrusion-base': ['get', 'min_height'],
+                        'fill-extrusion-opacity': 0.85
+                    }
+                }, labelLayerId);
 
-            // add route lines
-            map.addSource('uw-routes', {
-                type: 'geojson',
-                data: 'assets/routes_uw.geojson'
+                // add route lines
+                map.addSource('uw-routes', {
+                    type: 'geojson',
+                    data: 'assets/routes_uw.geojson'
+                });
+
+                map.addLayer({
+                    'id': 'uw-route-lines',
+                    'type': 'line',
+                    'source': 'uw-routes',
+                    'layout': {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    'paint': {
+                        'line-color': '#53585C', // default color when user hasn't selected a route from menu
+                        'line-width': 3
+                    }
+                });
+
+                // add stop points
+                map.addSource('uw-stops', {
+                    type: 'geojson',
+                    data: 'assets/stops_uw.geojson'
+                });
+
+                map.addLayer({
+                    'id': 'uw-stops',
+                    'type': 'circle',
+                    'source': 'uw-stops',
+                    'minzoom': 14,
+                    'paint': {
+                        'circle-radius': 5,
+                        'circle-color': '#6C7278', // default color when user hasn't selected a route from menu
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': '#fff'
+                    }
+                });
+
+                // add pop-ups for stops
+                map.on('click', 'uw-stops', (e) => {
+                    const feature = e.features[0];
+                    const coordinates = feature.geometry.coordinates.slice();
+                    const props = feature.properties;
+
+                    const description = Object.entries(props)
+                        .map(([key, val]) => `<b>${key}</b>: ${val}`)
+                        .join('<br>');
+
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(description)
+                        .addTo(map);
+                });
             });
+        }
 
-            map.addLayer({
-                'id': 'uw-route-lines',
-                'type': 'line',
-                'source': 'uw-routes',
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': '#53585C', // default color when user hasn't selected a route from menu
-                    'line-width': 3
-                }
-            });
-
-            // add stop points
-            map.addSource('uw-stops', {
-                type: 'geojson',
-                data: 'assets/stops_uw.geojson'
-            });
-
-            map.addLayer({
-                'id': 'uw-stops',
-                'type': 'circle',
-                'source': 'uw-stops',
-                'minzoom': 14,
-                'paint': {
-                    'circle-radius': 5,
-                    'circle-color': '#6C7278', // default color when user hasn't selected a route from menu
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#fff'
-                }
-            });
-
-            // add pop-ups for stops
-            map.on('click', 'uw-stops', (e) => {
-                const feature = e.features[0];
-                const coordinates = feature.geometry.coordinates.slice();
-                const props = feature.properties;
-
-                const description = Object.entries(props)
-                    .map(([key, val]) => `<b>${key}</b>: ${val}`)
-                    .join('<br>');
-
-                new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(description)
-                    .addTo(map);
-            });
-        });
+        makeMap();
     </script>
 </body>
 </html>
