@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Seattle Bus Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.14.0/mapbox-gl.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 10px;
+            border-radius: 10px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 13px;
+            max-height: 320px;
+            width: 210px;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        }
+
+        #menu h3 {
+            margin: 0 0 2px;
+            font-size: 14px;
+        }
+
+        .menu-subtitle {
+            margin: 0 0 8px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .menu-controls {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .menu-btn {
+            flex: 1;
+            border: none;
+            border-radius: 999px;
+            padding: 3px 6px;
+            font-size: 11px;
+            cursor: pointer;
+            background: #f2f2f2;
+            transition: background 0.15s, transform 0.05s;
+        }
+
+        .menu-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .menu-btn:active {
+            transform: translateY(1px);
+        }
+
+        .menu-list {
+            border-top: 1px solid #eee;
+            padding-top: 6px;
+            margin-top: 4px;
+        }
+
+        #menu label.menu-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 3px;
+            padding: 2px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        #menu label.menu-item:hover {
+            background: #f6f6f6;
+        }
+
+        .menu-color-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+        }
+
+        .menu-status {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menu"></div>
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v11',
+            center: [-122.3035, 47.6553],
+            zoom: 12
+        });
+
+        const colorPalette = [
+            '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00',
+            '#ffff33', '#a65628', '#f781bf', '#999999', '#1b9e77',
+            '#d95f02', '#7570b3'
+        ];
+
+        map.on('load', async () => {
+            const layers = map.getStyle().layers;
+            const labelLayerId = layers.find(
+                (layer) => layer.type === 'symbol' && layer.layout['text-field']
+            ).id;
+
+            map.addLayer({
+                id: '3d-buildings',
+                source: 'composite',
+                'source-layer': 'building',
+                filter: ['==', 'extrude', 'true'],
+                type: 'fill-extrusion',
+                minzoom: 15,
+                paint: {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-base': ['get', 'min_height'],
+                    'fill-extrusion-opacity': 0.85
+                }
+            }, labelLayerId);
+
+            let routesData;
+            try {
+                const r = await fetch('assets/routes_uw.geojson');
+                routesData = await r.json();
+            } catch (e) {
+                console.error('Could not load routes_uw.geojson', e);
+                return;
+            }
+
+            const sampleRouteProps = routesData.features[0]?.properties || {};
+            const routeCandidateKeys = [
+                'route_id', 'ROUTE_ID',
+                'shape_id', 'route_short_name', 'ROUTE_SHORT_NAME',
+                'route', 'Route'
+            ];
+            const routeProp = routeCandidateKeys.find(k => k in sampleRouteProps) ||
+                              Object.keys(sampleRouteProps)[0];
+
+            console.log('Using route property for routes:', routeProp);
+
+            const routeSet = new Set();
+            routesData.features.forEach(f => {
+                const v = f.properties[routeProp];
+                if (v !== null && v !== undefined && v !== '') {
+                    routeSet.add(String(v));
+                }
+            });
+            const routeIds = Array.from(routeSet).sort();
+
+            const routeColors = {};
+            routeIds.forEach((id, i) => {
+                routeColors[id] = colorPalette[i % colorPalette.length];
+            });
+
+            let stopsData;
+            try {
+                const s = await fetch('assets/stops_uw.geojson');
+                stopsData = await s.json();
+            } catch (e) {
+                console.error('Could not load stops_uw.geojson', e);
+                return;
+            }
+
+            map.addSource('uw-routes', {
+                type: 'geojson',
+                data: routesData
+            });
+
+            map.addSource('uw-stops', {
+                type: 'geojson',
+                data: stopsData
+            });
+
+            const lineColorExpr = ['match', ['to-string', ['get', routeProp]]];
+            routeIds.forEach(id => {
+                lineColorExpr.push(id, routeColors[id]);
+            });
+            lineColorExpr.push('#555555');
+
+            map.addLayer({
+                id: 'uw-route-lines',
+                type: 'line',
+                source: 'uw-routes',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': lineColorExpr,
+                    'line-width': 7
+                }
+            });
+
+            map.addLayer({
+                id: 'uw-stops',
+                type: 'circle',
+                source: 'uw-stops',
+                minzoom: 11,
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#7F00FF',
+                    'circle-stroke-width': 3,
+                    'circle-stroke-color': '#FFEE8C',
+                    'circle-opacity': 0.7
+                }
+            });
+
+            map.on('click', 'uw-stops', (e) => {
+                const feature = e.features[0];
+                const coords = feature.geometry.coordinates.slice();
+                const props = feature.properties;
+
+                const html = Object.entries(props)
+                    .map(([k, v]) => `<b>${k}</b>: ${v}`)
+                    .join('<br>');
+
+                new mapboxgl.Popup()
+                    .setLngLat(coords)
+                    .setHTML(html)
+                    .addTo(map);
+            });
+
+            const menu = document.getElementById('menu');
+
+            const header = document.createElement('div');
+            header.innerHTML = `
+                <h3>Bus routes</h3>
+                <p class="menu-subtitle">Click on the brackets to choose the bus routes you would like to display :3 </p>
+            `;
+            menu.appendChild(header);
+
+            const controls = document.createElement('div');
+            controls.className = 'menu-controls';
+
+            const btnAll = document.createElement('button');
+            btnAll.className = 'menu-btn';
+            btnAll.textContent = 'All';
+
+            const btnNone = document.createElement('button');
+            btnNone.className = 'menu-btn';
+            btnNone.textContent = 'None';
+
+            controls.appendChild(btnAll);
+            controls.appendChild(btnNone);
+            menu.appendChild(controls);
+
+            const list = document.createElement('div');
+            list.className = 'menu-list';
+            menu.appendChild(list);
+
+            const status = document.createElement('div');
+            status.className = 'menu-status';
+            menu.appendChild(status);
+
+            routeIds.forEach(id => {
+                const label = document.createElement('label');
+                label.className = 'menu-item';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = id;
+                checkbox.checked = true;
+
+                const swatch = document.createElement('span');
+                swatch.className = 'menu-color-swatch';
+                swatch.style.backgroundColor = routeColors[id];
+
+                label.appendChild(checkbox);
+                label.appendChild(swatch);
+                label.appendChild(document.createTextNode('Route ' + id));
+
+                list.appendChild(label);
+            });
+
+            function updateRouteFilter() {
+                const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+                const checked = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+
+                if (checked.length === 0) {
+                    map.setLayoutProperty('uw-route-lines', 'visibility', 'none');
+                    status.textContent = 'No routes visible';
+                    return;
+                }
+
+                map.setLayoutProperty('uw-route-lines', 'visibility', 'visible');
+
+                const lineFilter = [
+                    'in',
+                    ['to-string', ['get', routeProp]],
+                    ['literal', checked]
+                ];
+                map.setFilter('uw-route-lines', lineFilter);
+
+                status.textContent = `${checked.length} route${checked.length === 1 ? '' : 's'} visible`;
+            }
+
+            list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', updateRouteFilter);
+            });
+
+            btnAll.addEventListener('click', () => {
+                list.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+                updateRouteFilter();
+            });
+
+            btnNone.addEventListener('click', () => {
+                list.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                updateRouteFilter();
+            });
+
+            updateRouteFilter();
+        });
+    </script>
+</body>
+</html>
