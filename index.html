@@ -125,9 +125,9 @@
                     const coordinates = feature.geometry.coordinates.slice();
                     const props = feature.properties;
 
-                    const description = Object.entries(props)
-                        .map(([key, val]) => `<b>${key}</b>: ${val}`)
-                        .join('<br>');
+                    const description = `
+                        <b>Stop Address:</b> ${p.stop_name}
+                    `;
 
                     new mapboxgl.Popup()
                         .setLngLat(coordinates)
