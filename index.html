@@ -37,7 +37,14 @@
     <div id="menu"></div>
     <div id="map"></div>
     
-    <script>
+    <script type="module">
+        // importing static data objects (routes and stops)
+        // import { routes_uw } from './assets/routes_uw.js';
+        // import { stops_uw } from './assets/stops_uw.js';
+
+        // importing function to fetch data from API, convert to object, and convert to GeoJSON
+        import { getLiveBusGeoJSON } from './live_bus_positions.js';
+
         // setting up map and basemap style
         mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
         
@@ -127,6 +134,39 @@
                         .setHTML(description)
                         .addTo(map);
                 });
+
+                // add live bus positions
+                // first add empty source and layer
+                map.addSource('live-buses', {
+                    type: 'geojson',
+                    data: {"type": "FeatureCollection", "features": []}
+                });
+
+                // styling for bus positions
+                map.addLayer({
+                    'id': 'live-bus-positions',
+                    'type': 'circle',
+                    'source': 'live-buses',
+                    'paint': {
+                        'circle-radius': 6,
+                        'circle-color': '#EB1B00',
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': '#fff'
+                    }
+                });
+
+                // function to update live bus positions the first time and every few seconds
+                async function updateBusPositions() {
+                    const busGeoJSON = await getLiveBusGeoJSON();
+                    map.getSource('live-buses').setData(busGeoJSON);
+                }
+
+                // first call
+                updateBusPositions();
+
+                // updating every 
+                const POLLING_INTERVAL = 7500; //  (in milliseconds)
+                setInterval(updateBusPositions, POLLING_INTERVAL);
             });
         }
 

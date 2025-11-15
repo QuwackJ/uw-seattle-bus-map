@@ -1,5 +1,17 @@
-// constant for S3 AWS link to live bus positions JSON data
-export const LIVE_BUS_POSITIONS_URL = 'https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json';
+// constant for proxy to S3 AWS link of live bus positions JSON data
+export const LIVE_BUS_POSITIONS_URL = 'https://kcm-proxy.quwackj.workers.dev/';
+
+// constant for bus routes to filter
+export const ROUTE_IDS_OF_INTEREST = [
+    "100223",
+    "100224",
+    "100225",
+    "100228",
+    "100447",
+    "100254",
+    "100259",
+    "100264"
+];
 
 // constructing object to hold live bus positions from S3 AWS link
 export class LiveBusData {
@@ -11,43 +23,57 @@ export class LiveBusData {
     }
 }
 
-// fetch data from S3 AWS link
-export async function fetchLiveBusPositions() {
+// fetch and filter data from S3 AWS link
+export async function fetchLiveBusPositions(routeIds = ROUTE_IDS_OF_INTEREST) {
     const response = await fetch(LIVE_BUS_POSITIONS_URL);
     const busPositions = await response.json();
-    return busPositions;
+    
+    // filter bus positions based on route IDs of interest
+    const allowedBuses = new Set(routeIds.map(String));
+
+    const filteredBusPositions = busPositions.entity.filter(e => {
+        const routeIdToCheck = e.vehicle.trip.route_id;
+        return allowedBuses.has(String(routeIdToCheck));
+    });
+
+    // return filtered data in same format as original
+    return {
+        header: busPositions.header,
+        entity: filteredBusPositions
+    }
 }
 
 // convert fetched data into array of LiveBusData objects
-export function convertToLiveBusObjects(busPositions) {
-    if (!busPositions || !busPositions.entity) {
+export function convertToLiveBusObjects(filteredBusPositionsJson) {
+    if (!filteredBusPositionsJson || !filteredBusPositionsJson.entity) {
         return [];
     }
 
-    return busPositions.entity.map(e => {
+    const buses = [];
+
+    for (const e of filteredBusPositionsJson.entity) {
         const trip = e.vehicle.trip;
         const position = e.vehicle.position;
 
-        return new LiveBusData(
+        buses.push(new LiveBusData(
             e.vehicle.vehicle.label,
             trip.route_id,
             trip.direction_id,
             position.latitude,
             position.longitude
-        );
-    });
-}
+        ));
+    }
 
-// might delete this function later - depends on if the one below works
-// combining fetching and converting into single function
-// export async function getLiveBusData() {
-//     const busPositionsJson = await fetchLiveBusPositions();
-//     return convertToLiveBusObjects(busPositionsJson);
-// }
+    // print array of LiveBusData objects to console for debugging
+    console.log("First 5 LiveBusData objects:", buses.slice(0, 5));
+    console.log(buses.length)
+
+    return buses;
+}
 
 // combining fetching and converting into single function + converting to GeoJSON format
 export async function getLiveBusGeoJSON() {
-    const busPositionsJson = await fetchLiveBusPositions();
+    const busPositionsJson = await fetchLiveBusPositions(ROUTE_IDS_OF_INTEREST);
     const busObjectArray = convertToLiveBusObjects(busPositionsJson);
 
     return {
