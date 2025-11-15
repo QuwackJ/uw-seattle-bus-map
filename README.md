@@ -19,4 +19,4 @@
 [insert here]
 
 ## AI Disclosure - how have we used AI?
-[insert here]
+1. (for the front end), we used AI to help us make the menu look fancier, also, it did teach us how to filter the routes we want.
