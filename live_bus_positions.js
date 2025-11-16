@@ -1,3 +1,6 @@
+// importing static route data for lookups
+import { routesById } from "./routes_uw_static.js";
+
 // constant for proxy to S3 AWS link of live bus positions JSON data
 export const LIVE_BUS_POSITIONS_URL = 'https://kcm-proxy.quwackj.workers.dev/';
 
@@ -15,9 +18,12 @@ export const ROUTE_IDS_OF_INTEREST = [
 
 // constructing object to hold live bus positions from S3 AWS link
 export class LiveBusData {
-    constructor(label, route_id, direction_id, lat, lon) {
-        this.label = label;
+    constructor(route_id, route_num, headsign_primary, headsign_secondary, label, direction_id, lat, lon) {
         this.route_id = route_id;
+        this.route_num = route_num;
+        this.headsign_primary = headsign_primary;
+        this.headsign_secondary = headsign_secondary;
+        this.label = label;
         this.direction_id = direction_id;
         this.coordinates = [lon, lat];
     }
@@ -54,10 +60,33 @@ export function convertToLiveBusObjects(filteredBusPositionsJson) {
     for (const e of filteredBusPositionsJson.entity) {
         const trip = e.vehicle.trip;
         const position = e.vehicle.position;
+        const routeIdString = String(trip.route_id);
+        const directionIdString = String(trip.direction_id);
+
+        // look up route_short_name and trip_headsigns
+        let routeShortName = "";
+        let tripHeadsignPrimary = "";
+        let tripHeadsignSecondary = "";
+
+        const routeInfo = routesById[routeIdString];
+
+        if (routeInfo) {
+            routeShortName = routeInfo.route_short_name;
+
+            const directionInfo = routeInfo.directions?.[directionIdString];
+
+            if (directionInfo && Array.isArray(directionInfo.trip_headsign)) {
+                tripHeadsignPrimary = directionInfo.trip_headsign[0] || "";
+                tripHeadsignSecondary = directionInfo.trip_headsign[1] || "";
+            }
+        }
 
         buses.push(new LiveBusData(
-            e.vehicle.vehicle.label,
             trip.route_id,
+            routeShortName,
+            tripHeadsignPrimary,
+            tripHeadsignSecondary,
+            e.vehicle.vehicle.label,
             trip.direction_id,
             position.latitude,
             position.longitude
@@ -85,8 +114,11 @@ export async function getLiveBusGeoJSON() {
                 coordinates: bus.coordinates
             },
             properties: {
-                label: bus.label,
                 route_id: bus.route_id,
+                route_num: bus.route_num,
+                headsign_primary: bus.headsign_primary,
+                headsign_secondary: bus.headsign_secondary,
+                label: bus.label,
                 direction_id: bus.direction_id
             }
         }))
