@@ -12,33 +12,77 @@
         body { 
             margin:0; 
             padding:0;
+            display:flex;
+            font-family: sans-serif;
+        }
+
+        #menu {
+            width: 280px;
+            height: 100vh;
+            background: white;
+            padding: 20px;
+            border-right: 2px solid #ddd;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        #menu h2 {
+            margin-top: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .route-btn {
+            width: 100%;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .route-btn:hover {
+            background: #eaeaea;
+        }
+
+        .route-btn.active {
+            background: #ffffff;
+            border-color: #007aff;
+            box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
         }
 
         #map { 
-            position:absolute; 
-            top:0; 
-            bottom:0; 
-            width:100%;
-        }
-
-        #menu { 
-            position:absolute; 
-            background:white; 
-            padding:10px; 
-            top:10px; 
-            left:10px; 
-            z-index:1; 
-            border-radius:8px;
+            flex-grow: 1;
+            height: 100vh;
         }
     </style>
 </head>
 
 <body>
-    <div id="menu"></div>
+
+    <div id="menu">
+        <h2>Bus Routes</h2>
+        <button class="route-btn">Route 43</button>
+        <button class="route-btn">Route 44</button>
+        <button class="route-btn">Route 45</button>
+        <button class="route-btn">Route 48</button>
+        <button class="route-btn">Route 49</button>
+        <button class="route-btn">Route 65</button>
+        <button class="route-btn">Route 67</button>
+        <button class="route-btn">Route 70</button>
+        <p style="font-size:12px; margin-top:8px; color:#555;">
+            Click a route to highlight it. Click again to reset.
+        </p>
+    </div>
+
     <div id="map"></div>
     
-    <script>
-        // setting up map and basemap style
+    <script type="module">
+        import { getLiveBusGeoJSON } from './live_bus_positions.js';
+
         mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
         
         const map = new mapboxgl.Map({
@@ -48,16 +92,13 @@
             zoom: 12,
         });
 
-        // function to add layers to map
         async function makeMap() {
-            // adding layers
             map.on('load', () => {
                 const layers = map.getStyle().layers;
                 const labelLayerId = layers.find(
                     (layer) => layer.type === 'symbol' && layer.layout['text-field']
                 ).id;
                 
-                // add 3D buildings
                 map.addLayer({
                     'id': '3d-buildings',
                     'source': 'composite',
@@ -73,7 +114,6 @@
                     }
                 }, labelLayerId);
 
-                // add route lines
                 map.addSource('uw-routes', {
                     type: 'geojson',
                     data: 'assets/routes_uw.geojson'
@@ -88,12 +128,13 @@
                         'line-cap': 'round'
                     },
                     'paint': {
-                        'line-color': '#53585C', // default color when user hasn't selected a route from menu
-                        'line-width': 3
+                        'line-width': 3,
+                        'line-color': '#53585C',   
+                        'line-opacity': 1        
                     }
                 });
 
-                // add stop points
+                // add stop points 
                 map.addSource('uw-stops', {
                     type: 'geojson',
                     data: 'assets/stops_uw.geojson'
@@ -106,7 +147,7 @@
                     'minzoom': 14,
                     'paint': {
                         'circle-radius': 5,
-                        'circle-color': '#6C7278', // default color when user hasn't selected a route from menu
+                        'circle-color': '#6C7278',
                         'circle-stroke-width': 1,
                         'circle-stroke-color': '#fff'
                     }
@@ -118,15 +159,147 @@
                     const coordinates = feature.geometry.coordinates.slice();
                     const props = feature.properties;
 
-                    const description = Object.entries(props)
-                        .map(([key, val]) => `<b>${key}</b>: ${val}`)
-                        .join('<br>');
+                    const description = `
+                        <b>Stop Address:</b> ${props.stop_name}
+                    `;
 
                     new mapboxgl.Popup()
                         .setLngLat(coordinates)
                         .setHTML(description)
                         .addTo(map);
                 });
+
+                map.addSource('live-buses', {
+                    type: 'geojson',
+                    data: {"type": "FeatureCollection", "features": []}
+                });
+
+                map.addLayer({
+                    'id': 'live-bus-positions',
+                    'type': 'circle',
+                    'source': 'live-buses',
+                    'paint': {
+                        'circle-radius': 6,
+                        'circle-color': '#EB1B00',
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': '#fff'
+                    }
+                });
+
+                let activeBusPopup = null;
+                let activeBusLabel = null;
+
+                map.on('click', 'live-bus-positions', (e) => {
+                    const feature = e.features[0];
+                    const props = feature.properties;
+                    const coords = feature.geometry.coordinates.slice();
+
+                    activeBusLabel = props.label;
+
+                    if (activeBusPopup) {
+                        activeBusPopup.remove();
+                    }
+
+                    const popupContent = `
+                        <strong>Route #:</strong> ${props.route_num} <br>
+                        <strong>Headsign:</strong> ${props.headsign_primary} <br>
+                        ${
+                            props.headsign_secondary 
+                            ? `<strong>Secondary Headsign:</strong> ${props.headsign_secondary} <br>` 
+                            : ""
+                        }
+                        <strong>Label:</strong> ${props.label} <br>
+                    `;
+
+                    activeBusPopup = new mapboxgl.Popup({closeOnClick: false})
+                        .setLngLat([coords[0], coords[1]])
+                        .setHTML(popupContent)
+                        .addTo(map);
+                });
+
+                async function updateBusPositions() {
+                    const busGeoJSON = await getLiveBusGeoJSON();
+                    map.getSource('live-buses').setData(busGeoJSON);
+
+                    if (activeBusPopup && activeBusLabel) {
+                        const busFeature = busGeoJSON.features.find(
+                            f => f.properties.label === activeBusLabel
+                        );
+
+                        if (busFeature) {
+                            const newCoords = busFeature.geometry.coordinates;
+                            activeBusPopup.setLngLat(newCoords);
+                        } else {
+                            activeBusPopup.remove();
+                            activeBusPopup = null;
+                            activeBusLabel = null;
+                        }
+                    }
+                }
+
+                updateBusPositions();
+                const POLLING_INTERVAL = 7500;
+                setInterval(updateBusPositions, POLLING_INTERVAL);
+
+                const routeColors = {
+                    "43": "#e41a1c", 
+                    "44": "#377eb8", 
+                    "45": "#4daf4a", 
+                    "48": "#984ea3", 
+                    "49": "#ff7f00", 
+                    "65": "#ffff33", 
+                    "67": "#a65628",  
+                    "70": "#f781bf"   
+                };
+
+                let currentSelectedRoute = null;
+
+                function setRouteStyle(routeNameOrNull) {
+                    if (!routeNameOrNull) {
+                        map.setPaintProperty('uw-route-lines', 'line-color', '#53585C');
+                        map.setPaintProperty('uw-route-lines', 'line-opacity', 1);
+                    } else {
+                        const routeColor = routeColors[routeNameOrNull] || '#ff6600';
+
+                        map.setPaintProperty('uw-route-lines', 'line-color', [
+                            'case',
+                            ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
+                            routeColor,
+                            '#53585C'
+                        ]);
+
+                        map.setPaintProperty('uw-route-lines', 'line-opacity', [
+                            'case',
+                            ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
+                            1,    
+                            0.2   
+                        ]);
+                    }
+                }
+
+                function setupRouteButtons() {
+                    const buttons = document.querySelectorAll('.route-btn');
+
+                    buttons.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const routeText = btn.textContent.trim(); 
+                            const routeName = routeText.replace('Route ', ''); 
+
+                            if (currentSelectedRoute === routeName) {
+                                currentSelectedRoute = null;
+                                setRouteStyle(null);
+                                buttons.forEach(b => b.classList.remove('active'));
+                            } else {
+                                currentSelectedRoute = routeName;
+                                setRouteStyle(routeName);
+                                buttons.forEach(b => b.classList.remove('active'));
+                                btn.classList.add('active');
+                            }
+                        });
+                    });
+                }
+
+                setupRouteButtons();
             });
         }
 
