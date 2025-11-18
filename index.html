@@ -169,11 +169,14 @@
                         .addTo(map);
                 });
 
+                // add live bus positions
+                // first add empty source and layer
                 map.addSource('live-buses', {
                     type: 'geojson',
                     data: {"type": "FeatureCollection", "features": []}
                 });
 
+                // styling for bus positions
                 map.addLayer({
                     'id': 'live-bus-positions',
                     'type': 'circle',
@@ -186,16 +189,20 @@
                     }
                 });
 
+                // tracking active pop-up and bus associated with it
                 let activeBusPopup = null;
                 let activeBusLabel = null;
 
+                // add pop-ups for live bus positions
                 map.on('click', 'live-bus-positions', (e) => {
                     const feature = e.features[0];
                     const props = feature.properties;
                     const coords = feature.geometry.coordinates.slice();
 
+                    // remembering which bus we're tracking
                     activeBusLabel = props.label;
 
+                    // if a pop-up already exists, remove it
                     if (activeBusPopup) {
                         activeBusPopup.remove();
                     }
@@ -217,11 +224,14 @@
                         .addTo(map);
                 });
 
+                // function to update live bus positions the first time and every few seconds
                 async function updateBusPositions() {
                     const busGeoJSON = await getLiveBusGeoJSON();
                     map.getSource('live-buses').setData(busGeoJSON);
 
+                    // move pop-up with bus if it's open
                     if (activeBusPopup && activeBusLabel) {
+                        // find feature for bus we're tracking
                         const busFeature = busGeoJSON.features.find(
                             f => f.properties.label === activeBusLabel
                         );
@@ -230,6 +240,7 @@
                             const newCoords = busFeature.geometry.coordinates;
                             activeBusPopup.setLngLat(newCoords);
                         } else {
+                            // bus is no longer active, remove pop-up
                             activeBusPopup.remove();
                             activeBusPopup = null;
                             activeBusLabel = null;
