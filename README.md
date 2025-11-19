@@ -38,7 +38,7 @@ Our webmap utilizes General Transit Feed Specification (GTFS) data from [King Co
 [insert here]
 
 ### Cloudflare
-Due to a Cross-Origin Resource Sharing (CORS) error, we were not able to pull from King County Metro's S3 AWS link directly. To work around this, we used Cloudflare Workers to create a third-party proxy that helps us pull data indirectly.
+Due to a Cross-Origin Resource Sharing (CORS) error, we were not able to pull from King County Metro's S3 AWS link directly. To work around this, we used Cloudflare Workers to create a [third-party proxy](https://kcm-proxy.quwackj.workers.dev/) that helps us pull data indirectly.
 
 ## Acknowledgements
 [insert here]
