@@ -30,7 +30,7 @@ To the left of the map, there will be a menu that has 8 buttons, one for each ro
 [insert screenshot of this working]
 
 ## Data Sources
-Our webmap utilizes General Transit Feed Specification (GTFS) data from King County Metro that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from King County Metro’s S3 AWS link, which we pull from every 7.5 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
+Our webmap utilizes General Transit Feed Specification (GTFS) data from [King County Metro](https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources) that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from [King County Metro’s S3 AWS link](https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json), which we pull from every 7.5 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
 
 ## Applied Libraries and Webservices
 
