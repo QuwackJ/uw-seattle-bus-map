@@ -10,11 +10,73 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
 
     <style>
+        
         body { 
             margin:0; 
             padding:0;
             display:flex;
             font-family: sans-serif;
+        }
+        #tutorialOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: none; /* hidden until JS shows it */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #tutorialOverlay.visible {
+            display: flex;
+        }
+
+        #tutorialBox {
+            width: 420px;
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.25);
+        }
+
+        #tutorialClose {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #tutorialNext {
+            position: absolute;
+            right: 20px;  
+            bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        #tutorialPrev {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        #tutorialControls button {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #f2f2f2;
+            cursor: pointer;
+        }
+
+        #tutorialContent img {
+            width: 100%;
+            border-radius: 6px;
+            margin-top: 10px;
         }
 
         #menu {
@@ -82,6 +144,22 @@
     </div>
 
     <div id="map"></div>
+
+    <!-- Create an overlay for the tutorial -->
+    <div id="tutorialOverlay" class="visible"> 
+        <div id="tutorialBox">
+            <button id="tutorialClose">✖</button> 
+            <div id="tutorialContent"></div>
+
+            <div id="tutorialNext">
+                <button id="nextSlide">Next</button>
+            </div>
+            <div id="tutorialPrev">
+                <button id="prevSlide">Back</button>
+            </div>
+        </div>
+    </div>
+
     
     <script type="module">
         // importing function to fetch data from API, convert to object, and convert to GeoJSON
@@ -356,6 +434,70 @@
                 setupRouteButtons();
             });
         }
+        const tutorialSlides = [
+            `
+            <h2>Welcome to the UW Bus Map!</h2>
+            <p>This site shows live bus locations around UW Seattle campus, updated every 7 seconds.</p>
+        `,
+        `
+            <h2>Click Stops</h2>
+            <p>Select any bus stop to see its location .</p>
+            <img src="assets/tutorial2.png">
+        `,
+        `
+            <h2>Select Routes</h2>
+            <p>Use the left menu to highlight and focus on a specific route.</p>
+            <img src="assets/tutorial3.png">
+            <p>Click the route again to exit the route</p>
+        `,
+        `
+            <h2>You're ready to use the map!</h2>
+        `
+        
+        ];
+
+        let tutorialIndex = 0;
+
+        const overlay = document.getElementById('tutorialOverlay');
+        const content = document.getElementById('tutorialContent');
+
+        function updateTutorial() {
+                content.innerHTML = tutorialSlides[tutorialIndex];
+                if (tutorialIndex == 3){
+                    document.getElementById('prevSlide').style.display = "block";
+                    document.getElementById('nextSlide').style.display = "none";
+                } else if (tutorialIndex == 0){
+                    document.getElementById('nextSlide').style.display = "block";
+                    document.getElementById('prevSlide').style.display = "none";
+                } else {
+                    document.getElementById('nextSlide').style.display = "block";
+                    document.getElementById('prevSlide').style.display = "block";
+                }
+        }
+
+        // Start with the tutorial visible
+        overlay.classList.add('visible');
+        
+        updateTutorial();
+
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            if (tutorialIndex < tutorialSlides.length - 1) {
+                tutorialIndex++;
+                updateTutorial();
+            }
+        });
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            if (tutorialIndex > 0) {
+                tutorialIndex--;
+                updateTutorial();
+            }
+        });
+
+        document.getElementById('tutorialClose').addEventListener('click', () => {
+            overlay.classList.remove('visible'); 
+            // hides popup
+        });
 
         makeMap();
     </script>
