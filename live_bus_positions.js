@@ -70,6 +70,7 @@ export function convertToLiveBusObjects(filteredBusPositionsJson) {
 
         const routeInfo = routesById[routeIdString];
 
+        // if route information for a specified route_id is found, get the trip_headsign for both directions
         if (routeInfo) {
             routeShortName = routeInfo.route_short_name;
 
@@ -92,10 +93,6 @@ export function convertToLiveBusObjects(filteredBusPositionsJson) {
             position.longitude
         ));
     }
-
-    // print array of LiveBusData objects to console for debugging
-    console.log("First 5 LiveBusData objects:", buses.slice(0, 5));
-    console.log(buses.length)
 
     return buses;
 }

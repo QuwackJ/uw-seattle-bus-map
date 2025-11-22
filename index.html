@@ -6,17 +6,19 @@
     <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- using mapbox gl js -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
 
     <style>
-        
-        body { 
+        body {
             margin:0; 
             padding:0;
             display:flex;
             font-family: sans-serif;
         }
+
+        /* styling for tutorial pop-up when user first loads map */
         #tutorialOverlay {
             position: fixed;
             inset: 0;
@@ -79,6 +81,7 @@
             margin-top: 10px;
         }
 
+        /* styling for side menu */
         #menu {
             width: 280px;
             height: 100vh;
@@ -119,6 +122,7 @@
             cursor: not-allowed;
         }
 
+        /* styling to make map fit page */
         #map { 
             flex-grow: 1;
             height: 100vh;
@@ -127,12 +131,14 @@
 </head>
 
 <body>
-
+    <!-- menu content -->
     <div id="menu">
         <h2>Bus Routes</h2>
-        <p style="font-size:12px; margin-top:8px; color:#555;">
+        <p style="font-size:14px; margin-top:8px; color:#555;">
             Click a route to highlight it. Click again to reset.
         </p>
+
+        <!-- buttons that highlight routes and bus stops; colored to match moving bus points -->
         <button class="route-btn" data-route-id="100223" style="--route-color: #EB2A22;">Route 43</button>
         <button class="route-btn" data-route-id="100224" style="--route-color: #3E6ECF;">Route 44</button>
         <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">Route 45</button>
@@ -143,9 +149,10 @@
         <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">Route 70</button>
     </div>
 
+    <!-- actual map -->
     <div id="map"></div>
 
-    <!-- Create an overlay for the tutorial -->
+    <!-- create an overlay for the tutorial -->
     <div id="tutorialOverlay" class="visible"> 
         <div id="tutorialBox">
             <button id="tutorialClose">✖</button> 
@@ -160,7 +167,6 @@
         </div>
     </div>
 
-    
     <script type="module">
         // importing function to fetch data from API, convert to object, and convert to GeoJSON
         import { getLiveBusGeoJSON } from './live_bus_positions.js';
@@ -170,6 +176,7 @@
 
         mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
         
+        // initializing map
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v11', 
@@ -184,6 +191,7 @@
                     (layer) => layer.type === 'symbol' && layer.layout['text-field']
                 ).id;
                 
+                // making buildings 3D
                 map.addLayer({
                     'id': '3d-buildings',
                     'source': 'composite',
@@ -199,6 +207,7 @@
                     }
                 }, labelLayerId);
 
+                // add bus route lines
                 map.addSource('uw-routes', {
                     type: 'geojson',
                     data: 'assets/routes_uw.geojson'
@@ -214,11 +223,11 @@
                     },
                     'paint': {
                         'line-width': 3,
-                        'line-color': '#53585C',        
+                        'line-color': '#53585C', // default gray color
                     }
                 });
 
-                // add stop points 
+                // add bus stop points
                 map.addSource('uw-stops', {
                     type: 'geojson',
                     data: 'assets/stops_uw.geojson'
@@ -228,17 +237,14 @@
                     'id': 'uw-stops',
                     'type': 'circle',
                     'source': 'uw-stops',
-                    'minzoom': 14,
+                    'minzoom': 14, // only show stops when zoomed in
                     'paint': {
                         'circle-radius': 5,
-                        'circle-color': '#6C7278',
+                        'circle-color': '#6C7278', // default gray color
                         'circle-stroke-width': 1,
                         'circle-stroke-color': '#fff'
                     }
                 });
-
-                // setting up menu logic from external module
-                menuLogic(map);
 
                 // add pop-ups for stops
                 map.on('click', 'uw-stops', (e) => {
@@ -255,6 +261,9 @@
                         .setHTML(description)
                         .addTo(map);
                 });
+
+                // setting up menu logic from external module; controls routes and bus stops
+                menuLogic(map);
 
                 // add live bus positions
                 // first add empty source and layer
@@ -306,6 +315,7 @@
                         activeBusPopup.remove();
                     }
 
+                    // what's shown in the pop-up
                     const popupContent = `
                         <strong>Route #:</strong> ${props.route_num} <br>
                         <strong>Headsign:</strong> ${props.headsign_primary} <br>
@@ -317,6 +327,7 @@
                         <strong>Label:</strong> ${props.label} <br>
                     `;
 
+                    // creating a new pop-up at new bus position
                     activeBusPopup = new mapboxgl.Popup({closeOnClick: false})
                         .setLngLat([coords[0], coords[1]])
                         .setHTML(popupContent)
@@ -350,9 +361,10 @@
                 // first load of bus positions
                 updateBusPositions();
 
-                // updating every 7.5 seconds
-                const POLLING_INTERVAL = 7500;
+                // updating every 7 seconds
+                const POLLING_INTERVAL = 7000;
                 setInterval(updateBusPositions, POLLING_INTERVAL);
+
 
                 // setting up route selection buttons
                 const routeColors = {
@@ -366,15 +378,20 @@
                     "70": "#FB3BA6"  // pink
                 };
 
+                // what the user has selected with a button
                 let currentSelectedRoute = null;
 
+                // function to set route style based on selected route in menu
                 function setRouteStyle(routeNameOrNull) {
+                    // if no route selected (null), reset to default style
                     if (!routeNameOrNull) {
                         map.setPaintProperty('uw-route-lines', 'line-color', '#53585C');
                         map.setPaintProperty('uw-route-lines', 'line-opacity', 1);
                     } else {
+                        // pick a route color based on route from routeColors object
                         const routeColor = routeColors[routeNameOrNull] || '#ff6600';
 
+                        // change to route color based on selected route or gray if not selected
                         map.setPaintProperty('uw-route-lines', 'line-color', [
                             'case',
                             ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
@@ -382,6 +399,7 @@
                             '#53585C'
                         ]);
 
+                        // change opacity of routes that were not selected to 0.04 (very faint)
                         map.setPaintProperty('uw-route-lines', 'line-opacity', [
                             'case',
                             ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
@@ -391,6 +409,7 @@
                     }
                 }
 
+                // setting up menu button event listeners
                 function setupRouteButtons() {
                     const buttons = document.querySelectorAll('.route-btn');
 
@@ -411,9 +430,11 @@
                                 return;
                             }
 
+                            // keep track of selected route and update styles
                             currentSelectedRoute = routeName;
                             setRouteStyle(routeName);
 
+                            // update button states
                             buttons.forEach(b => {
                                 if (b === btn) {
                                     b.classList.add('active');
@@ -434,26 +455,27 @@
                 setupRouteButtons();
             });
         }
+
+        // tutorial pop-up logic
         const tutorialSlides = [
             `
             <h2>Welcome to the UW Bus Map!</h2>
-            <p>This site shows live bus locations around UW Seattle campus, updated every 7 seconds.</p>
+            <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
         `,
         `
             <h2>Click Stops</h2>
-            <p>Select any bus stop to see its location .</p>
-            <img src="assets/tutorial2.png">
+            <p>Select any bus stop to see its location in a pop-up.</p>
+            <img src="tutorial_images/tutorial2.png">
         `,
         `
             <h2>Select Routes</h2>
             <p>Use the left menu to highlight and focus on a specific route.</p>
-            <img src="assets/tutorial3.png">
-            <p>Click the route again to exit the route</p>
+            <img src="tutorial_images/tutorial3.png">
+            <p>Click the route again to exit the route.</p>
         `,
         `
             <h2>You're ready to use the map!</h2>
         `
-        
         ];
 
         let tutorialIndex = 0;
@@ -475,7 +497,7 @@
                 }
         }
 
-        // Start with the tutorial visible
+        // start with the tutorial visible
         overlay.classList.add('visible');
         
         updateTutorial();
