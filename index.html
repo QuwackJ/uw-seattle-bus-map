@@ -1,527 +1,596 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>UW Seattle Bus Map</title>
-    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8" />
+        <title>UW Seattle Bus Map</title>
+        <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- using mapbox gl js -->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
+        <!-- using mapbox gl js -->
+        <link href="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
 
-    <style>
-        body {
-            margin:0; 
-            padding:0;
-            display:flex;
-            font-family: sans-serif;
-        }
+        <!-- styling for topnav -->
+        <link rel="stylesheet" href="topnav/topnav.css">
 
-        /* styling for tutorial pop-up when user first loads map */
-        #tutorialOverlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-            display: none; /* hidden until JS shows it */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+        <!-- including the Font Awesome CSS library for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        #tutorialOverlay.visible {
-            display: flex;
-        }
+        <style>
+            body { 
+                padding: 0;
+            }
 
-        #tutorialBox {
-            width: 420px;
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.25);
-        }
+            /* styling for tutorial pop-up when user first loads map */
+            #tutorialOverlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.55);
+                display: none; /* hidden until JS shows it */
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
 
-        #tutorialClose {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
+            #tutorialOverlay.visible {
+                display: flex;
+            }
 
-        #tutorialNext {
-            position: absolute;
-            right: 20px;  
-            bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
+            #tutorialBox {
+                width: 420px;
+                background: white;
+                padding: 22px;
+                border-radius: 12px;
+                position: relative;
+                box-shadow: 0 0 20px rgba(0,0,0,0.25);
+            }
 
-        #tutorialPrev {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
+            #tutorialClose {
+                position: absolute;
+                top: 8px;
+                right: 12px;
+                background: none;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+            }
 
-        #tutorialControls button {
-            padding: 8px 14px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background: #f2f2f2;
-            cursor: pointer;
-        }
+            #tutorialNext {
+                position: absolute;
+                right: 20px;  
+                bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 15px;
+            }
 
-        #tutorialContent img {
-            width: 100%;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
+            #tutorialPrev {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 15px;
+            }
 
-        /* styling for side menu */
-        #menu {
-            width: 280px;
-            height: 100vh;
-            background: white;
-            padding: 20px;
-            border-right: 2px solid #ddd;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
+            #tutorialControls button {
+                padding: 8px 14px;
+                border-radius: 6px;
+                border: 1px solid #333;
+                background: #f2f2f2;
+                cursor: pointer;
+            }
 
-        #menu h2 {
-            margin-top: 0;
-            font-size: 24px;
-            font-weight: 700;
-        }
+            #tutorialContent img {
+                width: 100%;
+                border-radius: 6px;
+                margin-top: 10px;
+            }
 
-        .route-btn {
-            background-color: var(--route-color);
-            width: 100%;
-            padding: 10px 14px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: 1.5px solid #000;
-            cursor: pointer;
-            text-align: left;
-        }
+            /* grouped styling for side menu and map */
+            #main-layout {
+                display: flex;
+                height: 100vh;
+                align-items: flex-start;
+            }
 
-        .route-btn.active {
-            border-color: #007aff;
-            box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
-        }
+            /* styling for side menu */
+            #menu {
+                width: 280px;
+                height: auto;
+                background: white;
+                padding: 20px;
+                border-right: 2px solid #ddd;
+                box-sizing: border-box;
+                overflow-y: auto;
+            }
 
-        .route-btn.disabled,
-        .route-btn[disabled] {
-            background-color: #cccccc !important;
-            color: #666666 !important;
-            cursor: not-allowed;
-        }
+            #menu h2 {
+                margin-top: 0;
+                font-size: 24px;
+                font-weight: 700;
+            }
 
-        /* styling to make map fit page */
-        #map { 
-            flex-grow: 1;
-            height: 100vh;
-        }
-    </style>
-</head>
+            #route-buttons {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: minmax(44px, auto);
+                gap: 10px;
+            }
 
-<body>
-    <!-- menu content -->
-    <div id="menu">
-        <h2>Bus Routes</h2>
-        <p style="font-size:14px; margin-top:8px; color:#555;">
-            Click a route to highlight it. Click again to reset.
-        </p>
+            .route-btn {
+                background-color: var(--route-color);
+                width: 100%;
+                padding: 10px 14px;
+                font-size: 16px;
+                border-radius: 6px;
+                border: 1.5px solid #000;
+                cursor: pointer;
+                justify-content: center;
+                text-align: center;
+            }
 
-        <!-- buttons that highlight routes and bus stops; colored to match moving bus points -->
-        <button class="route-btn" data-route-id="100223" style="--route-color: #EB2A22;">Route 43</button>
-        <button class="route-btn" data-route-id="100224" style="--route-color: #3E6ECF;">Route 44</button>
-        <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">Route 45</button>
-        <button class="route-btn" data-route-id="100228" style="--route-color: #984EBD;">Route 48</button>
-        <button class="route-btn" data-route-id="100447" style="--route-color: #FF6B00;">Route 49</button>
-        <button class="route-btn" data-route-id="100254" style="--route-color: #FFBD3D;">Route 65</button>
-        <button class="route-btn" data-route-id="100259" style="--route-color: #46D2CD;">Route 67</button>
-        <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">Route 70</button>
-    </div>
+            .route-btn.active {
+                border-color: #007aff;
+                box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
+            }
 
-    <!-- actual map -->
-    <div id="map"></div>
+            .route-btn.disabled,
+            .route-btn[disabled] {
+                background-color: #cccccc !important;
+                color: #666666 !important;
+                cursor: not-allowed;
+            }
 
-    <!-- create an overlay for the tutorial -->
-    <div id="tutorialOverlay" class="visible"> 
-        <div id="tutorialBox">
-            <button id="tutorialClose">✖</button> 
-            <div id="tutorialContent"></div>
+            /* styling to make map fit page */
+            #map { 
+                height: 100vh;
+                flex-grow: 1;
+            }
 
-            <div id="tutorialNext">
-                <button id="nextSlide">Next</button>
+            /* adjusting styling when screen is less than 800px wide */
+            @media screen and (max-width: 800px) {
+                #main-layout {
+                    flex-direction: row;
+                    height: 100vh;
+                }
+
+                #menu {
+                    width: min(32vw, 220px);
+                    height: 100vh;
+                    border-right: 2px solid #ddd;
+                    border-bottom: none;
+                    overflow-y: auto;
+                }
+
+                #route-buttons {
+                    grid-template-columns: 1fr;
+                    gap: 10px;
+                }
+
+                .route-btn {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- navigation bar -->
+        <div class="topnav" id="myTopNav">
+            <!-- current page -->
+            <a class="active" href="index.html">UW Seattle Bus Map</a>
+
+            <!-- link to project description -->
+            <a href="project_description.html">About the Map</a>
+
+            <!-- link to team page -->
+            <a href="about_team.html">About the Team</a> 
+
+            <!-- hamburger menu for smaller screens -->
+            <a href="javascript:void(0);" class="icon">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <!-- grouping side menu and map -->
+        <div id="main-layout">
+            <!-- menu content -->
+            <div id="menu">
+                <h2>Bus Routes</h2>
+                <p style="font-size:14px; margin-top:8px; color:#555;">
+                    Click a route to highlight it. Click again to reset.
+                </p>
+
+                <!-- grouping menu buttons -->
+                <div id="route-buttons">
+                    <!-- buttons that highlight routes and bus stops; colored to match moving bus points -->
+                    <button class="route-btn" data-route-id="100223" style="--route-color: #EB2A22;">43</button>
+                    <button class="route-btn" data-route-id="100224" style="--route-color: #3E6ECF;">44</button>
+                    <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">45</button>
+                    <button class="route-btn" data-route-id="100228" style="--route-color: #984EBD;">48</button>
+                    <button class="route-btn" data-route-id="100447" style="--route-color: #FF6B00;">49</button>
+                    <button class="route-btn" data-route-id="100254" style="--route-color: #FFBD3D;">65</button>
+                    <button class="route-btn" data-route-id="100259" style="--route-color: #46D2CD;">67</button>
+                    <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">70</button>
+                </div>
             </div>
-            <div id="tutorialPrev">
-                <button id="prevSlide">Back</button>
+
+            <!-- actual map -->
+            <div id="map"></div>
+        </div>
+
+        <!-- create an overlay for the tutorial -->
+        <div id="tutorialOverlay" class="visible"> 
+            <div id="tutorialBox">
+                <button id="tutorialClose">✖</button> 
+                <div id="tutorialContent"></div>
+
+                <div id="tutorialNext">
+                    <button id="nextSlide">Next</button>
+                </div>
+                <div id="tutorialPrev">
+                    <button id="prevSlide">Back</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script type="module">
-        // importing function to fetch data from API, convert to object, and convert to GeoJSON
-        import { getLiveBusGeoJSON } from './live_bus_positions.js';
+        <script type="module">
+            // importing function to fetch data from API, convert to object, and convert to GeoJSON
+            import { getLiveBusGeoJSON } from './live_bus_positions.js';
 
-        // importing function to fade bus stops that are not on selected route
-        import { menuLogic } from './menu_logic.js';
+            // importing function to fade bus stops that are not on selected route
+            import { menuLogic } from './menu_logic.js';
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
-        
-        // initializing map
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v11', 
-            center: [-122.3035, 47.6553], 
-            zoom: 12,
-        });
+            mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
+            
+            // initializing map
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v11', 
+                center: [-122.3035, 47.6553], 
+                zoom: 12,
+            });
 
-        async function makeMap() {
-            map.on('load', () => {
-                const layers = map.getStyle().layers;
-                const labelLayerId = layers.find(
-                    (layer) => layer.type === 'symbol' && layer.layout['text-field']
-                ).id;
-                
-                // making buildings 3D
-                map.addLayer({
-                    'id': '3d-buildings',
-                    'source': 'composite',
-                    'source-layer': 'building',
-                    'filter': ['==', 'extrude', 'true'],
-                    'type': 'fill-extrusion',
-                    'minzoom': 15,
-                    'paint': {
-                        'fill-extrusion-color': '#aaa',
-                        'fill-extrusion-height': ['get', 'height'],
-                        'fill-extrusion-base': ['get', 'min_height'],
-                        'fill-extrusion-opacity': 0.85
-                    }
-                }, labelLayerId);
-
-                // add bus route lines
-                map.addSource('uw-routes', {
-                    type: 'geojson',
-                    data: 'assets/routes_uw.geojson'
-                });
-
-                map.addLayer({
-                    'id': 'uw-route-lines',
-                    'type': 'line',
-                    'source': 'uw-routes',
-                    'layout': {
-                        'line-join': 'round',
-                        'line-cap': 'round'
-                    },
-                    'paint': {
-                        'line-width': 3,
-                        'line-color': '#53585C', // default gray color
-                    }
-                });
-
-                // add bus stop points
-                map.addSource('uw-stops', {
-                    type: 'geojson',
-                    data: 'assets/stops_uw.geojson'
-                });
-
-                map.addLayer({
-                    'id': 'uw-stops',
-                    'type': 'circle',
-                    'source': 'uw-stops',
-                    'minzoom': 14, // only show stops when zoomed in
-                    'paint': {
-                        'circle-radius': 5,
-                        'circle-color': '#6C7278', // default gray color
-                        'circle-stroke-width': 1,
-                        'circle-stroke-color': '#fff'
-                    }
-                });
-
-                // add pop-ups for stops
-                map.on('click', 'uw-stops', (e) => {
-                    const feature = e.features[0];
-                    const coordinates = feature.geometry.coordinates.slice();
-                    const props = feature.properties;
-
-                    const description = `
-                        <b>Stop Address:</b> ${props.stop_name}
-                    `;
-
-                    new mapboxgl.Popup()
-                        .setLngLat(coordinates)
-                        .setHTML(description)
-                        .addTo(map);
-                });
-
-                // setting up menu logic from external module; controls routes and bus stops
-                menuLogic(map);
-
-                // add live bus positions
-                // first add empty source and layer
-                map.addSource('live-buses', {
-                    type: 'geojson',
-                    data: {"type": "FeatureCollection", "features": []}
-                });
-
-                // styling for bus positions based on route_num
-                map.addLayer({
-                    'id': 'live-bus-positions',
-                    'type': 'circle',
-                    'source': 'live-buses',
-                    'paint': {
-                        'circle-radius': 6,
-                        'circle-stroke-width': 1.5,
-                        'circle-stroke-color': '#000000',
-                        'circle-color': [
-                            'match',
-                            ['get', 'route_num'],
-                            '43', '#EB2A22',
-                            '44', '#3E6ECF',
-                            '45', '#4DBA4A',
-                            '48', '#984EBD',
-                            '49', '#FF6B00',
-                            '65', '#FFBD3D',
-                            '67', '#46D2CD',
-                            '70', '#FB3BA6',
-                            '#AAAAAA' // default color for other routes
-                        ]
-                    }
-                });
-
-                // tracking active pop-up and bus associated with it
-                let activeBusPopup = null;
-                let activeBusLabel = null;
-
-                // add pop-ups for live bus positions
-                map.on('click', 'live-bus-positions', (e) => {
-                    const feature = e.features[0];
-                    const props = feature.properties;
-                    const coords = feature.geometry.coordinates.slice();
-
-                    // remembering which bus we're tracking
-                    activeBusLabel = props.label;
-
-                    // if a pop-up already exists, remove it
-                    if (activeBusPopup) {
-                        activeBusPopup.remove();
-                    }
-
-                    // what's shown in the pop-up
-                    const popupContent = `
-                        <strong>Route #:</strong> ${props.route_num} <br>
-                        <strong>Headsign:</strong> ${props.headsign_primary} <br>
-                        ${
-                            props.headsign_secondary 
-                            ? `<strong>Secondary Headsign:</strong> ${props.headsign_secondary} <br>` 
-                            : ""
+            async function makeMap() {
+                map.on('load', () => {
+                    const layers = map.getStyle().layers;
+                    const labelLayerId = layers.find(
+                        (layer) => layer.type === 'symbol' && layer.layout['text-field']
+                    ).id;
+                    
+                    // making buildings 3D
+                    map.addLayer({
+                        'id': '3d-buildings',
+                        'source': 'composite',
+                        'source-layer': 'building',
+                        'filter': ['==', 'extrude', 'true'],
+                        'type': 'fill-extrusion',
+                        'minzoom': 15,
+                        'paint': {
+                            'fill-extrusion-color': '#aaa',
+                            'fill-extrusion-height': ['get', 'height'],
+                            'fill-extrusion-base': ['get', 'min_height'],
+                            'fill-extrusion-opacity': 0.85
                         }
-                        <strong>Label:</strong> ${props.label} <br>
-                    `;
+                    }, labelLayerId);
 
-                    // creating a new pop-up at new bus position
-                    activeBusPopup = new mapboxgl.Popup({closeOnClick: false})
-                        .setLngLat([coords[0], coords[1]])
-                        .setHTML(popupContent)
-                        .addTo(map);
-                });
+                    // add bus route lines
+                    map.addSource('uw-routes', {
+                        type: 'geojson',
+                        data: 'assets/routes_uw.geojson'
+                    });
 
-                // function to update live bus positions the first time and every few seconds
-                async function updateBusPositions() {
-                    const busGeoJSON = await getLiveBusGeoJSON();
-                    map.getSource('live-buses').setData(busGeoJSON);
+                    map.addLayer({
+                        'id': 'uw-route-lines',
+                        'type': 'line',
+                        'source': 'uw-routes',
+                        'layout': {
+                            'line-join': 'round',
+                            'line-cap': 'round'
+                        },
+                        'paint': {
+                            'line-width': 3,
+                            'line-color': '#53585C', // default gray color
+                        }
+                    });
 
-                    // move pop-up with bus if it's open
-                    if (activeBusPopup && activeBusLabel) {
-                        // find feature for bus we're tracking
-                        const busFeature = busGeoJSON.features.find(
-                            f => f.properties.label === activeBusLabel
-                        );
+                    // add bus stop points
+                    map.addSource('uw-stops', {
+                        type: 'geojson',
+                        data: 'assets/stops_uw.geojson'
+                    });
 
-                        if (busFeature) {
-                            const newCoords = busFeature.geometry.coordinates;
-                            activeBusPopup.setLngLat(newCoords);
-                        } else {
-                            // bus is no longer active, remove pop-up
+                    map.addLayer({
+                        'id': 'uw-stops',
+                        'type': 'circle',
+                        'source': 'uw-stops',
+                        'minzoom': 14, // only show stops when zoomed in
+                        'paint': {
+                            'circle-radius': 5,
+                            'circle-color': '#6C7278', // default gray color
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#fff'
+                        }
+                    });
+
+                    // add pop-ups for stops
+                    map.on('click', 'uw-stops', (e) => {
+                        const feature = e.features[0];
+                        const coordinates = feature.geometry.coordinates.slice();
+                        const props = feature.properties;
+
+                        const description = `
+                            <b>Stop Address:</b> ${props.stop_name}
+                        `;
+
+                        new mapboxgl.Popup()
+                            .setLngLat(coordinates)
+                            .setHTML(description)
+                            .addTo(map);
+                    });
+
+                    // setting up menu logic from external module; controls routes and bus stops
+                    menuLogic(map);
+
+                    // add live bus positions
+                    // first add empty source and layer
+                    map.addSource('live-buses', {
+                        type: 'geojson',
+                        data: {"type": "FeatureCollection", "features": []}
+                    });
+
+                    // styling for bus positions based on route_num
+                    map.addLayer({
+                        'id': 'live-bus-positions',
+                        'type': 'circle',
+                        'source': 'live-buses',
+                        'paint': {
+                            'circle-radius': 6,
+                            'circle-stroke-width': 1.5,
+                            'circle-stroke-color': '#000000',
+                            'circle-color': [
+                                'match',
+                                ['get', 'route_num'],
+                                '43', '#EB2A22',
+                                '44', '#3E6ECF',
+                                '45', '#4DBA4A',
+                                '48', '#984EBD',
+                                '49', '#FF6B00',
+                                '65', '#FFBD3D',
+                                '67', '#46D2CD',
+                                '70', '#FB3BA6',
+                                '#AAAAAA' // default color for other routes
+                            ]
+                        }
+                    });
+
+                    // tracking active pop-up and bus associated with it
+                    let activeBusPopup = null;
+                    let activeBusLabel = null;
+
+                    // add pop-ups for live bus positions
+                    map.on('click', 'live-bus-positions', (e) => {
+                        const feature = e.features[0];
+                        const props = feature.properties;
+                        const coords = feature.geometry.coordinates.slice();
+
+                        // remembering which bus we're tracking
+                        activeBusLabel = props.label;
+
+                        // if a pop-up already exists, remove it
+                        if (activeBusPopup) {
                             activeBusPopup.remove();
-                            activeBusPopup = null;
-                            activeBusLabel = null;
+                        }
+
+                        // what's shown in the pop-up
+                        const popupContent = `
+                            <strong>Route #:</strong> ${props.route_num} <br>
+                            <strong>Headsign:</strong> ${props.headsign_primary} <br>
+                            ${
+                                props.headsign_secondary 
+                                ? `<strong>Secondary Headsign:</strong> ${props.headsign_secondary} <br>` 
+                                : ""
+                            }
+                            <strong>Label:</strong> ${props.label} <br>
+                        `;
+
+                        // creating a new pop-up at new bus position
+                        activeBusPopup = new mapboxgl.Popup({closeOnClick: false})
+                            .setLngLat([coords[0], coords[1]])
+                            .setHTML(popupContent)
+                            .addTo(map);
+                    });
+
+                    // function to update live bus positions the first time and every few seconds
+                    async function updateBusPositions() {
+                        const busGeoJSON = await getLiveBusGeoJSON();
+                        map.getSource('live-buses').setData(busGeoJSON);
+
+                        // move pop-up with bus if it's open
+                        if (activeBusPopup && activeBusLabel) {
+                            // find feature for bus we're tracking
+                            const busFeature = busGeoJSON.features.find(
+                                f => f.properties.label === activeBusLabel
+                            );
+
+                            if (busFeature) {
+                                const newCoords = busFeature.geometry.coordinates;
+                                activeBusPopup.setLngLat(newCoords);
+                            } else {
+                                // bus is no longer active, remove pop-up
+                                activeBusPopup.remove();
+                                activeBusPopup = null;
+                                activeBusLabel = null;
+                            }
                         }
                     }
-                }
 
-                // first load of bus positions
-                updateBusPositions();
+                    // first load of bus positions
+                    updateBusPositions();
 
-                // updating every 7 seconds
-                const POLLING_INTERVAL = 7000;
-                setInterval(updateBusPositions, POLLING_INTERVAL);
+                    // updating every 7 seconds
+                    const POLLING_INTERVAL = 7000;
+                    setInterval(updateBusPositions, POLLING_INTERVAL);
 
 
-                // setting up route selection buttons
-                const routeColors = {
-                    "43": "#EB2A22", // red
-                    "44": "#3E6ECF", // blue
-                    "45": "#4DBA4A", // green
-                    "48": "#984EBD", // purple
-                    "49": "#FF6B00", // orange
-                    "65": "#FFBD3D", // yellow
-                    "67": "#46D2CD", // teal 
-                    "70": "#FB3BA6"  // pink
-                };
+                    // setting up route selection buttons
+                    const routeColors = {
+                        "43": "#EB2A22", // red
+                        "44": "#3E6ECF", // blue
+                        "45": "#4DBA4A", // green
+                        "48": "#984EBD", // purple
+                        "49": "#FF6B00", // orange
+                        "65": "#FFBD3D", // yellow
+                        "67": "#46D2CD", // teal 
+                        "70": "#FB3BA6"  // pink
+                    };
 
-                // what the user has selected with a button
-                let currentSelectedRoute = null;
+                    // what the user has selected with a button
+                    let currentSelectedRoute = null;
 
-                // function to set route style based on selected route in menu
-                function setRouteStyle(routeNameOrNull) {
-                    // if no route selected (null), reset to default style
-                    if (!routeNameOrNull) {
-                        map.setPaintProperty('uw-route-lines', 'line-color', '#53585C');
-                        map.setPaintProperty('uw-route-lines', 'line-opacity', 1);
-                    } else {
-                        // pick a route color based on route from routeColors object
-                        const routeColor = routeColors[routeNameOrNull] || '#ff6600';
+                    // function to set route style based on selected route in menu
+                    function setRouteStyle(routeNameOrNull) {
+                        // if no route selected (null), reset to default style
+                        if (!routeNameOrNull) {
+                            map.setPaintProperty('uw-route-lines', 'line-color', '#53585C');
+                            map.setPaintProperty('uw-route-lines', 'line-opacity', 1);
+                        } else {
+                            // pick a route color based on route from routeColors object
+                            const routeColor = routeColors[routeNameOrNull] || '#ff6600';
 
-                        // change to route color based on selected route or gray if not selected
-                        map.setPaintProperty('uw-route-lines', 'line-color', [
-                            'case',
-                            ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
-                            routeColor,
-                            '#53585C'
-                        ]);
+                            // change to route color based on selected route or gray if not selected
+                            map.setPaintProperty('uw-route-lines', 'line-color', [
+                                'case',
+                                ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
+                                routeColor,
+                                '#53585C'
+                            ]);
 
-                        // change opacity of routes that were not selected to 0.04 (very faint)
-                        map.setPaintProperty('uw-route-lines', 'line-opacity', [
-                            'case',
-                            ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
-                            1,    
-                            0.04  
-                        ]);
+                            // change opacity of routes that were not selected to 0.04 (very faint)
+                            map.setPaintProperty('uw-route-lines', 'line-opacity', [
+                                'case',
+                                ['==', ['to-string', ['get', 'route_name']], routeNameOrNull],
+                                1,    
+                                0.04  
+                            ]);
+                        }
                     }
-                }
 
-                // setting up menu button event listeners
-                function setupRouteButtons() {
-                    const buttons = document.querySelectorAll('.route-btn');
+                    // setting up menu button event listeners
+                    function setupRouteButtons() {
+                        const buttons = document.querySelectorAll('.route-btn');
 
-                    buttons.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const routeText = btn.textContent.trim(); 
-                            const routeName = routeText.replace('Route ', ''); 
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const routeText = btn.textContent.trim(); 
+                                const routeName = routeText.replace('Route ', ''); 
 
-                            // if the same button has been clicked again, enable all buttons
-                            if (currentSelectedRoute === routeName) {
-                                currentSelectedRoute = null;
-                                setRouteStyle(null);
-                                buttons.forEach(b => {
-                                    b.classList.remove('disabled');
-                                    b.disabled = false;
-                                    b.removeAttribute('aria-disabled'); // for accessibility
-                                });
-                                return;
-                            }
-
-                            // keep track of selected route and update styles
-                            currentSelectedRoute = routeName;
-                            setRouteStyle(routeName);
-
-                            // update button states
-                            buttons.forEach(b => {
-                                if (b === btn) {
-                                    b.classList.add('active');
-                                    b.classList.remove('disabled');
-                                    b.disabled = false;
-                                    b.removeAttribute('aria-disabled'); // for accessibility
-                                } else {
-                                    b.classList.remove('active');
-                                    b.classList.add('disabled');
-                                    b.disabled = true;
-                                    b.setAttribute('aria-disabled', 'true'); // for accessibility
+                                // if the same button has been clicked again, enable all buttons
+                                if (currentSelectedRoute === routeName) {
+                                    currentSelectedRoute = null;
+                                    setRouteStyle(null);
+                                    buttons.forEach(b => {
+                                        b.classList.remove('disabled');
+                                        b.disabled = false;
+                                        b.removeAttribute('aria-disabled'); // for accessibility
+                                    });
+                                    return;
                                 }
+
+                                // keep track of selected route and update styles
+                                currentSelectedRoute = routeName;
+                                setRouteStyle(routeName);
+
+                                // update button states
+                                buttons.forEach(b => {
+                                    if (b === btn) {
+                                        b.classList.add('active');
+                                        b.classList.remove('disabled');
+                                        b.disabled = false;
+                                        b.removeAttribute('aria-disabled'); // for accessibility
+                                    } else {
+                                        b.classList.remove('active');
+                                        b.classList.add('disabled');
+                                        b.disabled = true;
+                                        b.setAttribute('aria-disabled', 'true'); // for accessibility
+                                    }
+                                });
                             });
                         });
-                    });
-                }
+                    }
 
-                setupRouteButtons();
-            });
-        }
+                    setupRouteButtons();
+                });
+            }
 
-        // tutorial pop-up logic
-        const tutorialSlides = [
+            // tutorial pop-up logic
+            const tutorialSlides = [
+                `
+                <h2>Welcome to the UW Bus Map!</h2>
+                <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
+            `,
             `
-            <h2>Welcome to the UW Bus Map!</h2>
-            <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
-        `,
-        `
-            <h2>Click Stops</h2>
-            <p>Select any bus stop to see its location in a pop-up.</p>
-            <img src="tutorial_images/tutorial2.png">
-        `,
-        `
-            <h2>Select Routes</h2>
-            <p>Use the left menu to highlight and focus on a specific route.</p>
-            <img src="tutorial_images/tutorial3.png">
-            <p>Click the route again to exit the route.</p>
-        `,
-        `
-            <h2>You're ready to use the map!</h2>
-        `
-        ];
+                <h2>Click Stops</h2>
+                <p>Select any bus stop to see its location in a pop-up.</p>
+                <img src="tutorial_images/tutorial2.png">
+            `,
+            `
+                <h2>Select Routes</h2>
+                <p>Use the left menu to highlight and focus on a specific route.</p>
+                <img src="tutorial_images/tutorial3.png">
+                <p>Click the route again to exit the route.</p>
+            `,
+            `
+                <h2>You're ready to use the map!</h2>
+            `
+            ];
 
-        let tutorialIndex = 0;
+            let tutorialIndex = 0;
 
-        const overlay = document.getElementById('tutorialOverlay');
-        const content = document.getElementById('tutorialContent');
+            const overlay = document.getElementById('tutorialOverlay');
+            const content = document.getElementById('tutorialContent');
 
-        function updateTutorial() {
-                content.innerHTML = tutorialSlides[tutorialIndex];
-                if (tutorialIndex == 3){
-                    document.getElementById('prevSlide').style.display = "block";
-                    document.getElementById('nextSlide').style.display = "none";
-                } else if (tutorialIndex == 0){
-                    document.getElementById('nextSlide').style.display = "block";
-                    document.getElementById('prevSlide').style.display = "none";
-                } else {
-                    document.getElementById('nextSlide').style.display = "block";
-                    document.getElementById('prevSlide').style.display = "block";
+            function updateTutorial() {
+                    content.innerHTML = tutorialSlides[tutorialIndex];
+                    if (tutorialIndex == 3){
+                        document.getElementById('prevSlide').style.display = "block";
+                        document.getElementById('nextSlide').style.display = "none";
+                    } else if (tutorialIndex == 0){
+                        document.getElementById('nextSlide').style.display = "block";
+                        document.getElementById('prevSlide').style.display = "none";
+                    } else {
+                        document.getElementById('nextSlide').style.display = "block";
+                        document.getElementById('prevSlide').style.display = "block";
+                    }
+            }
+
+            // start with the tutorial visible
+            overlay.classList.add('visible');
+            
+            updateTutorial();
+
+            document.getElementById('nextSlide').addEventListener('click', () => {
+                if (tutorialIndex < tutorialSlides.length - 1) {
+                    tutorialIndex++;
+                    updateTutorial();
                 }
-        }
+            });
 
-        // start with the tutorial visible
-        overlay.classList.add('visible');
-        
-        updateTutorial();
+            document.getElementById('prevSlide').addEventListener('click', () => {
+                if (tutorialIndex > 0) {
+                    tutorialIndex--;
+                    updateTutorial();
+                }
+            });
 
-        document.getElementById('nextSlide').addEventListener('click', () => {
-            if (tutorialIndex < tutorialSlides.length - 1) {
-                tutorialIndex++;
-                updateTutorial();
-            }
-        });
+            document.getElementById('tutorialClose').addEventListener('click', () => {
+                overlay.classList.remove('visible'); 
+                // hides popup
+            });
 
-        document.getElementById('prevSlide').addEventListener('click', () => {
-            if (tutorialIndex > 0) {
-                tutorialIndex--;
-                updateTutorial();
-            }
-        });
+            makeMap();
+        </script>
 
-        document.getElementById('tutorialClose').addEventListener('click', () => {
-            overlay.classList.remove('visible'); 
-            // hides popup
-        });
-
-        makeMap();
-    </script>
-</body>
+        <!-- javascript for topnav -->
+        <script src="topnav/topnav_logic.js"></script>
+    </body>
 </html>
