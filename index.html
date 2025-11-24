@@ -10,6 +10,12 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
 
+    <!-- styling for topnav -->
+    <link rel="stylesheet" href="topnav/topnav.css">
+
+    <!-- including the Font Awesome CSS library for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         body {
             margin:0; 
@@ -131,26 +137,49 @@
 </head>
 
 <body>
-    <!-- menu content -->
-    <div id="menu">
-        <h2>Bus Routes</h2>
-        <p style="font-size:14px; margin-top:8px; color:#555;">
-            Click a route to highlight it. Click again to reset.
-        </p>
+    <!-- navigation bar -->
+    <div class="topnav" id="myTopNav">
+        <!-- current page -->
+        <a class="active" href="index.html">UW Seattle Bus Map</a>
 
-        <!-- buttons that highlight routes and bus stops; colored to match moving bus points -->
-        <button class="route-btn" data-route-id="100223" style="--route-color: #EB2A22;">Route 43</button>
-        <button class="route-btn" data-route-id="100224" style="--route-color: #3E6ECF;">Route 44</button>
-        <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">Route 45</button>
-        <button class="route-btn" data-route-id="100228" style="--route-color: #984EBD;">Route 48</button>
-        <button class="route-btn" data-route-id="100447" style="--route-color: #FF6B00;">Route 49</button>
-        <button class="route-btn" data-route-id="100254" style="--route-color: #FFBD3D;">Route 65</button>
-        <button class="route-btn" data-route-id="100259" style="--route-color: #46D2CD;">Route 67</button>
-        <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">Route 70</button>
+        <!-- link to project description -->
+        <a href="project_description.html">About the Map</a>
+
+        <!-- link to team page -->
+        <a href="about_team.html">About the Team</a> 
+
+        <!-- hamburger menu for smaller screens -->
+        <a href="javascript:void(0);" class="icon">
+            <i class="fa fa-bars"></i>
+        </a>
     </div>
 
-    <!-- actual map -->
-    <div id="map"></div>
+    <!-- grouping side menu and map -->
+    <div id="main-layout">
+        <!-- menu content -->
+        <div id="menu">
+            <h2>Bus Routes</h2>
+            <p style="font-size:14px; margin-top:8px; color:#555;">
+                Click a route to highlight it. Click again to reset.
+            </p>
+
+            <!-- grouping menu buttons -->
+            <div id="route-buttons">
+                <!-- buttons that highlight routes and bus stops; colored to match moving bus points -->
+                <button class="route-btn" data-route-id="100223" style="--route-color: #EB2A22;">43</button>
+                <button class="route-btn" data-route-id="100224" style="--route-color: #3E6ECF;">44</button>
+                <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">45</button>
+                <button class="route-btn" data-route-id="100228" style="--route-color: #984EBD;">48</button>
+                <button class="route-btn" data-route-id="100447" style="--route-color: #FF6B00;">49</button>
+                <button class="route-btn" data-route-id="100254" style="--route-color: #FFBD3D;">65</button>
+                <button class="route-btn" data-route-id="100259" style="--route-color: #46D2CD;">67</button>
+                <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">70</button>
+            </div>
+        </div>
+
+        <!-- actual map -->
+        <div id="map"></div>
+    </div>
 
     <!-- create an overlay for the tutorial -->
     <div id="tutorialOverlay" class="visible"> 
@@ -523,5 +552,8 @@
 
         makeMap();
     </script>
+
+    <!-- javascript for topnav -->
+    <script src="topnav/topnav_logic.js"></script>
 </body>
 </html>
