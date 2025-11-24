@@ -66,9 +66,9 @@ We used ChatGPT and Copilot to assist with several parts of our project. The fol
 - Creating the map
     - We used ChatGPT to help debug issues with creating pop-ups for moving buses, especially when trying to get the pop-ups to follow moving buses
     - We used ChatGPT to style the moving buses based on their route numbers
-    - We used ChatGPT to debug issues with creating the tutorial overlay
 - Creating the menu
     - We used ChatGPT and Copilot to help style the menu buttons in their active and disabled states
     - We used ChatGPT to write the logic that enables the menu to only show bus stops along a selected route
+    - We used ChatGPT to debug issues with creating the tutorial overlay and having it be activated by clicking the help button
 - Web page layout
     - We used ChatGPT and Copilot to make all pages conform to responsive design principles
