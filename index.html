@@ -590,29 +590,6 @@
             makeMap();
         </script>
 
-        <!-- for debugging -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const overlay = document.getElementById('tutorialOverlay');
-                const closeBtn = document.getElementById('tutorialClose');
-
-                if (!overlay || !closeBtn) return;
-
-                // Close when X is clicked
-                closeBtn.addEventListener('click', function () {
-                    overlay.classList.remove('visible');
-                });
-
-                // Optional: close when clicking outside the tutorial box
-                overlay.addEventListener('click', function (e) {
-                    if (e.target === overlay) {
-                        overlay.classList.remove('visible');
-                    }
-                });
-            });
-        </script>
-
-
         <!-- javascript for topnav -->
         <script src="topnav/topnav_logic.js"></script>
     </body>
