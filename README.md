@@ -18,7 +18,7 @@ When users first load the web map, they will see a map consisting of a custom ba
 
 [insert screenshot of this working]
 
-On the bus routes, moving circles represent the current positions of buses on the routes. The positions of these circles are updated every 7.5 seconds. The moving buses display a pop-up that shows their route number, headsign(s), and label when clicked. This pop-up tracks the position of the bus.
+On the bus routes, moving circles represent the current positions of buses on the routes. The positions of these circles are updated every 7 seconds. The moving buses display a pop-up that shows their route number, headsign(s), and label when clicked. This pop-up tracks the position of the bus.
 
 [insert screenshot of this working]
 
@@ -35,7 +35,7 @@ To the left of the map, there is a menu with 8 buttons, one for each route displ
 [insert screenshot of this working]
 
 ## Data Sources
-Our web map utilizes General Transit Feed Specification (GTFS) data from [King County Metro](https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources) that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from [King County Metro’s AWS S3 object](https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json), which we pull from every 7.5 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
+Our web map utilizes General Transit Feed Specification (GTFS) data from [King County Metro](https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources) that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from [King County Metro’s AWS S3 object](https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json), which we pull from every 7 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
 
 ## Applied Libraries, Plugins, and Webservices
 
@@ -70,3 +70,5 @@ We used ChatGPT and Copilot to assist with several parts of our project. The fol
 - Creating the menu
     - We used ChatGPT and Copilot to help style the menu buttons in their active and disabled states
     - We used ChatGPT to write the logic that enables the menu to only show bus stops along a selected route
+- Web page layout
+    - We used ChatGPT and Copilot to make all pages conform to responsive design principles
