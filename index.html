@@ -22,7 +22,7 @@
             }
 
             /* styling for tutorial pop-up when user first loads map */
-            /* #tutorialOverlay {
+            #tutorialOverlay {
                 position: fixed;
                 inset: 0;
                 background: rgba(0,0,0,0.55);
@@ -82,7 +82,7 @@
                 width: 100%;
                 border-radius: 6px;
                 margin-top: 10px;
-            } */
+            }
 
             /* grouped styling for side menu and map */
             #main-layout {
@@ -219,7 +219,7 @@
         </div>
 
         <!-- create an overlay for the tutorial -->
-        <!-- <div id="tutorialOverlay" class="visible">
+        <div id="tutorialOverlay" class="visible">
             <div id="tutorialBox">
                 <button id="tutorialClose">✖</button>
                 <div id="tutorialContent"></div>
@@ -231,7 +231,7 @@
                     <button id="prevSlide">Back</button>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <script type="module">
             // importing function to fetch data from API, convert to object, and convert to GeoJSON
@@ -523,69 +523,69 @@
             }
 
             // tutorial pop-up logic
-            // const tutorialSlides = [
-            //     `
-            //     <h2>Welcome to the UW Bus Map!</h2>
-            //     <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
-            // `,
-            // `
-            //     <h2>Click Stops</h2>
-            //     <p>Select any bus stop to see its location in a pop-up.</p>
-            //     <img src="tutorial_images/tutorial2.png">
-            // `,
-            // `
-            //     <h2>Select Routes</h2>
-            //     <p>Use the left menu to highlight and focus on a specific route.</p>
-            //     <img src="tutorial_images/tutorial3.png">
-            //     <p>Click the route again to exit the route.</p>
-            // `,
-            // `
-            //     <h2>You're ready to use the map!</h2>
-            // `
-            // ];
+            const tutorialSlides = [
+                `
+                <h2>Welcome to the UW Bus Map!</h2>
+                <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
+            `,
+            `
+                <h2>Click Stops</h2>
+                <p>Select any bus stop to see its location in a pop-up.</p>
+                <img src="tutorial_images/tutorial2.png">
+            `,
+            `
+                <h2>Select Routes</h2>
+                <p>Use the left menu to highlight and focus on a specific route.</p>
+                <img src="tutorial_images/tutorial3.png">
+                <p>Click the route again to exit the route.</p>
+            `,
+            `
+                <h2>You're ready to use the map!</h2>
+            `
+            ];
 
-            // let tutorialIndex = 0;
+            let tutorialIndex = 0;
 
-            // const overlay = document.getElementById('tutorialOverlay');
-            // const content = document.getElementById('tutorialContent');
+            const overlay = document.getElementById('tutorialOverlay');
+            const content = document.getElementById('tutorialContent');
 
-            // function updateTutorial() {
-            //         content.innerHTML = tutorialSlides[tutorialIndex];
-            //         if (tutorialIndex == 3){
-            //             document.getElementById('prevSlide').style.display = "block";
-            //             document.getElementById('nextSlide').style.display = "none";
-            //         } else if (tutorialIndex == 0){
-            //             document.getElementById('nextSlide').style.display = "block";
-            //             document.getElementById('prevSlide').style.display = "none";
-            //         } else {
-            //             document.getElementById('nextSlide').style.display = "block";
-            //             document.getElementById('prevSlide').style.display = "block";
-            //         }
-            // }
+            function updateTutorial() {
+                    content.innerHTML = tutorialSlides[tutorialIndex];
+                    if (tutorialIndex == 3){
+                        document.getElementById('prevSlide').style.display = "block";
+                        document.getElementById('nextSlide').style.display = "none";
+                    } else if (tutorialIndex == 0){
+                        document.getElementById('nextSlide').style.display = "block";
+                        document.getElementById('prevSlide').style.display = "none";
+                    } else {
+                        document.getElementById('nextSlide').style.display = "block";
+                        document.getElementById('prevSlide').style.display = "block";
+                    }
+            }
 
             // start with the tutorial visible
-            // overlay.classList.add('visible');
+            overlay.classList.add('visible');
             
-            // updateTutorial();
+            updateTutorial();
 
-            // document.getElementById('nextSlide').addEventListener('click', () => {
-            //     if (tutorialIndex < tutorialSlides.length - 1) {
-            //         tutorialIndex++;
-            //         updateTutorial();
-            //     }
-            // });
+            document.getElementById('nextSlide').addEventListener('click', () => {
+                if (tutorialIndex < tutorialSlides.length - 1) {
+                    tutorialIndex++;
+                    updateTutorial();
+                }
+            });
 
-            // document.getElementById('prevSlide').addEventListener('click', () => {
-            //     if (tutorialIndex > 0) {
-            //         tutorialIndex--;
-            //         updateTutorial();
-            //     }
-            // });
+            document.getElementById('prevSlide').addEventListener('click', () => {
+                if (tutorialIndex > 0) {
+                    tutorialIndex--;
+                    updateTutorial();
+                }
+            });
 
-            // document.getElementById('tutorialClose').addEventListener('click', () => {
-            //     overlay.classList.remove('visible'); 
-            //     // hides popup
-            // });
+            document.getElementById('tutorialClose').addEventListener('click', () => {
+                overlay.classList.remove('visible'); 
+                // hides popup
+            });
 
             makeMap();
         </script>
