@@ -21,7 +21,91 @@
                 padding: 0;
             }
 
-            /* styling for tutorial pop-up when user first loads map */
+            /* grouped styling for side menu and map */
+            #main-layout {
+                display: flex;
+                height: 100vh;
+                align-items: flex-start;
+            }
+
+            /* styling for side menu */
+            #menu {
+                width: 280px;
+                height: auto;
+                background: white;
+                padding: 20px;
+                border-right: 2px solid #ddd;
+                box-sizing: border-box;
+                overflow-y: auto;
+            }
+
+            /* grouped styling for menu title and help button */
+            .menu-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                gap: 8px;
+            }
+
+            /* styling for menu text */
+            #menu h2 {
+                margin-top: 0;
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            /* styling for help button */
+            #help-button {
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            #route-buttons {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: minmax(44px, auto);
+                gap: 10px;
+            }
+
+            .route-btn {
+                background-color: var(--route-color);
+                width: 100%;
+                padding: 10px 14px;
+                font-size: 16px;
+                border-radius: 6px;
+                border: 1.5px solid #000;
+                cursor: pointer;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .route-btn.active {
+                border-color: #007aff;
+                box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
+            }
+
+            .route-btn.disabled,
+            .route-btn[disabled] {
+                background-color: #cccccc !important;
+                color: #666666 !important;
+                cursor: not-allowed;
+            }
+
+            /* styling to make map fit page */
+            #map { 
+                height: 100vh;
+                flex-grow: 1;
+            }
+
+            /* styling for tutorial pop-up */
             #tutorialOverlay {
                 position: fixed;
                 inset: 0;
@@ -84,67 +168,6 @@
                 margin-top: 10px;
             }
 
-            /* grouped styling for side menu and map */
-            #main-layout {
-                display: flex;
-                height: 100vh;
-                align-items: flex-start;
-            }
-
-            /* styling for side menu */
-            #menu {
-                width: 280px;
-                height: auto;
-                background: white;
-                padding: 20px;
-                border-right: 2px solid #ddd;
-                box-sizing: border-box;
-                overflow-y: auto;
-            }
-
-            #menu h2 {
-                margin-top: 0;
-                font-size: 24px;
-                font-weight: 700;
-            }
-
-            #route-buttons {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                grid-auto-rows: minmax(44px, auto);
-                gap: 10px;
-            }
-
-            .route-btn {
-                background-color: var(--route-color);
-                width: 100%;
-                padding: 10px 14px;
-                font-size: 16px;
-                border-radius: 6px;
-                border: 1.5px solid #000;
-                cursor: pointer;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .route-btn.active {
-                border-color: #007aff;
-                box-shadow: 0 0 0 2px rgba(0,122,255,0.15);
-            }
-
-            .route-btn.disabled,
-            .route-btn[disabled] {
-                background-color: #cccccc !important;
-                color: #666666 !important;
-                cursor: not-allowed;
-            }
-
-            /* styling to make map fit page */
-            #map { 
-                height: 100vh;
-                flex-grow: 1;
-            }
-
             /* adjusting styling when screen is less than 800px wide */
             @media screen and (max-width: 800px) {
                 #main-layout {
@@ -158,6 +181,15 @@
                     border-right: 2px solid #ddd;
                     border-bottom: none;
                     overflow-y: auto;
+                }
+
+                .menu-header {
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                }
+
+                #help-button {
+                    margin-left: auto;
                 }
 
                 #route-buttons {
@@ -195,7 +227,11 @@
         <div id="main-layout">
             <!-- menu content -->
             <div id="menu">
-                <h2>Bus Routes</h2>
+                <!-- grouping menu title and help button -->
+                <div class="menu-header">
+                    <h2>Bus Routes</h2>
+                    <button id="help-button">?</button>
+                </div>
                 <p style="font-size:14px; margin-top:8px; color:#555;">
                     Click a route to highlight it. Click again to reset.
                 </p>
@@ -219,7 +255,7 @@
         </div>
 
         <!-- create an overlay for the tutorial -->
-        <div id="tutorialOverlay" class="visible">
+        <div id="tutorialOverlay">
             <div id="tutorialBox">
                 <button id="tutorialClose">✖</button>
                 <div id="tutorialContent"></div>
@@ -563,9 +599,7 @@
                     }
             }
 
-            // start with the tutorial visible
-            overlay.classList.add('visible');
-            
+            // initialize tutorial content but don't show it 
             updateTutorial();
 
             document.getElementById('nextSlide').addEventListener('click', () => {
@@ -585,6 +619,13 @@
             document.getElementById('tutorialClose').addEventListener('click', () => {
                 overlay.classList.remove('visible'); 
                 // hides popup
+            });
+
+            // only show tutorial content when user hits ? button
+            document.getElementById('help-button').addEventListener('click', () => {
+                tutorialIndex = 0;
+                updateTutorial();
+                overlay.classList.add('visible');
             });
 
             makeMap();
