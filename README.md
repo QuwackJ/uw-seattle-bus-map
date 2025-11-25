@@ -34,6 +34,10 @@ To the left of the map, there is a menu with 8 buttons, one for each route displ
 
 [insert screenshot of this working]
 
+The menu also includes a button labeled with a question mark. By clicking on this button, users can get a quick tutorial on how to use the map.
+
+[insert screenshot of this working]
+
 ## Data Sources
 Our web map utilizes General Transit Feed Specification (GTFS) data from [King County Metro](https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources) that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from [King County Metro’s AWS S3 object](https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json), which we pull from every 7 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
 
@@ -49,6 +53,8 @@ We created the GeoJSON layers for the bus routes and stops by feeding the King C
 Due to a Cross-Origin Resource Sharing (CORS) restriction, we were not able to pull from King County Metro's AWS S3 object directly. To work around this, we used Cloudflare Workers to create a [third-party proxy](https://kcm-proxy.quwackj.workers.dev/) that helps us pull data indirectly.
 
 ## Acknowledgements
+Thanks to Gianna Carlson, Olivia Whitford, and Michelle Tong for helping with browser and device testing.
+
 Thanks to King County Metro for making it easy to access live-updating bus data in GTFS format via an ungated S3 object. This reduced complexity because we don't have to interact with a REST API.
 
 Thanks to Cloudflare for making it easy to set up a CORS proxy without users needing their own accounts or API keys.
@@ -66,9 +72,9 @@ We used ChatGPT and Copilot to assist with several parts of our project. The fol
 - Creating the map
     - We used ChatGPT to help debug issues with creating pop-ups for moving buses, especially when trying to get the pop-ups to follow moving buses
     - We used ChatGPT to style the moving buses based on their route numbers
-    - We used ChatGPT to debug issues with creating the tutorial overlay
 - Creating the menu
     - We used ChatGPT and Copilot to help style the menu buttons in their active and disabled states
     - We used ChatGPT to write the logic that enables the menu to only show bus stops along a selected route
+    - We used ChatGPT to debug issues with creating the tutorial overlay and having it be activated by clicking the help button
 - Web page layout
     - We used ChatGPT and Copilot to make all pages conform to responsive design principles
