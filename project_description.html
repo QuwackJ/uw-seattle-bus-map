@@ -62,6 +62,10 @@
 
             <!-- screenshot here -->
 
+            <p>The menu also includes a button labeled with a question mark. By clicking on this button, users can get a quick tutorial on how to use the map.</p>
+
+            <!-- screeshot here -->
+
             <h2>Data Sources</h2>
             <p>Our web map utilizes General Transit Feed Specification (GTFS) data from <a href="https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources">King County Metro</a> that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from <a href="https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json">King County Metro’s AWS S3 object</a>, which we pull from every 7 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.</p>
 
@@ -76,6 +80,8 @@
             <p>Due to a Cross-Origin Resource Sharing (CORS) restriction, we were not able to pull from King County Metro's AWS S3 object directly. To work around this, we used Cloudflare Workers to create a <a href="https://kcm-proxy.quwackj.workers.dev/">third-party proxy</a> that helps us pull data indirectly.</p>
 
             <h2>Acknowledgements</h2>
+            <p>Thanks to Gianna Carlson, Olivia Whitford, and Michelle Tong for helping with browser and device testing.</p>
+
             <p>Thanks to King County Metro for making it easy to access live-updating bus data in GTFS format via an ungated S3 object. This reduced complexity because we don't have to interact with a REST API.</p>
 
             <p>Thanks to Cloudflare for making it easy to set up a CORS proxy without users needing their own accounts or API keys.</p>
