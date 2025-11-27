@@ -1,7 +1,7 @@
 // importing static route data for lookups
 import { routesById } from "./routes_uw_static.js";
 
-// constant for proxy to S3 AWS link of live bus positions JSON data
+// constant for proxy to AWS S3 object of live bus positions JSON data
 export const LIVE_BUS_POSITIONS_URL = 'https://kcm-proxy.quwackj.workers.dev/';
 
 // constant for bus routes to filter
@@ -16,7 +16,7 @@ export const ROUTE_IDS_OF_INTEREST = [
     "100264"
 ];
 
-// constructing object to hold live bus positions from S3 AWS link
+// constructor for object to hold live bus positions from AWS S3 object
 export class LiveBusData {
     constructor(route_id, route_num, headsign_primary, headsign_secondary, label, direction_id, lat, lon) {
         this.route_id = route_id;
@@ -29,8 +29,9 @@ export class LiveBusData {
     }
 }
 
-// fetch and filter data from S3 AWS link
+// fetch and filter data from AWS S3 object
 export async function fetchLiveBusPositions(routeIds = ROUTE_IDS_OF_INTEREST) {
+    // get and hold onto all data from king county metro
     const response = await fetch(LIVE_BUS_POSITIONS_URL);
     const busPositions = await response.json();
     
@@ -42,7 +43,7 @@ export async function fetchLiveBusPositions(routeIds = ROUTE_IDS_OF_INTEREST) {
         return allowedBuses.has(String(routeIdToCheck));
     });
 
-    // return filtered data in same format as original
+    // return filtered data in same format as original (JSON)
     return {
         header: busPositions.header,
         entity: filteredBusPositions
@@ -57,13 +58,15 @@ export function convertToLiveBusObjects(filteredBusPositionsJson) {
 
     const buses = [];
 
+    // for each object in king county metro JSON
     for (const e of filteredBusPositionsJson.entity) {
+        // hold onto these properties
         const trip = e.vehicle.trip;
         const position = e.vehicle.position;
         const routeIdString = String(trip.route_id);
         const directionIdString = String(trip.direction_id);
 
-        // look up route_short_name and trip_headsigns
+        // look up route_short_name and trip_headsigns in routesById (static route JavaScript object)
         let routeShortName = "";
         let tripHeadsignPrimary = "";
         let tripHeadsignSecondary = "";
@@ -82,6 +85,7 @@ export function convertToLiveBusObjects(filteredBusPositionsJson) {
             }
         }
 
+        // create LiveBusData JavaScript object
         buses.push(new LiveBusData(
             trip.route_id,
             routeShortName,
@@ -102,6 +106,7 @@ export async function getLiveBusGeoJSON() {
     const busPositionsJson = await fetchLiveBusPositions(ROUTE_IDS_OF_INTEREST);
     const busObjectArray = convertToLiveBusObjects(busPositionsJson);
 
+    // conversion of LiveBusData JavaScript to GeoJSON
     return {
         type: "FeatureCollection",
         features: busObjectArray.map(bus => ({
