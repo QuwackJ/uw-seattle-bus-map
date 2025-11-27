@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8"/>
         <title>UW Seattle Bus Map</title>
         <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,10 +17,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <style>
-            body { 
-                padding: 0;
-            }
-
             /* grouped styling for side menu and map */
             #main-layout {
                 display: flex;
@@ -69,6 +65,7 @@
                 flex-shrink: 0;
             }
 
+            /* styling the route buttons */
             #route-buttons {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
@@ -77,7 +74,7 @@
             }
 
             .route-btn {
-                background-color: var(--route-color);
+                background-color: var(--route-color); /* allows buttons to be colored based on route */
                 width: 100%;
                 padding: 10px 14px;
                 color: #000;
@@ -99,6 +96,21 @@
                 background-color: #cccccc !important;
                 color: #666666 !important;
                 cursor: not-allowed;
+            }
+
+            /* styling for the legend */
+            .legend-img {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+                object-fit: contain;
+            }
+
+            .legend-item {
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
             }
 
             /* styling to make map fit page */
@@ -203,6 +215,11 @@
                     display: flex;
                     align-items: center;
                 }
+
+                .legend-img {
+                    width: 32px;
+                    height: 32px;
+                }
             }
         </style>
     </head>
@@ -246,9 +263,48 @@
                     <button class="route-btn" data-route-id="100225" style="--route-color: #4DBA4A;">45</button>
                     <button class="route-btn" data-route-id="100228" style="--route-color: #984EBD;">48</button>
                     <button class="route-btn" data-route-id="100447" style="--route-color: #FF6B00;">49</button>
-                    <button class="route-btn" data-route-id="100254" style="--route-color: #FFBD3D;">65</button>
-                    <button class="route-btn" data-route-id="100259" style="--route-color: #46D2CD;">67</button>
+                    <button class="route-btn" data-route-id="100254" style="--route-color: #FFE023;">65</button>
+                    <button class="route-btn" data-route-id="100259" style="--route-color: #4EF6EB;">67</button>
                     <button class="route-btn" data-route-id="100264" style="--route-color: #FB3BA6;">70</button>
+                </div>
+
+                <!-- legend -->
+                <h3 class="legend-title">Legend</h3>
+                <div id="legend">
+                    <div class="legend-item">
+                        <img src="legend_images/university_areas.png" class="legend-img">
+                        <span>University Areas</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/route_default.png" class="legend-img">
+                        <span>Route (Default)</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/route_selected.png" class="legend-img">
+                        <span>Selected Route</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/route_faded.png" class="legend-img">
+                        <span>Deselected Route</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/stop_default.png" class="legend-img">
+                        <span>Bus Stop (Default)</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/stop_faded.png" class="legend-img">
+                        <span>Deselected Bus Stop</span>
+                    </div>
+
+                    <div class="legend-item">
+                        <img src="legend_images/moving_bus.png" class="legend-img">
+                        <span>Live Bus Position</span>
+                    </div>
                 </div>
             </div>
 
@@ -278,39 +334,19 @@
             // importing function to fade bus stops that are not on selected route
             import { menuLogic } from './menu_logic.js';
 
-            mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
+            mapboxgl.accessToken = 'pk.eyJ1IjoicXV3YWNrLWpvbmVzIiwiYSI6ImNtaDJkcjBzNzBiOGoyam9ib2Q4bGZkNTUifQ.tcdpJ47sN7uE8gEREB17MQ'
             
             // initializing map
             const map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/light-v11', 
-                center: [-122.3035, 47.6553], 
+                style: 'mapbox://styles/quwack-jones/cmifaipkf000101sq1p2ibnz2', // custom basemap
+                center: [-122.3035, 47.6553],
                 zoom: 12,
             });
 
+            // ensures that everything is loaded properly before continuing onto other things
             async function makeMap() {
                 map.on('load', () => {
-                    const layers = map.getStyle().layers;
-                    const labelLayerId = layers.find(
-                        (layer) => layer.type === 'symbol' && layer.layout['text-field']
-                    ).id;
-                    
-                    // making buildings 3D
-                    map.addLayer({
-                        'id': '3d-buildings',
-                        'source': 'composite',
-                        'source-layer': 'building',
-                        'filter': ['==', 'extrude', 'true'],
-                        'type': 'fill-extrusion',
-                        'minzoom': 15,
-                        'paint': {
-                            'fill-extrusion-color': '#aaa',
-                            'fill-extrusion-height': ['get', 'height'],
-                            'fill-extrusion-base': ['get', 'min_height'],
-                            'fill-extrusion-opacity': 0.85
-                        }
-                    }, labelLayerId);
-
                     // add bus route lines
                     map.addSource('uw-routes', {
                         type: 'geojson',
@@ -321,6 +357,7 @@
                         'id': 'uw-route-lines',
                         'type': 'line',
                         'source': 'uw-routes',
+                        'slot': 'middle', // allows street labels to appear over route lines
                         'layout': {
                             'line-join': 'round',
                             'line-cap': 'round'
@@ -341,7 +378,7 @@
                         'id': 'uw-stops',
                         'type': 'circle',
                         'source': 'uw-stops',
-                        'minzoom': 14, // only show stops when zoomed in
+                        'minzoom': 14, // only show stops when zoomed in to this level
                         'paint': {
                             'circle-radius': 5,
                             'circle-color': '#6C7278', // default gray color
@@ -366,7 +403,7 @@
                             .addTo(map);
                     });
 
-                    // setting up menu logic from external module; controls routes and bus stops
+                    // setting up menu logic from external module; controls visibility of routes and bus stops
                     menuLogic(map);
 
                     // add live bus positions
@@ -388,15 +425,15 @@
                             'circle-color': [
                                 'match',
                                 ['get', 'route_num'],
-                                '43', '#EB2A22',
-                                '44', '#3E6ECF',
-                                '45', '#4DBA4A',
-                                '48', '#984EBD',
-                                '49', '#FF6B00',
-                                '65', '#FFBD3D',
-                                '67', '#46D2CD',
-                                '70', '#FB3BA6',
-                                '#AAAAAA' // default color for other routes
+                                '43', '#EB2A22', // red
+                                '44', '#3E6ECF', // blue
+                                '45', '#4DBA4A', // green
+                                '48', '#984EBD', // purple
+                                '49', '#FF6B00', // orange
+                                '65', '#FFE023', // yellow
+                                '67', '#4EF6EB', // teal
+                                '70', '#FB3BA6', // pink
+                                '#AAAAAA' // default color for other routes (necessary for code to work but doesn't actually appear on the map)
                             ]
                         }
                     });
@@ -477,8 +514,8 @@
                         "45": "#4DBA4A", // green
                         "48": "#984EBD", // purple
                         "49": "#FF6B00", // orange
-                        "65": "#FFBD3D", // yellow
-                        "67": "#46D2CD", // teal 
+                        "65": "#FFE023", // yellow
+                        "67": "#4EF6EB", // teal
                         "70": "#FB3BA6"  // pink
                     };
 
@@ -565,21 +602,31 @@
                 `
                 <h2>Welcome to the UW Bus Map!</h2>
                 <p>This site shows live bus locations around the UW Seattle campus, updated every 7 seconds.</p>
-            `,
-            `
+                `,
+                `
+                <h2>Click Moving Buses</h2>
+                <p>Select any moving bus to see its route number, headsign(s), and label in a pop-up.</p>
+                <img src="report_images/live_bus_popup.png">
+                `,
+                `
                 <h2>Click Stops</h2>
-                <p>Select any bus stop to see its location in a pop-up.</p>
-                <img src="tutorial_images/tutorial2.png">
-            `,
-            `
+                <p>Select any bus stop to see its address in a pop-up.</p>
+                <img src="report_images/bus_stop_popup.png">
+                `,
+                `
                 <h2>Select Routes</h2>
                 <p>Use the left menu to highlight and focus on a specific route.</p>
-                <img src="tutorial_images/tutorial3.png">
+                <img src="report_images/menu_selection.png">
                 <p>Click the route again to exit the route.</p>
-            `,
-            `
+                `,
+                `
+                <h2>Tilt the Map</h2>
+                <p>Hold CTRL while dragging on the map to view 3D buildings at different angles.</p>
+                <img src="report_images/3d_buildings_tilted.png">
+                `,
+                `
                 <h2>You're ready to use the map!</h2>
-            `
+                `
             ];
 
             let tutorialIndex = 0;
@@ -588,22 +635,27 @@
             const content = document.getElementById('tutorialContent');
 
             function updateTutorial() {
-                    content.innerHTML = tutorialSlides[tutorialIndex];
-                    if (tutorialIndex == 3){
-                        document.getElementById('prevSlide').style.display = "block";
-                        document.getElementById('nextSlide').style.display = "none";
-                    } else if (tutorialIndex == 0){
-                        document.getElementById('nextSlide').style.display = "block";
-                        document.getElementById('prevSlide').style.display = "none";
-                    } else {
-                        document.getElementById('nextSlide').style.display = "block";
-                        document.getElementById('prevSlide').style.display = "block";
-                    }
+                content.innerHTML = tutorialSlides[tutorialIndex];
+
+                if (tutorialIndex == 5) {
+                    // if you're on the last slide, don't have a "next" button
+                    document.getElementById('prevSlide').style.display = "block";
+                    document.getElementById('nextSlide').style.display = "none";
+                } else if (tutorialIndex == 0) {
+                    // if you're on the first slide, don't have a "back" button
+                    document.getElementById('nextSlide').style.display = "block";
+                    document.getElementById('prevSlide').style.display = "none";
+                } else {
+                    // have a "next" and "back" button for all other slides
+                    document.getElementById('nextSlide').style.display = "block";
+                    document.getElementById('prevSlide').style.display = "block";
+                }
             }
 
             // initialize tutorial content but don't show it 
             updateTutorial();
 
+            // how to advance to the next slide
             document.getElementById('nextSlide').addEventListener('click', () => {
                 if (tutorialIndex < tutorialSlides.length - 1) {
                     tutorialIndex++;
@@ -611,6 +663,7 @@
                 }
             });
 
+            // how to go back to the previous slide
             document.getElementById('prevSlide').addEventListener('click', () => {
                 if (tutorialIndex > 0) {
                     tutorialIndex--;
@@ -618,6 +671,7 @@
                 }
             });
 
+            // how to exit out of the tutorial pop-up
             document.getElementById('tutorialClose').addEventListener('click', () => {
                 overlay.classList.remove('visible'); 
                 // hides popup
