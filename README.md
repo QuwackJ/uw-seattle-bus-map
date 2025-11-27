@@ -16,27 +16,29 @@ We intend for this web map to be used as an attractive and realistic display of 
 ## Main Functions
 When users first load the web map, they will see a map consisting of a custom basemap centered over UW Seattle and the University District, featuring the 8 bus routes listed above.
 
-[insert screenshot of this working]
+![Map on initial load](report_images/map_first_load.png)
 
 On the bus routes, moving circles represent the current positions of buses on the routes. The positions of these circles are updated every 7 seconds. The moving buses display a pop-up that shows their route number, headsign(s), and label when clicked. This pop-up tracks the position of the bus.
 
-[insert screenshot of this working]
+![Moving bus pop-up](report_images/live_bus_popup.png)
 
 When users zoom into the map and reach zoom level 14, they see bus stops along the routes, which are represented as gray circles. The bus stops display a pop-up that shows their address when clicked.
 
-[insert screenshot of this working]
+![Bus stop pop-up](report_images/bus_stop_popup.png)
 
 At zoom level 15, users can see buildings drawn in 3D. By holding CTRL while dragging the map, users can add tilt and rotate controls to the standard pan and zoom motions. These additional controls alter the shading of buildings based on view angle.
 
-[insert screenshot of this working]
+![3D buildings top-down view](report_images/3d_buildings_no_tilt.png)
+
+![3D buildings at an angle](report_images/3d_buildings_tilted.png)
 
 To the left of the map, there is a menu with 8 buttons, one for each route displayed on the map. The buttons are color-coded to match the moving bus points. By clicking on a button, users can highlight one route at a time in its specified color and the bus stops associated with the route. All other routes and bus stops fade.
 
-[insert screenshot of this working]
+![Selecting a route from menu](report_images/menu_selection.png)
 
 The menu also includes a button labeled with a question mark. By clicking on this button, users can get a quick tutorial on how to use the map.
 
-[insert screenshot of this working]
+![Accessing tutorial from help button](report_images/help_button_tutorial.png)
 
 ## Data Sources
 Our web map utilizes General Transit Feed Specification (GTFS) data from [King County Metro](https://kingcounty.gov/en/dept/metro/rider-tools/mobile-and-web-apps#toc-developer-resources) that comes in two forms: static and real-time (GTFS-RT). The static GTFS data is a collection of 11 CSVs represented as .txt files that describe a variety of characteristics for King County Metro Transit Services, such as scheduling, fares, routes, stops, and trips. The GTFS-RT data comes from [King County Metro’s AWS S3 object](https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_pb.json), which we pull from every 7 seconds. The data that comes from the link describes the live positions of individual buses for all of King County and is in JSON.
@@ -70,11 +72,13 @@ We used ChatGPT and Copilot to assist with several parts of our project. The fol
     - We received guidance from ChatGPT on how to write the methods for fetching the live bus data as JSON, converting the JSON into JavaScript objects, and converting the JavaScript objects into GeoJSON
     - We used ChatGPT to edit the GeoJSON of live-updating bus positions to include data (i.e., route number and trip headsign) from the route JavaScript object
 - Creating the map
+    - We received guidance from ChatGPT on how to customize the basemap to highlight the UW Seattle campus and re-arrange the street labels to sit above the bus route lines
     - We used ChatGPT to help debug issues with creating pop-ups for moving buses, especially when trying to get the pop-ups to follow moving buses
     - We used ChatGPT to style the moving buses based on their route numbers
 - Creating the menu
     - We used ChatGPT and Copilot to help style the menu buttons in their active and disabled states
     - We used ChatGPT to write the logic that enables the menu to only show bus stops along a selected route
     - We used ChatGPT to debug issues with creating the tutorial overlay and having it be activated by clicking the help button
+    - We used ChatGPT to help add a legend under the menu buttons
 - Web page layout
     - We used ChatGPT and Copilot to make all pages conform to responsive design principles
