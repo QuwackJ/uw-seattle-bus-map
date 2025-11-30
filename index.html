@@ -278,37 +278,49 @@
             // importing function to fade bus stops that are not on selected route
             import { menuLogic } from './menu_logic.js';
 
-            mapboxgl.accessToken = 'pk.eyJ1IjoicGFpc2xleXc4MjkiLCJhIjoiY21oZTY4Z3h6MGFpbzJsb2UzbWkxZjZybyJ9.qvAAm5rLQZPLPn8ltX2vLg';
+            mapboxgl.accessToken = 'pk.eyJ1IjoicXV3YWNrLWpvbmVzIiwiYSI6ImNtaDJkcjBzNzBiOGoyam9ib2Q4bGZkNTUifQ.tcdpJ47sN7uE8gEREB17MQ';
             
             // initializing map
             const map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/light-v11', 
+                style: 'mapbox://styles/quwack-jones/cmif240t600ah01r94xjqehuj', 
                 center: [-122.3035, 47.6553], 
                 zoom: 12,
             });
 
+            function safeAddLayer(map, layerOptions, before = null) {
+                const style = map.getStyle();
+                const layers = style.layers.map(l => l.id);
+
+                if (before && layers.includes(before)) {
+                    map.addLayer(layerOptions, before);
+                } else {
+                    // fallback: add to the top of the style
+                    map.addLayer(layerOptions);
+                }
+            }
+
             async function makeMap() {
                 map.on('load', () => {
                     const layers = map.getStyle().layers;
-                    const labelLayerId = layers.find(
-                        (layer) => layer.type === 'symbol' && layer.layout['text-field']
-                    ).id;
-                    
+                    let labelLayer = layers.find(
+                    (layer) => layer.type === 'symbol' && layer.layout && layer.layout['text-field']
+                );
+                const labelLayerId = labelLayer ? labelLayer.id : null;
+                   
                     // making buildings 3D
-                    map.addLayer({
-                        'id': '3d-buildings',
-                        'source': 'composite',
-                        'source-layer': 'building',
-                        'filter': ['==', 'extrude', 'true'],
-                        'type': 'fill-extrusion',
-                        'minzoom': 15,
-                        'paint': {
-                            'fill-extrusion-color': '#aaa',
-                            'fill-extrusion-height': ['get', 'height'],
-                            'fill-extrusion-base': ['get', 'min_height'],
-                            'fill-extrusion-opacity': 0.85
-                        }
+                    safeAddLayer(map, {
+                        id: "3d-buildings",
+                        source: "composite",
+                        "source-layer": "building",
+                        type: "fill-extrusion",
+                        minzoom: 15,
+                        paint: {
+                            "fill-extrusion-color": "#aaa",
+                            "fill-extrusion-height": ["get", "height"],
+                            "fill-extrusion-base": ["get", "min_height"],
+                            "fill-extrusion-opacity": 0.85
+                     }
                     }, labelLayerId);
 
                     // add bus route lines
@@ -317,19 +329,35 @@
                         data: 'assets/routes_uw.geojson'
                     });
 
-                    map.addLayer({
-                        'id': 'uw-route-lines',
-                        'type': 'line',
-                        'source': 'uw-routes',
-                        'layout': {
-                            'line-join': 'round',
-                            'line-cap': 'round'
-                        },
-                        'paint': {
-                            'line-width': 3,
-                            'line-color': '#53585C', // default gray color
-                        }
-                    });
+                    if (labelLayerId) {
+                        map.addLayer({
+                            id: 'uw-route-lines',
+                            type: 'line',
+                            source: 'uw-routes',
+                            layout: {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            paint: {
+                                'line-width': 3,
+                                'line-color': '#53585C'
+                            }
+                        }, labelLayerId);  
+                    } else {
+                        map.addLayer({
+                            id: 'uw-route-lines',
+                            type: 'line',
+                            source: 'uw-routes',
+                            layout: {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            paint: {
+                                'line-width': 3,
+                                'line-color': '#53585C'
+                            }
+                        });
+                    }
 
                     // add bus stop points
                     map.addSource('uw-stops', {
@@ -337,16 +365,16 @@
                         data: 'assets/stops_uw.geojson'
                     });
 
-                    map.addLayer({
-                        'id': 'uw-stops',
-                        'type': 'circle',
-                        'source': 'uw-stops',
-                        'minzoom': 14, // only show stops when zoomed in
-                        'paint': {
-                            'circle-radius': 5,
-                            'circle-color': '#6C7278', // default gray color
-                            'circle-stroke-width': 1,
-                            'circle-stroke-color': '#fff'
+                    safeAddLayer(map, {
+                        id: "uw-stops",
+                        type: "circle",
+                        source: "uw-stops",
+                        minzoom: 14,
+                        paint: {
+                            "circle-radius": 5,
+                            "circle-color": "#6C7278",
+                            "circle-stroke-width": 1,
+                            "circle-stroke-color": "#fff"
                         }
                     });
 
@@ -377,26 +405,26 @@
                     });
 
                     // styling for bus positions based on route_num
-                    map.addLayer({
-                        'id': 'live-bus-positions',
-                        'type': 'circle',
-                        'source': 'live-buses',
-                        'paint': {
-                            'circle-radius': 6,
-                            'circle-stroke-width': 1.5,
-                            'circle-stroke-color': '#000000',
-                            'circle-color': [
-                                'match',
-                                ['get', 'route_num'],
-                                '43', '#EB2A22',
-                                '44', '#3E6ECF',
-                                '45', '#4DBA4A',
-                                '48', '#984EBD',
-                                '49', '#FF6B00',
-                                '65', '#FFBD3D',
-                                '67', '#46D2CD',
-                                '70', '#FB3BA6',
-                                '#AAAAAA' // default color for other routes
+                    safeAddLayer(map, {
+                        id: "live-bus-positions",
+                        type: "circle",
+                        source: "live-buses",
+                        paint: {
+                            "circle-radius": 6,
+                            "circle-stroke-width": 1.5,
+                            "circle-stroke-color": "#000000",
+                            "circle-color": [
+                            "match",
+                                ["get", "route_num"],
+                                "43", "#EB2A22",
+                                "44", "#3E6ECF",
+                                "45", "#4DBA4A",
+                                "48", "#984EBD",
+                                "49", "#FF6B00",
+                                "65", "#FFBD3D",
+                                "67", "#46D2CD",
+                                "70", "#FB3BA6",
+                                "#AAAAAA"
                             ]
                         }
                     });
